@@ -30,7 +30,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>new_1.png</pixmap>
+     <pixmap>1.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -86,7 +86,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/2.png</pixmap>
+     <pixmap>2.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -155,7 +155,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/3.png</pixmap>
+     <pixmap>3.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -192,7 +192,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/4.png</pixmap>
+     <pixmap>4.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -277,7 +277,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/5.png</pixmap>
+     <pixmap>5.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -330,7 +330,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/6.png</pixmap>
+     <pixmap>6.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -399,7 +399,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/7.png</pixmap>
+     <pixmap>7.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -468,7 +468,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/8.png</pixmap>
+     <pixmap>8.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -521,7 +521,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/9.png</pixmap>
+     <pixmap>9.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -590,7 +590,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/10.png</pixmap>
+     <pixmap>10.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -643,7 +643,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/11.png</pixmap>
+     <pixmap>11.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -696,7 +696,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/12.png</pixmap>
+     <pixmap>12.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -717,7 +717,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/13.png</pixmap>
+     <pixmap>13.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -770,7 +770,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/15.png</pixmap>
+     <pixmap>15.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -823,7 +823,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/14.png</pixmap>
+     <pixmap>14.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -892,7 +892,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/16.png</pixmap>
+     <pixmap>16.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -961,7 +961,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/17.png</pixmap>
+     <pixmap>17.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -998,7 +998,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/18.png</pixmap>
+     <pixmap>18.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1051,7 +1051,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/19.png</pixmap>
+     <pixmap>19.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1104,7 +1104,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/20.png</pixmap>
+     <pixmap>20.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1125,7 +1125,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/21.png</pixmap>
+     <pixmap>21.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1210,7 +1210,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/22.png</pixmap>
+     <pixmap>22.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1295,7 +1295,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/23.png</pixmap>
+     <pixmap>23.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1364,7 +1364,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/24.png</pixmap>
+     <pixmap>24.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1417,7 +1417,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/25.png</pixmap>
+     <pixmap>25.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1454,7 +1454,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/26.png</pixmap>
+     <pixmap>26.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1491,7 +1491,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/27.png</pixmap>
+     <pixmap>27.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1544,7 +1544,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/28.png</pixmap>
+     <pixmap>28.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1613,7 +1613,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/29.png</pixmap>
+     <pixmap>29.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1682,7 +1682,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/30.png</pixmap>
+     <pixmap>30.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
