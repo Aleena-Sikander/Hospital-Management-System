@@ -10,9 +10,13 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
         # Connect the button to the page switch
         self.GCH_login_button.clicked.connect(self.go_to_login_page)
+        self.GCH_our_services_button.clicked.connect(self.go_to_service_page)
 
     def go_to_login_page(self):
         self.setCurrentIndex(1)  # Switch to page_2
+
+    def go_to_service_page(self):
+        self.setCurrentIndex(9)  # Switch to page_10
 
 app = QtWidgets.QApplication(sys.argv)
 window = HospitalApp()

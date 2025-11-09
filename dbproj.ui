@@ -39,56 +39,12 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <!-- <widget class="QPushButton" name="GCH_login_button">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>620</y>
-      <width>431</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget> -->
    <widget class="QPushButton" name="GCH_login_button">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>460</y>
-      <width>201</width>
-      <height>301</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </rect>
- </property>
- <property name="text">
-  <string/>
- </property>
- <property name="flat">
-  <bool>true</bool>
- </property>
- <property name="styleSheet">
-  <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
- </property>
-</widget>
-   <widget class="QPushButton" name="GCH_our_services_button">
-    <property name="geometry">
-     <rect>
-      <x>1180</x>
-      <y>620</y>
-      <width>431</width>
+      <x>160</x>
+      <y>580</y>
+      <width>231</width>
       <height>141</height>
      </rect>
     </property>
@@ -97,6 +53,28 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="GCH_our_services_button">
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>580</y>
+      <width>221</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -135,6 +113,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="login_doctor_button">
     <property name="geometry">
@@ -151,6 +132,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="login_admin_button">
     <property name="geometry">
@@ -166,6 +150,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -204,6 +191,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
   </widget>
   <widget class="QWidget" name="page_3">
@@ -241,6 +231,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="patient_portal_appointment_button">
     <property name="geometry">
@@ -256,6 +249,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="patient_portal_bills_button">
@@ -273,6 +269,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="patient_portal_admission_details_button">
     <property name="geometry">
@@ -288,6 +287,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -326,6 +328,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="patient_profile_our_services">
     <property name="geometry">
@@ -341,6 +346,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -379,6 +387,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="our_services_lab_test_button">
     <property name="geometry">
@@ -394,6 +405,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="our_services_pharmacy_button">
@@ -432,6 +446,9 @@
     <property name="scaledContents">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="appointment_booking_back_button">
     <property name="geometry">
@@ -448,6 +465,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="appointment_booking_generate_bill_button">
     <property name="geometry">
@@ -463,6 +483,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="appointment_booking_book_button">
@@ -501,6 +524,9 @@
     <property name="scaledContents">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="lab_tests_book_button">
     <property name="geometry">
@@ -517,6 +543,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="lab_tests_back_button">
     <property name="geometry">
@@ -532,6 +561,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -570,6 +602,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="pharmacy_back_button">
     <property name="geometry">
@@ -586,6 +621,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="order_generate_bill_button">
     <property name="geometry">
@@ -601,6 +639,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -639,6 +680,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="appointments_details_button">
     <property name="geometry">
@@ -654,6 +698,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -692,6 +739,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="bills_details_button">
     <property name="geometry">
@@ -707,6 +757,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -766,6 +819,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="patient_labs_generate_bill_button">
     <property name="geometry">
@@ -781,6 +837,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -819,6 +878,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="lab_test_result_download_button">
     <property name="geometry">
@@ -834,6 +896,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -872,6 +937,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="bill_generation_add_more_button">
     <property name="geometry">
@@ -888,6 +956,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="bill_generation_proceed_to_payment">
     <property name="geometry">
@@ -903,6 +974,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -941,6 +1015,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="medical_history_details_button">
     <property name="geometry">
@@ -957,6 +1034,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="medical_history_back_button">
     <property name="geometry">
@@ -972,6 +1052,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -1010,6 +1093,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
   </widget>
   <widget class="QWidget" name="page_17">
@@ -1047,6 +1133,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="login_register_button">
     <property name="geometry">
@@ -1062,6 +1151,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -1100,6 +1192,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="doctor_portal_appointment_button">
     <property name="geometry">
@@ -1115,6 +1210,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -1174,6 +1272,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="appointments_cancel_appointment_button_2">
     <property name="geometry">
@@ -1189,6 +1290,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="appointments_details_button_2">
@@ -1206,6 +1310,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="appointments_medical_history_button">
     <property name="geometry">
@@ -1221,6 +1328,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -1259,6 +1369,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="doctor_medical_history_add_button">
     <property name="geometry">
@@ -1274,6 +1387,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="doctor_medical_history_delete_button">
@@ -1291,6 +1407,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="doctor_medical_history_details_button">
     <property name="geometry">
@@ -1306,6 +1425,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -1344,6 +1466,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="admin_portal_doctor_button">
     <property name="geometry">
@@ -1360,6 +1485,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="admin_portal_pharmacy_button">
     <property name="geometry">
@@ -1375,6 +1503,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -1413,6 +1544,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="admin_doctor_approval_reject_button">
     <property name="geometry">
@@ -1428,6 +1562,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -1466,6 +1603,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
   </widget>
   <widget class="QWidget" name="page_25">
@@ -1502,6 +1642,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -1540,6 +1683,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="specialization_back_button">
     <property name="geometry">
@@ -1555,6 +1701,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -1593,6 +1742,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="Admin_specialization_entry_remove_button">
     <property name="geometry">
@@ -1609,6 +1761,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="Admin_specialization_entry_back_button">
     <property name="geometry">
@@ -1624,6 +1779,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -1662,6 +1820,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="Admin_lab_tests_entry_remove_button">
     <property name="geometry">
@@ -1678,6 +1839,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="Admin_lab_tests_entry_back_button">
     <property name="geometry">
@@ -1693,6 +1857,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -1731,6 +1898,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="Admin_pharmacy_entry_remove_button">
     <property name="geometry">
@@ -1747,6 +1917,9 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="Admin_pharmacy_entry_back_button">
     <property name="geometry">
@@ -1762,6 +1935,9 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
