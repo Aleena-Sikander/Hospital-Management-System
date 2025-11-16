@@ -1,5 +1,8 @@
 from PyQt6 import QtWidgets, uic
+from PyQt6.QtWidgets import QMessageBox  # <-- Import QMessageBox for error popups
 import sys
+import pyodbc  # <-- Import pyodbc to handle exceptions
+from sql_connection import get_db_connection
 
 class HospitalApp(QtWidgets.QStackedWidget):
     def __init__(self):
@@ -9,6 +12,9 @@ class HospitalApp(QtWidgets.QStackedWidget):
         print("Profile button index = ", self.indexOf(self.patient_portal_profile_button))
         print("Does button exist?", hasattr(self, "patient_portal_profile_button"))
         print(self.count())  # number of pages in stacked widget
+
+        self.current_login_type = None
+        self.current_user_id = None
 
         # Start at first page
         self.setCurrentIndex(0)
@@ -91,8 +97,95 @@ class HospitalApp(QtWidgets.QStackedWidget):
         print("Navigated to patient registration")
 
     def go_to_patient_portal_page(self):
-        """Navigate to patient portal main page (with 4 buttons)"""
-        self.setCurrentIndex(22)  # page_3 (Patient portal with 4 options)
+        """
+        Validates user credentials based on the ID length.
+        - 3 digits = Doctor
+        - Not 3 digits = Patient or Admin
+        """
+        # --- 1. Get text from UI ---
+        # We assume 'login_register_id' is the QLineEdit for the ID
+        id_text = self.login_register_id.text()
+        password = self.login_register_password.text()
+
+        if not id_text or not password:
+            QMessageBox.warning(self, "Login Error", "Please enter both ID and password.")
+            return
+
+        # --- 2. Check if ID is a valid number (CRITICAL) ---
+        try:
+            user_id = int(id_text)
+        except ValueError:
+            QMessageBox.warning(self, "Input Error", "ID must be a number.")
+            return
+
+        connection = None
+        try:
+            # --- 3. Connect to DB ---
+            connection = get_db_connection()
+            if connection is None:
+                QMessageBox.critical(self, "Connection Error", "Could not connect to the database.")
+                return
+            
+            cursor = connection.cursor()
+
+            # --- 4. Check logic based on ID length ---
+            is_doctor_check = (len(id_text) == 3)
+
+            if is_doctor_check:
+                # --- Doctor Logic (3 digits) ---
+                query = "SELECT DoctorPassword, DoctorStatus FROM Doctor WHERE DoctorID = ?"
+                cursor.execute(query, (user_id,))
+                result = cursor.fetchone()
+
+                if result:
+                    db_password, db_status = result
+                    if db_password == password:
+                        if db_status == 'Active':
+                            print(f"Login successful for Doctor: {user_id}")
+                            self.current_user_id = user_id # Save the doctor's ID
+                            self.go_to_doctor_portal_page()
+                        else:
+                            QMessageBox.warning(self, "Login Failed", f"Account is not active. Status: {db_status}")
+                    else:
+                        QMessageBox.warning(self, "Login Failed", "Invalid ID or password.")
+                else:
+                    QMessageBox.warning(self, "Login Failed", "Invalid ID or password.")
+
+            else:
+                # --- Patient / Admin Logic (Not 3 digits) ---
+                query = "SELECT Password, Role FROM UserAccount WHERE UserID = ?"
+                cursor.execute(query, (user_id,))
+                result = cursor.fetchone()
+
+                if result:
+                    db_password, db_role = result
+                    if db_password == password:
+                        if db_role == 'Patient':
+                            print(f"Login successful for Patient: {user_id}")
+                            self.current_user_id = user_id # Save the patient's ID
+                            self.setCurrentIndex(22)
+                        elif db_role == 'Admin':
+                            print(f"Login successful for Admin: {user_id}")
+                            self.current_user_id = user_id # Save the admin's ID
+                            self.go_to_admin_portal_page()
+                        else:
+                            QMessageBox.warning(self, "Login Failed", f"User role '{db_role}' is not valid for login.")
+                    else:
+                        QMessageBox.warning(self, "Login Failed", "Invalid ID or password.")
+                else:
+                    QMessageBox.warning(self, "Login Failed", "Invalid ID or password.")
+
+        except pyodbc.Error as e:
+            QMessageBox.critical(self, "Database Error", f"An error occurred during login: {e}")
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"An unexpected error occurred: {e}")
+        finally:
+            # --- 5. Always close connection ---
+            if connection:
+                connection.close()
+        
+        
+          # page_3 (Patient portal with 4 options)
         print("Navigated to patient portal")
 
     def go_to_patient_portal_profile_page(self):
