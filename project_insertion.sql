@@ -1,9 +1,9 @@
 INSERT INTO UserAccount VALUES
-(1, 'Dr. Aleena Sikander', '03001234567', 'F', 'Admin', '1980-05-12', 'aleena.sik@hospital.com', 'pass123'),
-(2, 'Dr. Asad Ali Lodhi', '03011234567', 'M', 'Admin', '1975-08-22', 'asad.ali@hospital.com', 'pass123'),
-(3, 'Dr. Saira Talha', '03021234567', 'F', 'Admin', '1982-03-15', 'saira.tal@hospital.com', 'pass123'),
-(4, 'Dr. Bilal Raza', '03031234567', 'M', 'Patient', '1978-11-30', 'bilal.raza@hospital.com', 'pass123'),
-(5, 'Dr. Nadia Farooq', '03041234567', 'F', 'Patient', '1985-07-09', 'nadia.farooq@hospital.com', 'pass123'),
+(1, 'Aleena Sikander', '03001234567', 'F', 'Admin', '1980-05-12', 'aleena.sik@hospital.com', 'pass123'),
+(2, 'Asad Ali Lodhi', '03011234567', 'M', 'Admin', '1975-08-22', 'asad.ali@hospital.com', 'pass123'),
+(3, 'Saira Talha', '03021234567', 'F', 'Admin', '1982-03-15', 'saira.tal@hospital.com', 'pass123'),
+(4, 'Bilal Raza', '03031234567', 'M', 'Patient', '1978-11-30', 'bilal.raza@hospital.com', 'pass123'),
+(5, 'Nadia Farooq', '03041234567', 'F', 'Patient', '1985-07-09', 'nadia.farooq@hospital.com', 'pass123'),
 (6, 'Alina Rehman', '03051234567', 'F', 'Patient', '1990-01-01', 'alina.rehman@gmail.com', 'pass123'),
 (7, 'Fatima Noor', '03061234567', 'F', 'Patient', '1992-02-02', 'fatima.noor@gmail.com', 'pass123'),
 (8, 'Zainab Tariq', '03071234567', 'F', 'Patient', '1988-03-03', 'zainab.tariq@gmail.com', 'pass123'),
@@ -65,7 +65,7 @@ INSERT INTO LabTest VALUES
 (20, 'Pap Smear', 10, '2025-11-03', 'Routine gynecological exam', NULL, 'Pending', 950);
 
 INSERT INTO Doctor VALUES
-(1, 'Dr. Ayesha Khan', 'ayesha.khan@hospital.com', 'passAyesha1', 'Active'),
+(1, 'Dr. Bilal Amir', 'bilal.amir@hospital.com', 'ba123', 'Active'),
 (2, 'Dr. Imran Malik', 'imran.malik@hospital.com', 'passImran2', 'Active'),
 (3, 'Dr. Sara Ahmed', 'sara.ahmed@hospital.com', 'passSara3', 'Active'),
 (4, 'Dr. Bilal Raza', 'bilal.raza@hospital.com', 'passBilal4', 'Active'),
