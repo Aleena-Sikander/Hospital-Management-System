@@ -26,7 +26,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
         # Patient portal page (page index 3 - page_3) buttons
         self.patient_portal_profile_button.clicked.connect(self.go_to_patient_portal_profile_page)
-        self.patient_portal_appointment_button.clicked.connect(self.go_to_appointment_booking)
+        self.patient_portal_appointment_button.clicked.connect(self.go_to_patient_portal_appointment_page)
         self.patient_portal_bills_button.clicked.connect(self.go_to_bills_page)
         self.patient_portal_admission_details_button.clicked.connect(self.go_to_admission_details)
         self.our_services_specializations_button.clicked.connect(self.go_to_specialization_page)
@@ -53,8 +53,8 @@ class HospitalApp(QtWidgets.QStackedWidget):
         # Doctor Pages:
         self.login_doctor_button.clicked.connect(self.go_to_login)
         self.doctor_registration_submit_button.clicked.connect(self.go_to_login)
-        self.login_register_button.clicked.connect(self.go_to_doctor_registration_page)
-        self.login_submit_button.clicked.connect(self.go_to_doctor_profile_page) # conditions
+        # self.login_register_button.clicked.connect(self.go_to_doctor_registration_page)
+        # self.login_submit_button.clicked.connect(self.go_to_doctor_profile_page) # conditions
         self.doctor_portal_profile_button.clicked.connect(self.go_to_doctor_profile_page)
         self.doctor_portal_appointment_button.clicked.connect(self.go_to_doctor_appointment_page)
         self.appointments_medical_history_button.clicked.connect(self.go_to_editable_medical_history)
@@ -62,7 +62,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
         #admin pages:
         self.login_admin_button.clicked.connect(self.go_to_login)
-        self.login_submit_button.clicked.connect(self.go_to_admin_portal_page) # conditions
+        # self.login_submit_button.clicked.connect(self.go_to_admin_portal_page) # conditions
         self.admin_portal_patient_button.clicked.connect(self.go_to_admin_patient_page)
         self.admin_patient_admission_edit_button.clicked.connect(self.go_to_admin_patient_admission_edit_page)
         self.admin_portal_doctor_button.clicked.connect(self.go_to_admin_doctor_approval_page)
@@ -103,6 +103,11 @@ class HospitalApp(QtWidgets.QStackedWidget):
     def go_to_appointment_booking(self):
         """Navigate to appointment booking page"""
         self.setCurrentIndex(16)  # page_6
+        print("Navigated to appointment booking")
+    
+    def go_to_patient_portal_appointment_page(self):
+        """Navigate to appointment booking page"""
+        self.setCurrentIndex(26)  # page_6
         print("Navigated to appointment booking")
     
     def go_to_bills_page(self):
