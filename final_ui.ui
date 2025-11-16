@@ -14,7 +14,7 @@
    <string>StackedWidget</string>
   </property>
   <property name="currentIndex">
-   <number>0</number>
+   <number>23</number>
   </property>
   <widget class="QWidget" name="first_page">
    <widget class="QLabel" name="label">
@@ -30,7 +30,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>1.png</pixmap>
+     <pixmap>new_1.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -42,14 +42,11 @@
    <widget class="QPushButton" name="GCH_login_button">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>580</y>
-      <width>231</width>
+      <x>300</x>
+      <y>620</y>
+      <width>431</width>
       <height>141</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -61,14 +58,11 @@
    <widget class="QPushButton" name="GCH_our_services_button">
     <property name="geometry">
      <rect>
-      <x>630</x>
-      <y>580</y>
-      <width>221</width>
+      <x>1180</x>
+      <y>620</y>
+      <width>431</width>
       <height>141</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -92,7 +86,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>2.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/2.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -106,9 +100,6 @@
       <width>201</width>
       <height>301</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -126,9 +117,6 @@
       <height>301</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
     <property name="text">
      <string/>
     </property>
@@ -144,9 +132,6 @@
       <width>211</width>
       <height>301</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -170,7 +155,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>3.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/3.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -184,9 +169,6 @@
       <width>111</width>
       <height>51</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -210,23 +192,39 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>4.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/4.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="doctor_registration_submit_button">
+   <widget class="QPushButton" name="patient_portal_profile_button">
     <property name="geometry">
      <rect>
-      <x>732</x>
-      <y>680</y>
-      <width>121</width>
-      <height>51</height>
+      <x>40</x>
+      <y>440</y>
+      <width>201</width>
+      <height>311</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="patient_portal_appointment_button">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>450</y>
+      <width>201</width>
+      <height>301</height>
+     </rect>
     </property>
     <property name="text">
      <string/>
@@ -235,7 +233,38 @@
      <bool>true</bool>
     </property>
    </widget>
-   
+   <widget class="QPushButton" name="patient_portal_bills_button">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>450</y>
+      <width>191</width>
+      <height>301</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="patient_portal_admission_details_button">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>450</y>
+      <width>201</width>
+      <height>301</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QWidget" name="page_4">
    <widget class="QLabel" name="label_5">
@@ -251,23 +280,20 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>5.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/5.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="login_submit_button">
+   <widget class="QPushButton" name="patient_profile_medical_history">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>490</y>
-      <width>111</width>
-      <height>61</height>
+      <x>42</x>
+      <y>620</y>
+      <width>181</width>
+      <height>51</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -276,17 +302,14 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="login_register_button">
+   <widget class="QPushButton" name="patient_profile_our_services">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>490</y>
-      <width>101</width>
+      <x>242</x>
+      <y>620</y>
+      <width>191</width>
       <height>51</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -310,230 +333,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>6.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="admin_portal_patient_button">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>460</y>
-      <width>201</width>
-      <height>301</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="admin_portal_pharmacy_button">
-    <property name="geometry">
-     <rect>
-      <x>680</x>
-      <y>460</y>
-      <width>201</width>
-      <height>301</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="admin_portal_doctor_button">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>460</y>
-      <width>201</width>
-      <height>301</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QWidget" name="page_6">
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1000</width>
-      <height>800</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>7.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="admin_doctor_approval_reject_button">
-    <property name="geometry">
-     <rect>
-      <x>788</x>
-      <y>670</y>
-      <width>91</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="admin_doctor_approval_approve_button">
-    <property name="geometry">
-     <rect>
-      <x>660</x>
-      <y>670</y>
-      <width>101</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QWidget" name="page_7">
-   <widget class="QLabel" name="label_8">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1000</width>
-      <height>800</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>8.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="admin_patient_admission_edit_button">
-    <property name="geometry">
-     <rect>
-      <x>720</x>
-      <y>660</y>
-      <width>121</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QWidget" name="page_8">
-   <widget class="QLabel" name="label_9">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1000</width>
-      <height>800</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>9.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="admin_admission_entry_save_button">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>590</y>
-      <width>111</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QWidget" name="page_9">
-   <widget class="QLabel" name="label_10">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1000</width>
-      <height>800</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>10.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/6.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -548,8 +348,21 @@
       <height>291</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="our_services_lab_test_button">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>460</y>
+      <width>201</width>
+      <height>301</height>
+     </rect>
     </property>
     <property name="text">
      <string/>
@@ -574,28 +387,9 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="our_services_lab_test_button">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>460</y>
-      <width>201</width>
-      <height>301</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
   </widget>
-  <widget class="QWidget" name="page_10">
-   <widget class="QLabel" name="label_11">
+  <widget class="QWidget" name="page_6">
+   <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -608,439 +402,25 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>11.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/7.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="specialization_book_button">
+   <widget class="QPushButton" name="appointment_booking_back_button">
     <property name="geometry">
      <rect>
-      <x>32</x>
-      <y>710</y>
-      <width>151</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="specialization_back_button">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>710</y>
-      <width>151</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QWidget" name="page_11">
-   <widget class="QLabel" name="label_12">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1000</width>
-      <height>800</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>12.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Admin_specialization_entry_remove_button">
-    <property name="geometry">
-     <rect>
-      <x>368</x>
-      <y>700</y>
-      <width>141</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Admin_specialization_entry_back_button">
-    <property name="geometry">
-     <rect>
-      <x>538</x>
-      <y>700</y>
-      <width>141</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Admin_specialization_entry_add_button">
-    <property name="geometry">
-     <rect>
-      <x>200</x>
-      <y>700</y>
-      <width>141</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QWidget" name="page_12">
-   <widget class="QLabel" name="label_13">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1000</width>
-      <height>800</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>13.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="lab_tests_book_button">
-    <property name="geometry">
-     <rect>
-      <x>22</x>
-      <y>700</y>
-      <width>171</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="lab_tests_back_button">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>700</y>
-      <width>161</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QWidget" name="page_13">
-   <widget class="QLabel" name="label_14">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1000</width>
-      <height>800</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>15.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="order_generate_bill_button">
-    <property name="geometry">
-     <rect>
-      <x>810</x>
-      <y>703</y>
-      <width>161</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pharmacy_back_button">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>703</y>
-      <width>151</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pharmacy_add_item_button">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>700</y>
-      <width>151</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QWidget" name="page_14">
-   <widget class="QLabel" name="label_15">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1000</width>
-      <height>800</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>14.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Admin_lab_tests_entry_remove_button">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>700</y>
-      <width>141</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Admin_lab_tests_entry_add_button">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>700</y>
-      <width>141</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Admin_lab_tests_entry_back_button">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>700</y>
-      <width>141</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QWidget" name="page_15">
-   <widget class="QLabel" name="label_16">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1000</width>
-      <height>800</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>16.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Admin_pharmacy_entry_add_button">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>710</y>
-      <width>101</width>
+      <x>40</x>
+      <y>600</y>
+      <width>111</width>
       <height>51</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
     <property name="text">
      <string/>
     </property>
     <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Admin_pharmacy_entry_back_button">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>710</y>
-      <width>91</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Admin_pharmacy_entry_remove_button">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>710</y>
-      <width>121</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QWidget" name="page_16">
-   <widget class="QLabel" name="label_17">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1000</width>
-      <height>800</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>17.png</pixmap>
-    </property>
-    <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
@@ -1052,9 +432,6 @@
       <width>171</width>
       <height>61</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1079,17 +456,528 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="appointment_booking_back_button">
+  </widget>
+  <widget class="QWidget" name="page_7">
+   <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>600</y>
+      <x>0</x>
+      <y>0</y>
+      <width>1000</width>
+      <height>800</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/8.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="lab_tests_book_button">
+    <property name="geometry">
+     <rect>
+      <x>22</x>
+      <y>700</y>
+      <width>171</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="lab_tests_back_button">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>700</y>
+      <width>161</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="page_8">
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1000</width>
+      <height>800</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/9.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pharmacy_add_item_button">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>707</y>
+      <width>151</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pharmacy_back_button">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>710</y>
+      <width>151</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="order_generate_bill_button">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>710</y>
+      <width>161</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="page_9">
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1000</width>
+      <height>800</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/10.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="appointments_cancel_appointment_button">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>670</y>
+      <width>241</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="appointments_details_button">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>677</y>
       <width>111</width>
       <height>51</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="page_10">
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1000</width>
+      <height>800</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/11.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bills_generate_bill_button">
+    <property name="geometry">
+     <rect>
+      <x>272</x>
+      <y>670</y>
+      <width>241</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bills_details_button">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>670</y>
+      <width>121</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="page_11">
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1000</width>
+      <height>800</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/12.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="page_12">
+   <widget class="QLabel" name="label_13">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1000</width>
+      <height>800</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/13.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="patient_labs_check_result_button">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>670</y>
+      <width>151</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="patient_labs_generate_bill_button">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>670</y>
+      <width>181</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="page_13">
+   <widget class="QLabel" name="label_14">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1000</width>
+      <height>800</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/15.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="lab_test_result_back_button">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>530</y>
+      <width>81</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="lab_test_result_download_button">
+    <property name="geometry">
+     <rect>
+      <x>262</x>
+      <y>530</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="page_14">
+   <widget class="QLabel" name="label_15">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1000</width>
+      <height>800</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/14.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bill_generation_total_button">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>610</y>
+      <width>121</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bill_generation_add_more_button">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>680</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bill_generation_proceed_to_payment">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>680</y>
+      <width>241</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="page_15">
+   <widget class="QLabel" name="label_16">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1000</width>
+      <height>800</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/16.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="medical_history_patient_id_button">
+    <property name="geometry">
+     <rect>
+      <x>22</x>
+      <y>320</y>
+      <width>191</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="medical_history_details_button">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>710</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="medical_history_back_button">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>710</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="page_16">
+   <widget class="QLabel" name="label_17">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1000</width>
+      <height>800</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/17.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="doctor_registration_submit_button">
+    <property name="geometry">
+     <rect>
+      <x>732</x>
+      <y>680</y>
+      <width>121</width>
+      <height>51</height>
+     </rect>
     </property>
     <property name="text">
      <string/>
@@ -1113,23 +1001,20 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>18.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/18.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="bill_generation_proceed_to_payment">
+   <widget class="QPushButton" name="login_submit_button">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>680</y>
-      <width>241</width>
-      <height>41</height>
+      <x>130</x>
+      <y>490</y>
+      <width>111</width>
+      <height>61</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1138,36 +1023,14 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="bill_generation_add_more_button">
+   <widget class="QPushButton" name="login_register_button">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>680</y>
-      <width>141</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="bill_generation_total_button">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>610</y>
-      <width>121</width>
+      <x>270</x>
+      <y>490</y>
+      <width>101</width>
       <height>51</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1191,23 +1054,20 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>19.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/19.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="lab_test_result_back_button">
+   <widget class="QPushButton" name="doctor_portal_profile_button">
     <property name="geometry">
      <rect>
-      <x>28</x>
-      <y>530</y>
-      <width>81</width>
-      <height>41</height>
+      <x>220</x>
+      <y>467</y>
+      <width>201</width>
+      <height>301</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1216,17 +1076,14 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="lab_test_result_download_button">
+   <widget class="QPushButton" name="doctor_portal_appointment_button">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>530</y>
-      <width>141</width>
-      <height>41</height>
+      <x>580</x>
+      <y>460</y>
+      <width>201</width>
+      <height>301</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1250,47 +1107,9 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>20.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/20.png</pixmap>
     </property>
     <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="doctor_portal_profile_button">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>467</y>
-      <width>201</width>
-      <height>301</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="doctor_portal_appointment_button">
-    <property name="geometry">
-     <rect>
-      <x>580</x>
-      <y>460</y>
-      <width>201</width>
-      <height>301</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
      <bool>true</bool>
     </property>
    </widget>
@@ -1309,9 +1128,73 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>21.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/21.png</pixmap>
     </property>
     <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="appointments_edit_button">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>680</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="appointments_cancel_appointment_button_2">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>680</y>
+      <width>231</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="appointments_details_button_2">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>680</y>
+      <width>111</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="appointments_medical_history_button">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>310</y>
+      <width>171</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
      <bool>true</bool>
     </property>
    </widget>
@@ -1330,23 +1213,20 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>22.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/22.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="appointments_cancel_appointment_button_2">
+   <widget class="QPushButton" name="doctor_medical_history_back_button">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>680</y>
-      <width>231</width>
+      <x>250</x>
+      <y>710</y>
+      <width>41</width>
       <height>51</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1355,17 +1235,14 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="appointments_details_button_2">
+   <widget class="QPushButton" name="doctor_medical_history_add_button">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>680</y>
-      <width>111</width>
+      <x>320</x>
+      <y>710</y>
+      <width>61</width>
       <height>51</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1374,17 +1251,14 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="appointments_medical_history_button">
+   <widget class="QPushButton" name="doctor_medical_history_delete_button">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>310</y>
-      <width>171</width>
+      <x>410</x>
+      <y>710</y>
+      <width>61</width>
       <height>51</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1393,17 +1267,14 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="appointments_edit_button">
+   <widget class="QPushButton" name="doctor_medical_history_details_button">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>680</y>
-      <width>51</width>
-      <height>51</height>
+      <x>500</x>
+      <y>710</y>
+      <width>71</width>
+      <height>61</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1427,23 +1298,20 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>23.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/23.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="patient_portal_bills_button">
+   <widget class="QPushButton" name="admin_portal_patient_button">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>450</y>
-      <width>191</width>
+      <x>110</x>
+      <y>460</y>
+      <width>201</width>
       <height>301</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1452,17 +1320,14 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="patient_portal_admission_details_button">
+   <widget class="QPushButton" name="admin_portal_doctor_button">
     <property name="geometry">
      <rect>
-      <x>760</x>
-      <y>450</y>
+      <x>400</x>
+      <y>460</y>
       <width>201</width>
       <height>301</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1471,36 +1336,14 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="patient_portal_profile_button">
+   <widget class="QPushButton" name="admin_portal_pharmacy_button">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>440</y>
-      <width>201</width>
-      <height>311</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="patient_portal_appointment_button">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>450</y>
+      <x>680</x>
+      <y>460</y>
       <width>201</width>
       <height>301</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1524,23 +1367,20 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>24.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/24.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="patient_profile_our_services">
+   <widget class="QPushButton" name="admin_doctor_approval_approve_button">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>620</y>
-      <width>191</width>
-      <height>51</height>
+      <x>662</x>
+      <y>670</y>
+      <width>101</width>
+      <height>61</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1549,17 +1389,14 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="patient_profile_medical_history">
+   <widget class="QPushButton" name="admin_doctor_approval_reject_button">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>620</y>
-      <width>181</width>
-      <height>51</height>
+      <x>790</x>
+      <y>670</y>
+      <width>91</width>
+      <height>61</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1583,42 +1420,20 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>25.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/25.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="bills_generate_bill_button">
+   <widget class="QPushButton" name="admin_patient_admission_edit_button">
     <property name="geometry">
      <rect>
-      <x>272</x>
-      <y>670</y>
-      <width>241</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="bills_details_button">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>670</y>
+      <x>722</x>
+      <y>660</y>
       <width>121</width>
-      <height>61</height>
+      <height>71</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1642,42 +1457,20 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>26.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/26.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="appointments_cancel_appointment_button">
+   <widget class="QPushButton" name="admin_admission_entry_save_button">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>663</y>
-      <width>241</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="appointments_details_button">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>670</y>
+      <x>572</x>
+      <y>590</y>
       <width>111</width>
-      <height>51</height>
+      <height>41</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1701,9 +1494,41 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>27.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/27.png</pixmap>
     </property>
     <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="specialization_book_button">
+    <property name="geometry">
+     <rect>
+      <x>32</x>
+      <y>710</y>
+      <width>151</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="specialization_back_button">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>710</y>
+      <width>151</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
      <bool>true</bool>
     </property>
    </widget>
@@ -1722,23 +1547,20 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>28.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/28.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="patient_labs_check_result_button">
+   <widget class="QPushButton" name="Admin_specialization_entry_add_button">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>670</y>
-      <width>151</width>
-      <height>51</height>
+      <x>202</x>
+      <y>700</y>
+      <width>141</width>
+      <height>71</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1747,17 +1569,30 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="patient_labs_generate_bill_button">
+   <widget class="QPushButton" name="Admin_specialization_entry_remove_button">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>670</y>
-      <width>181</width>
-      <height>51</height>
+      <x>370</x>
+      <y>700</y>
+      <width>141</width>
+      <height>71</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Admin_specialization_entry_back_button">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>700</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
     </property>
     <property name="text">
      <string/>
@@ -1781,23 +1616,20 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>29.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/29.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="medical_history_details_button">
+   <widget class="QPushButton" name="Admin_lab_tests_entry_add_button">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>710</y>
+      <x>210</x>
+      <y>700</y>
       <width>141</width>
-      <height>51</height>
+      <height>71</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1806,17 +1638,14 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="medical_history_patient_id_button">
+   <widget class="QPushButton" name="Admin_lab_tests_entry_remove_button">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>320</y>
-      <width>191</width>
-      <height>61</height>
+      <x>370</x>
+      <y>700</y>
+      <width>141</width>
+      <height>71</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1825,17 +1654,14 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="medical_history_back_button">
+   <widget class="QPushButton" name="Admin_lab_tests_entry_back_button">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>710</y>
+      <x>540</x>
+      <y>700</y>
       <width>141</width>
-      <height>51</height>
+      <height>71</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1859,23 +1685,20 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>30.png</pixmap>
+     <pixmap>C:/Users/Saira Talha/Downloads/Your most trusted health partner (2)/30.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="doctor_medical_history_back_button">
+   <widget class="QPushButton" name="Admin_pharmacy_entry_add_button">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>220</x>
       <y>710</y>
-      <width>41</width>
+      <width>101</width>
       <height>51</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1884,17 +1707,14 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="doctor_medical_history_delete_button">
+   <widget class="QPushButton" name="Admin_pharmacy_entry_remove_button">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>360</x>
       <y>710</y>
-      <width>61</width>
+      <width>121</width>
       <height>51</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>
@@ -1903,36 +1723,14 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="doctor_medical_history_add_button">
+   <widget class="QPushButton" name="Admin_pharmacy_entry_back_button">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>520</x>
       <y>710</y>
-      <width>61</width>
+      <width>91</width>
       <height>51</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="doctor_medical_history_details_button">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>710</y>
-      <width>71</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
     <property name="text">
      <string/>

@@ -1,0 +1,1 @@
+go_to_doctor_registration_page
