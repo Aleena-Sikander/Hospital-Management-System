@@ -31,10 +31,13 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
 
         # Login page (page index 1 - page_2) buttons
+<<<<<<< HEAD
         # self.login_patient_button.clicked.connect(self.go_to_login)
         # self.login_register_button.clicked.connect(self.go_to_patient_registration)
         # self.patient_registration_submit_button.clicked.connect(self.go_to_login) #condition
         # self.login_submit_button.clicked.connect(self.go_to_patient_portal_page) #condition
+=======
+>>>>>>> 6c7252efe2a563248e576f1a2fdfcdea4f9a8890
         self.appointments_details_button.clicked.connect(self.load_bills_from_appointments)
         self.login_patient_button.clicked.connect(self.go_to_login)
         self.login_patient_button.clicked.connect(self.prepare_login_as_patient)
@@ -101,7 +104,10 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.admin_portal_pharmacy_button.clicked.connect(self.go_to_admin_pharmacy_edit_page)
         self.Admin_pharmacy_entry_back_button.clicked.connect(self.go_to_admin_portal_page)
         self.order_generate_bill_button.clicked.connect(self.go_to_bill_gen_page)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6c7252efe2a563248e576f1a2fdfcdea4f9a8890
     # --- Navigation Methods ---
     def go_to_login_page(self):
         """Navigate to login selection page"""
@@ -219,9 +225,12 @@ class HospitalApp(QtWidgets.QStackedWidget):
                 connection.close()
 
     def go_to_patient_portal_page(self):
+<<<<<<< HEAD
         # --- 1. Get text from UI ---
         # We assume 'login_register_id' is the QLineEdit for the ID
 
+=======
+>>>>>>> 6c7252efe2a563248e576f1a2fdfcdea4f9a8890
         """
         Validates user credentials based on the ID length.
         - 3 digits = Doctor
@@ -281,9 +290,13 @@ class HospitalApp(QtWidgets.QStackedWidget):
         finally:
             if connection:
                 connection.close()
+<<<<<<< HEAD
 
           # page_3 (Patient portal with 4 options)
             print("Navigated to patient portal")
+=======
+        print("Navigated to patient portal")
+>>>>>>> 6c7252efe2a563248e576f1a2fdfcdea4f9a8890
 
     def go_to_patient_portal_profile_page(self):
         """Navigate to patient profile page"""

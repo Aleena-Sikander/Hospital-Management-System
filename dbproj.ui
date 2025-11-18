@@ -473,11 +473,14 @@
     <property name="styleSheet"><string>background-color: rgba(0, 0, 0, 0); border: none;</string></property>
    </widget>
 <<<<<<< HEAD
+<<<<<<< HEAD
    <widget class="QDateTimeEdit" name="appointment_booking_timeanddate">
     <property name="geometry"><rect><x>260</x><y>500</y><width>281</width><height>61</height></rect></property>
     <property name="font"><font><family>MS PGothic</family><pointsize>14</pointsize><weight>75</weight><bold>true</bold></font></property>
     <property name="styleSheet"><string>background-color: rgba(0, 0, 0, 0); border: none;</string></property>
 =======
+=======
+>>>>>>> 6c7252efe2a563248e576f1a2fdfcdea4f9a8890
    <widget class="QComboBox" name="appointment_booking_available_times">
     <property name="geometry">
      <rect>
@@ -498,7 +501,10 @@
     <property name="styleSheet">
      <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
+<<<<<<< HEAD
 >>>>>>> 8e4b9b3b06f4c1d677d315f967bb3ed3d2756f2c
+=======
+>>>>>>> 6c7252efe2a563248e576f1a2fdfcdea4f9a8890
    </widget>
   </widget>
 
