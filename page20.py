@@ -28,6 +28,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.GCH_login_button.clicked.connect(self.go_to_login_page)
         self.GCH_our_services_button.clicked.connect(self.go_to_service_page)
         self.specialization_tableview.clicked.connect(self.on_specialization_row_selected)
+        self.bills_details_button.clicked.connect(self.show_bill_details)
 
 
         # Login page (page index 1 - page_2) buttons
@@ -516,7 +517,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
             model.setHorizontalHeaderLabels(
                 ["Bill ID", "Appointment ID", "Amount", "Status", "Appointment Date"]
             )
-            
+
             for row in rows:
                 items = [QStandardItem(str(col)) for col in row]
                 model.appendRow(items)
@@ -545,6 +546,80 @@ class HospitalApp(QtWidgets.QStackedWidget):
             self.bills_generate_bill_button.setEnabled(False)
         else:
             self.bills_generate_bill_button.setEnabled(True)
+    
+    def show_bill_details(self):
+        try:
+            index = self.bills_detail_dataview.currentIndex()
+            if not index.isValid():
+                QtWidgets.QMessageBox.warning(self, "Error", "Please select a bill first.")
+                return
+
+            bill_id = index.sibling(index.row(), 0).data()  # BillID
+
+            connection = get_db_connection()
+            cursor = connection.cursor()
+
+            cursor.execute("""
+                SELECT 
+                    Bill.BillID,
+                    Bill.BillDate,
+                    Bill.TotalPrice AS BillTotal,
+                    Bill.BillStatus,
+
+                    UserAccount.UserID AS PatientID,
+                    UserAccount.Name AS PatientName,
+
+                    Doctor_Appointment.AppointmentDateTime,
+                    Doctor_Appointment.AppointmentPrice,
+                    Doctor.DoctorName,
+
+                    Pharmacy_Order.OrderID,
+                    Pharmacy_Item.ItemName,
+                    Pharmacy_Order.ItemQuantity,
+                    Pharmacy_Order.PricePerItem,
+                    Pharmacy_Order.TotalPrice AS OrderTotal
+
+                FROM Bill
+                LEFT JOIN UserAccount ON Bill.PatientID = UserAccount.UserID
+                LEFT JOIN Pharmacy_Order ON Bill.OrderID = Pharmacy_Order.OrderID
+                LEFT JOIN Pharmacy_Item ON Pharmacy_Order.ItemID = Pharmacy_Item.ItemID
+                LEFT JOIN Doctor_Appointment 
+                    ON Doctor_Appointment.PatientID = UserAccount.UserID
+                LEFT JOIN Doctor 
+                    ON Doctor_Appointment.DoctorID = Doctor.DoctorID
+                WHERE Bill.BillID = ?
+            """, (bill_id,))
+
+            row = cursor.fetchone()
+            connection.close()
+
+            if not row:
+                QtWidgets.QMessageBox.warning(self, "Error", "No details found for this bill.")
+                return
+
+            details_text = (
+                f"Bill ID: {row.BillID}\n"
+                f"Bill Date: {row.BillDate}\n"
+                f"Bill Status: {row.BillStatus}\n"
+                f"Total Amount: {row.BillTotal}\n\n"
+                f"Patient ID: {row.PatientID}\n"
+                f"Patient Name: {row.PatientName}\n\n"
+                f"Doctor Name: {row.DoctorName}\n"
+                f"Appointment Time: {row.AppointmentDateTime}\n"
+                f"Appointment Price: {row.AppointmentPrice}\n\n"
+                f"Order ID: {row.OrderID}\n"
+                f"Item Name: {row.ItemName}\n"
+                f"Quantity: {row.ItemQuantity}\n"
+                f"Price Per Item: {row.PricePerItem}\n"
+                f"Order Total: {row.OrderTotal}"
+            )
+
+            QtWidgets.QMessageBox.information(self, "Bill Details", details_text)
+
+        except Exception as e:
+            QtWidgets.QMessageBox.critical(self, "Error", str(e))
+
+
 
 
 
