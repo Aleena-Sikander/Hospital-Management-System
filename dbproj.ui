@@ -472,10 +472,33 @@
     <property name="geometry"><rect><x>258</x><y>431</y><width>281</width><height>51</height></rect></property>
     <property name="styleSheet"><string>background-color: rgba(0, 0, 0, 0); border: none;</string></property>
    </widget>
+<<<<<<< HEAD
    <widget class="QDateTimeEdit" name="appointment_booking_timeanddate">
     <property name="geometry"><rect><x>260</x><y>500</y><width>281</width><height>61</height></rect></property>
     <property name="font"><font><family>MS PGothic</family><pointsize>14</pointsize><weight>75</weight><bold>true</bold></font></property>
     <property name="styleSheet"><string>background-color: rgba(0, 0, 0, 0); border: none;</string></property>
+=======
+   <widget class="QComboBox" name="appointment_booking_available_times">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>500</y>
+      <width>281</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+>>>>>>> 8e4b9b3b06f4c1d677d315f967bb3ed3d2756f2c
    </widget>
   </widget>
 
@@ -504,6 +527,20 @@
     <property name="text"><string/></property>
     <property name="flat"><bool>true</bool></property>
    </widget>
+   
+<widget class="QTableView" name="bill_generation_dataview">
+    <property name="geometry">
+        <rect>
+            <x>40</x>
+            <y>200</y>
+            <width>611</width>
+            <height>380</height>
+        </rect>
+    </property>
+    <property name="styleSheet">
+        <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+</widget>
   </widget>
 
   <widget class="QWidget" name="page_18">
@@ -709,6 +746,19 @@
     <property name="text"><string/></property>
     <property name="flat"><bool>true</bool></property>
    </widget>
+   <widget class="QTableView" name="bills_detail_dataview">
+    <property name="geometry">
+        <rect>
+            <x>40</x>
+            <y>250</y>
+            <width>611</width>
+            <height>401</height>
+        </rect>
+    </property>
+    <property name="styleSheet">
+        <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+</widget>
   </widget>
 
   <widget class="QWidget" name="page_25">

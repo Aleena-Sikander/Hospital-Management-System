@@ -1,7 +1,7 @@
 import pyodbc
 
 # --- Connection Details ---
-SERVER = r'DESKTOP-GDT94QR\ALEENASQLSERVER'
+SERVER = 'SAIRATALHA\\MYSQL'
 DATABASE = 'Hospital_Managment_System'
 USE_WINDOWS_AUTH = True
 
@@ -221,6 +221,7 @@ def setup_database():
     """
 
     cursor.executemany(user_insert_query, user_data)
+    connection.commit()
     print("Inserted UserAccount records.")
 
     medical_data = [
@@ -252,6 +253,7 @@ def setup_database():
     """
 
     cursor.executemany(medical_insert_query, medical_data)
+    connection.commit()
     print("Inserted Medical_History records.")
 
     LabTest_data = [
@@ -282,6 +284,7 @@ def setup_database():
     """
 
     cursor.executemany(LabTest_insert_query, LabTest_data)
+    connection.commit()
     print("Inserted LabTest records.")
 
     doctor_data = [
@@ -303,7 +306,7 @@ def setup_database():
         (170, 'Dr. Usman Tariq', 'usman.tariq@hospital.com', 'passUsman17', 'Active'),
         (180, 'Dr. Mahnoor Zia', 'mahnoor.zia@hospital.com', 'passMahnoor18', 'Active'),
         (190, 'Dr. Danish Khan', 'danish.khan@hospital.com', 'passDanish19', 'Active'),
-        (200, 'Dr. Saba Rehman', 'saba.rehman@hospital.com', 'passSaba20', 'Active')
+        (220, 'Dr. Saba Rehman', 'saba.rehman@hospital.com', 'passSaba20', 'Active'),
         (210, 'Dr. Zafar Iqbal', 'zafar.iqbal@hospital.com', 'passZafar10', 'Active'),
     ]
 
@@ -313,50 +316,51 @@ def setup_database():
     """
 
     cursor.executemany(doctor_insert_query, doctor_data)
+    connection.commit()
     print("Inserted Doctor records.")
 
     specialisation_data = [
-        (1, 'Cardiology', 1),
-        (2, 'Internal Medicine', 1),
-        (3, 'Pulmonology', 2),
-        (4, 'Critical Care', 2),
-        (5, 'Neurology', 3),
-        (6, 'Sleep Medicine', 3),
-        (7, 'Orthopedics', 4),
-        (8, 'Sports Medicine', 4),
-        (9, 'Gynecology', 5),
-        (10, 'Obstetrics', 5),
-        (11, 'Dermatology', 6),
-        (12, 'Cosmetic Dermatology', 6),
-        (13, 'Gastroenterology', 7),
-        (14, 'Hepatology', 7),
-        (15, 'Endocrinology', 8),
-        (16, 'Diabetology', 8),
-        (17, 'Pediatrics', 9),
-        (18, 'Neonatology', 9),
-        (19, 'Psychiatry', 10),
-        (20, 'Addiction Medicine', 10),
-        (21, 'Urology', 11),
-        (22, 'Andrology', 11),
-        (23, 'Nephrology', 12),
-        (24, 'Transplant Medicine', 12),
-        (25, 'Oncology', 13),
-        (26, 'Radiation Oncology', 13),
-        (27, 'Rheumatology', 14),
-        (28, 'Immunology', 14),
-        (29, 'Hematology', 15),
-        (30, 'Blood Disorders', 15),
-        (31, 'Radiology', 16),
-        (32, 'Interventional Radiology', 16),
-        (33, 'ENT', 17),
-        (34, 'Audiology', 17),
-        (35, 'Infectious Diseases', 18),
-        (36, 'Tropical Medicine', 18),
-        (37, 'General Surgery', 19),
-        (38, 'Laparoscopic Surgery', 19),
-        (39, 'Family Medicine', 20),
-        (40, 'Preventive Medicine', 20)
-    ]
+    (1, 'Cardiology', 100),
+    (2, 'Internal Medicine', 100),
+    (3, 'Pulmonology', 200),
+    (4, 'Critical Care', 200),
+    (5, 'Neurology', 300),
+    (6, 'Sleep Medicine', 300),
+    (7, 'Orthopedics', 400),
+    (8, 'Sports Medicine', 400),
+    (9, 'Gynecology', 500),
+    (10, 'Obstetrics', 500),
+    (11, 'Dermatology', 600),
+    (12, 'Cosmetic Dermatology', 600),
+    (13, 'Gastroenterology', 700),
+    (14, 'Hepatology', 700),
+    (15, 'Endocrinology', 800),
+    (16, 'Diabetology', 800),
+    (17, 'Pediatrics', 900),
+    (18, 'Neonatology', 900),
+    (19, 'Psychiatry', 110),
+    (20, 'Addiction Medicine', 110),
+    (21, 'Urology', 120),
+    (22, 'Andrology', 120),
+    (23, 'Nephrology', 130),
+    (24, 'Transplant Medicine', 130),
+    (25, 'Oncology', 140),
+    (26, 'Radiation Oncology', 140),
+    (27, 'Rheumatology', 150),
+    (28, 'Immunology', 150),
+    (29, 'Hematology', 160),
+    (30, 'Blood Disorders', 160),
+    (31, 'Radiology', 170),
+    (32, 'Interventional Radiology', 170),
+    (33, 'ENT', 180),
+    (34, 'Audiology', 180),
+    (35, 'Infectious Diseases', 190),
+    (36, 'Tropical Medicine', 190),
+    (37, 'General Surgery', 220),
+    (38, 'Laparoscopic Surgery', 220),
+    (39, 'Family Medicine', 210),
+    (40, 'Preventive Medicine', 210)
+]
 
     specialisation_insert_query = """
         INSERT INTO Specialisation (SpecialisationID, FieldName, DoctorID)
@@ -364,50 +368,52 @@ def setup_database():
     """
 
     cursor.executemany(specialisation_insert_query, specialisation_data)
+    connection.commit()
     print("Inserted Specialisation records.")
 
     availability_data = [
-        (1, 1, '2025-10-28 09:00'),
-        (2, 1, '2025-10-29 14:00'),
-        (3, 2, '2025-10-28 10:00'),
-        (4, 2, '2025-10-30 15:00'),
-        (5, 3, '2025-10-28 11:00'),
-        (6, 3, '2025-10-31 16:00'),
-        (7, 4, '2025-10-28 12:00'),
-        (8, 4, '2025-10-29 17:00'),
-        (9, 5, '2025-10-28 13:00'),
-        (10, 5, '2025-10-30 18:00'),
-        (11, 6, '2025-10-29 09:30'),
-        (12, 6, '2025-10-31 14:30'),
-        (13, 7, '2025-10-29 10:30'),
-        (14, 7, '2025-10-30 15:30'),
-        (15, 8, '2025-10-29 11:30'),
-        (16, 8, '2025-10-31 16:30'),
-        (17, 9, '2025-10-29 12:30'),
-        (18, 9, '2025-10-30 17:30'),
-        (19, 10, '2025-10-29 13:30'),
-        (20, 10, '2025-10-31 18:30'),
-        (21, 11, '2025-10-30 09:00'),
-        (22, 11, '2025-11-01 14:00'),
-        (23, 12, '2025-10-30 10:00'),
-        (24, 12, '2025-11-01 15:00'),
-        (25, 13, '2025-10-30 11:00'),
-        (26, 13, '2025-11-01 16:00'),
-        (27, 14, '2025-10-30 12:00'),
-        (28, 14, '2025-11-01 17:00'),
-        (29, 15, '2025-10-30 13:00'),
-        (30, 15, '2025-11-01 18:00'),
-        (31, 16, '2025-10-31 09:00'),
-        (32, 16, '2025-11-02 14:00'),
-        (33, 17, '2025-10-31 10:00'),
-        (34, 17, '2025-11-02 15:00'),
-        (35, 18, '2025-10-31 11:00'),
-        (36, 18, '2025-11-02 16:00'),
-        (37, 19, '2025-10-31 12:00'),
-        (38, 19, '2025-11-02 17:00'),
-        (39, 20, '2025-10-31 13:00'),
-        (40, 20, '2025-11-02 18:00')
+        (1, 100, '2025-10-28 09:00:00'),
+        (2, 100, '2025-10-29 14:00:00'),
+        (3, 200, '2025-10-28 10:00:00'),
+        (4, 200, '2025-10-30 15:00:00'),
+        (5, 300, '2025-10-28 11:00:00'),
+        (6, 300, '2025-10-31 16:00:00'),
+        (7, 400, '2025-10-28 12:00:00'),
+        (8, 400, '2025-10-29 17:00:00'),
+        (9, 500, '2025-10-28 13:00:00'),
+        (10, 500, '2025-10-30 18:00:00'),
+        (11, 600, '2025-10-29 09:30:00'),
+        (12, 600, '2025-10-31 14:30:00'),
+        (13, 700, '2025-10-29 10:30:00'),
+        (14, 700, '2025-10-30 15:30:00'),
+        (15, 800, '2025-10-29 11:30:00'),
+        (16, 800, '2025-10-31 16:30:00'),
+        (17, 900, '2025-10-29 12:30:00'),
+        (18, 900, '2025-10-30 17:30:00'),
+        (19, 110, '2025-10-29 13:30:00'),
+        (20, 110, '2025-10-31 18:30:00'),
+        (21, 120, '2025-10-30 09:00:00'),
+        (22, 120, '2025-11-01 14:00:00'),
+        (23, 130, '2025-10-30 10:00:00'),
+        (24, 130, '2025-11-01 15:00:00'),
+        (25, 140, '2025-10-30 11:00:00'),
+        (26, 140, '2025-11-01 16:00:00'),
+        (27, 150, '2025-10-30 12:00:00'),
+        (28, 150, '2025-11-01 17:00:00'),
+        (29, 160, '2025-10-30 13:00:00'),
+        (30, 160, '2025-11-01 18:00:00'),
+        (31, 170, '2025-10-31 09:00:00'),
+        (32, 170, '2025-11-02 14:00:00'),
+        (33, 180, '2025-10-31 10:00:00'),
+        (34, 180, '2025-11-02 15:00:00'),
+        (35, 190, '2025-10-31 11:00:00'),
+        (36, 190, '2025-11-02 16:00:00'),
+        (37, 220, '2025-10-31 12:00:00'),
+        (38, 220, '2025-11-02 17:00:00'),
+        (39, 210, '2025-10-31 13:00:00'),
+        (40, 210, '2025-11-02 18:00:00')
     ]
+
 
     availability_insert_query = """
         INSERT INTO Doctor_Availability (AvailabilityID, DoctorID, Available)
@@ -415,6 +421,7 @@ def setup_database():
     """
 
     cursor.executemany(availability_insert_query, availability_data)
+    connection.commit()
     print("Inserted Doctor_Availability records.")
 
     Admission_Details_data = [
@@ -446,37 +453,38 @@ def setup_database():
     """
 
     cursor.executemany(Admission_Details_insert_query, Admission_Details_data)
+    connection.commit()
     print("Inserted Admission_Details records.")
 
     apointment_data = [
-        (1, 6, 1, '2025-10-28 09:00', 'Completed', 1500),
-        (2, 7, 2, '2025-10-28 10:00', 'Completed', 1600),
-        (3, 8, 3, '2025-10-28 11:00', 'Completed', 1700),
-        (4, 9, 4, '2025-10-28 12:00', 'Completed', 1800),
-        (5, 10, 5, '2025-10-28 13:00', 'Completed', 1900),
-        (6, 11, 6, '2025-10-29 09:30', 'Completed', 1500),
-        (7, 12, 7, '2025-10-29 10:30', 'Completed', 1600),
-        (8, 13, 8, '2025-10-29 11:30', 'Completed', 1700),
-        (9, 14, 9, '2025-10-29 12:30', 'Completed', 1800),
-        (10, 15, 10, '2025-10-29 13:30', 'Completed', 1900),
-        (11, 16, 11, '2025-10-30 09:00', 'Scheduled', 1500),
-        (12, 17, 12, '2025-10-30 10:00', 'Scheduled', 1600),
-        (13, 18, 13, '2025-10-30 11:00', 'Scheduled', 1700),
-        (14, 19, 14, '2025-10-30 12:00', 'Scheduled', 1800),
-        (15, 20, 15, '2025-10-30 13:00', 'Scheduled', 1900),
-        (16, 6, 16, '2025-10-31 09:00', 'Scheduled', 1500),
-        (17, 7, 17, '2025-10-31 10:00', 'Scheduled', 1600),
-        (18, 8, 18, '2025-10-31 11:00', 'Scheduled', 1700),
-        (19, 9, 19, '2025-10-31 12:00', 'Scheduled', 1800),
-        (20, 10, 20, '2025-10-31 13:00', 'Scheduled', 1900)
-    ]
-
+    (1, 6, 100, '2025-10-28 09:00', 'Completed', 1500),
+    (2, 7, 100, '2025-10-28 10:00', 'Completed', 1600),
+    (3, 8, 200, '2025-10-28 11:00', 'Completed', 1700),
+    (4, 9, 200, '2025-10-28 12:00', 'Completed', 1800),
+    (5, 10, 300, '2025-10-28 13:00', 'Completed', 1900),
+    (6, 11, 300, '2025-10-29 09:30', 'Completed', 1500),
+    (7, 12, 400, '2025-10-29 10:30', 'Completed', 1600),
+    (8, 13, 400, '2025-10-29 11:30', 'Completed', 1700),
+    (9, 14, 500, '2025-10-29 12:30', 'Completed', 1800),
+    (10, 15, 500, '2025-10-29 13:30', 'Completed', 1900),
+    (11, 16, 600, '2025-10-30 09:00', 'Scheduled', 1500),
+    (12, 17, 600, '2025-10-30 10:00', 'Scheduled', 1600),
+    (13, 18, 700, '2025-10-30 11:00', 'Scheduled', 1700),
+    (14, 19, 700, '2025-10-30 12:00', 'Scheduled', 1800),
+    (15, 20, 800, '2025-10-30 13:00', 'Scheduled', 1900),
+    (16, 6, 800, '2025-10-31 09:00', 'Scheduled', 1500),
+    (17, 7, 900, '2025-10-31 10:00', 'Scheduled', 1600),
+    (18, 8, 900, '2025-10-31 11:00', 'Scheduled', 1700),
+    (19, 9, 110, '2025-10-31 12:00', 'Scheduled', 1800),
+    (20, 10, 110, '2025-10-31 13:00', 'Scheduled', 1900)
+]
     apointment_insert_query = """
         INSERT INTO Doctor_Appointment (AppointmentID, PatientID, DoctorID, AppointmentDateTime, AppointmentStatus, AppointmentPrice)
         VALUES (?, ?, ?, ?, ?, ?)
     """
 
     cursor.executemany(apointment_insert_query, apointment_data)
+    connection.commit()
     print("Inserted Doctor_Availability records.")
 
     Pharmacy_Item_data = [
@@ -508,6 +516,7 @@ def setup_database():
     """
 
     cursor.executemany(Pharmacy_Item_insert_query, Pharmacy_Item_data)
+    connection.commit()
     print("Inserted Pharmacy_Item records.")
 
     Pharmacy_Order_data = [
@@ -539,6 +548,7 @@ def setup_database():
     """
 
     cursor.executemany(Pharmacy_Order_insert_query, Pharmacy_Order_data)
+    connection.commit()
     print("Inserted Pharmacy_Order records.")
 
     Bill_data = [
@@ -571,6 +581,7 @@ def setup_database():
     """
 
     cursor.executemany(Bill_insert_query, Bill_data)
+    connection.commit()
     print("Inserted Bill records.")
 
     print("Committing all data...")
