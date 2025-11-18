@@ -1,1 +1,1 @@
-go_to_doctor_registration_page
+Hospital_Managment_System
