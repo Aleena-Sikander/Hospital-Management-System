@@ -1291,7 +1291,7 @@
      <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
-   <widget class="QDateTimeEdit" name="appointment_booking_timeanddate">
+   <widget class="QComboBox" name="appointment_booking_available_times">
     <property name="geometry">
      <rect>
       <x>260</x>
@@ -1390,6 +1390,20 @@
      <bool>true</bool>
     </property>
    </widget>
+   
+<widget class="QTableView" name="bill_generation_dataview">
+    <property name="geometry">
+        <rect>
+            <x>40</x>
+            <y>200</y>
+            <width>611</width>
+            <height>380</height>
+        </rect>
+    </property>
+    <property name="styleSheet">
+        <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+</widget>
   </widget>
   <widget class="QWidget" name="page_18">
    <widget class="QLabel" name="label_19">
@@ -1955,6 +1969,19 @@
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QTableView" name="bills_detail_dataview">
+    <property name="geometry">
+        <rect>
+            <x>40</x>
+            <y>250</y>
+            <width>611</width>
+            <height>401</height>
+        </rect>
+    </property>
+    <property name="styleSheet">
+        <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+</widget>
   </widget>
   <widget class="QWidget" name="page_25">
    <widget class="QLabel" name="label_26">
