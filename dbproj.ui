@@ -14,7 +14,7 @@
    <string>StackedWidget</string>
   </property>
   <property name="currentIndex">
-   <number>12</number>
+   <number>7</number>
   </property>
   <widget class="QWidget" name="first_page">
    <widget class="QLabel" name="label">
@@ -310,12 +310,12 @@
     </property>
     <item>
      <property name="text">
-      <string>Male</string>
+      <string>M</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>Female</string>
+      <string>F</string>
      </property>
     </item>
     <item>
@@ -385,6 +385,179 @@
     <property name="flat">
      <bool>true</bool>
     </property>
+   </widget>
+   <widget class="QLineEdit" name="doctor_registration__name">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>240</y>
+      <width>351</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none; font-weight: bold; color: rgba(0, 0, 0, 1);</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="doctor_registration_email">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>310</y>
+      <width>351</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none; font-weight: bold; color: rgba(0, 0, 0, 1);</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="doctor_registration_password">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>390</y>
+      <width>351</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none; font-weight: bold; color: rgba(0, 0, 0, 1);</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="doctor_registration_confirm_passowrd">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>460</y>
+      <width>351</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none; font-weight: bold; color: rgba(0, 0, 0, 1);</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="doctor_registration_contact_no">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>530</y>
+      <width>351</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none; font-weight: bold; color: rgba(0, 0, 0, 1);</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="doctor_registration_comboBox">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>600</y>
+      <width>341</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <item>
+     <property name="text">
+      <string>Cardiology</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Internal Medicine</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Pulmonology</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Critical Care</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Neurology</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Sleep Medicine</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Orthopedics</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Sports Medicine</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Gynecology</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Obstetrics</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QWidget" name="page_4">
@@ -621,6 +794,47 @@
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="admin_doctor_approval_approve_requests">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>340</y>
+      <width>521</width>
+      <height>391</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="admin_doctor_back_button">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>140</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(61, 70, 126);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>BACK BUTTON</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>110</width>
+      <height>110</height>
+     </size>
     </property>
    </widget>
   </widget>
@@ -1033,9 +1247,6 @@ color: rgb(255, 255, 255);</string>
       <height>421</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
     <property name="font">
      <font>
       <family>MS PGothic</family>
@@ -1043,6 +1254,9 @@ color: rgb(255, 255, 255);</string>
       <weight>75</weight>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -1153,9 +1367,6 @@ color: rgb(255, 255, 255);</string>
       <height>421</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
     <property name="font">
      <font>
       <family>MS PGothic</family>
@@ -1163,6 +1374,9 @@ color: rgb(255, 255, 255);</string>
       <weight>75</weight>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
