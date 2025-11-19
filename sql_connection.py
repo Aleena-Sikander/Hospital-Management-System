@@ -1,7 +1,7 @@
 import pyodbc
 
 # --- Connection Details ---
-SERVER = 'SAIRATALHA\\MYSQL'
+SERVER = 'DESKTOP-U5TP2TI\TomSQL'
 DATABASE = 'Hospital_Managment_System'
 USE_WINDOWS_AUTH = True
 

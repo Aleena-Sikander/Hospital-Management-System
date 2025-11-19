@@ -8,7 +8,7 @@ from sql_connection import get_db_connection
 class HospitalApp(QtWidgets.QStackedWidget):
     def __init__(self):
         super(HospitalApp, self).__init__()
-        uic.loadUi("Hospital-Management-System\dbproj.ui", self)
+        uic.loadUi("dbproj.ui", self)
         print("Profile button index of registration = ", self.indexOf(self.patient_registration_submit_button))
         print("Profile button index = ", self.indexOf(self.patient_portal_profile_button))
         print("Does button exist?", hasattr(self, "patient_portal_profile_button"))
@@ -64,10 +64,16 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.our_services_lab_test_button.clicked.connect(self.go_to_lab_test_page)
         self.lab_tests_book_button.clicked.connect(self.go_to_patient_lab_page)
         self.our_services_pharmacy_button.clicked.connect(self.go_to_pharmacy_page)
+        self.our_services_back_button.clicked.connect(self.go_to_patient_portal_profile_page)
         self.patient_labs_check_result_button.clicked.connect(self.go_to_check_result_page)
         self.lab_test_result_back_button.clicked.connect(self.go_to_patient_lab_page)
         self.patient_labs_generate_bill_button.clicked.connect(self.go_to_bill_gen_page)
         self.medical_history_back_button.clicked.connect(self.go_to_patient_portal_profile_page)
+        self.patient_profile_back_button.clicked.connect(self.go_to_patient_portal_page)
+        self.bills_back_button.clicked.connect(self.go_to_patient_portal_page)
+        self.appointments_back_button.clicked.connect(self.go_to_patient_portal_page)
+        self.admission_details_back_button.clicked.connect(self.go_to_patient_portal_page)
+        self.specialization_back_button.clicked.connect(self.go_to_service_page)
         # Patient profile page (page index 4 - page_4) buttons
         self.patient_profile_medical_history.clicked.connect(self.go_to_medical_history)
         self.patient_profile_our_services.clicked.connect(self.go_to_service_page)
@@ -839,7 +845,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.setCurrentIndex(15)
     
     def go_to_pharmacy_page(self):
-        self.setCurrentIndex(14)
+        self.setCurrentIndex(13)
     
     def go_to_patient_appointment_page(self):
         self.setCurrentIndex(25)
