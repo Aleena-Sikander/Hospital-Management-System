@@ -167,6 +167,8 @@ class HospitalApp(QtWidgets.QStackedWidget):
         
         gender = self.patient_registration_gender.currentText()
         dob = self.patient_registration_dob.date().toString("yyyy-MM-dd")
+        user_id = 20
+        user_id+=1
 
         # Validate all fields are filled
         if not name_text or not email_text or not contact_text:
@@ -186,7 +188,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
             # --- 3. Insert patient data into UserAccount table ---
             insert_query = """
             INSERT INTO UserAccount (UserID, Name, ContactNumber, Gender, Role, DateOfBirth, Email, Password)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (20+1, ?, ?, ?, 'Pateint', ?, ?, ?)
             """
             cursor.execute(insert_query, (name_text, contact_text, email_text, gender, dob, password))
             connection.commit()
@@ -547,16 +549,22 @@ class HospitalApp(QtWidgets.QStackedWidget):
         if not doctor_id or not availability_id:
             QMessageBox.warning(self, "Error", "Please select doctor and time.")
             return
-
+        AppointmentID =20
+        AppointmentID+=1
+        AppointmentStatus='scheduled' #hardcoded just for now
+        appointment_price=78 #hardcoded just for now
+        
         connection = get_db_connection()
         if connection is None: return
         cursor = connection.cursor()
         try:
             # Insert into Doctor_Appointment
             cursor.execute("""
-                INSERT INTO Doctor_Appointment (PatientID, DoctorID, AppointmentDateTime, AppointmentStatus, AppointmentPrice)
-                VALUES (?, ?, (SELECT Available FROM Doctor_Availability WHERE AvailabilityID=?), 'Booked', 0)
-            """, (self.current_user_id, doctor_id, availability_id))
+    INSERT INTO Doctor_Appointment (AppointmentID, PatientID, DoctorID, AppointmentDateTime, AppointmentStatus, AppointmentPrice)
+    Values(?,?,?,(SELECT Available FROM Doctor_Availability WHERE AvailabilityID=?), ?, ?)
+    
+""", (AppointmentID,self.current_user_id, doctor_id, availability_id, AppointmentStatus, appointment_price))
+
             connection.commit()
             QMessageBox.information(self, "Success", "Appointment booked successfully!")
             # Reload availability to remove booked slot if needed
@@ -683,6 +691,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
             index = self.bills_detail_dataview.currentIndex()
             if not index.isValid():
                 QtWidgets.QMessageBox.warning(self, "Error", "Please select a bill first.")
+
                 return
 
             bill_id = index.sibling(index.row(), 0).data()  # BillID
