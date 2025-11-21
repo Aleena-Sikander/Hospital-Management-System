@@ -8,7 +8,7 @@ from sql_connection import get_db_connection
 class HospitalApp(QtWidgets.QStackedWidget):
     def __init__(self):
         super(HospitalApp, self).__init__()
-        uic.loadUi("Hospital-Management-System\dbproj.ui", self)
+        uic.loadUi("dbproj.ui", self)
         print("Profile button index of registration = ", self.indexOf(self.patient_registration_submit_button))
         print("Profile button index = ", self.indexOf(self.patient_portal_profile_button))
         print("Does button exist?", hasattr(self, "patient_portal_profile_button"))
