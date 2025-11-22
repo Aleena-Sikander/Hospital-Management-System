@@ -1,7 +1,7 @@
 import pyodbc
 
 # --- Connection Details ---
-SERVER = r'DESKTOP-GDT94QR\ALEENASQLSERVER'
+SERVER = r'DESKTOP-U5TP2TI\tomSQL'
 DATABASE = 'Hospital_Managment_System'
 USE_WINDOWS_AUTH = True
 
@@ -20,7 +20,7 @@ def get_db_connection():
     try:
         connection = pyodbc.connect(connection_string)
         return connection
-    except Exception as e: #ok this should change it
+    except Exception as e:
         print(f"Error establishing database connection: {e}")
         return None
 
@@ -37,7 +37,7 @@ def setup_database():
 
     cursor = connection.cursor()
 
-    # --- Drop tables in reverse order of creation to avoid FK constraints ---
+    # --- 1. DROP TABLES (Order is critical: Child tables first, Parents last) ---
     drop_statements = [
         "IF OBJECT_ID('Bill', 'U') IS NOT NULL DROP TABLE Bill",
         "IF OBJECT_ID('Pharmacy_Order', 'U') IS NOT NULL DROP TABLE Pharmacy_Order",
@@ -46,6 +46,7 @@ def setup_database():
         "IF OBJECT_ID('Admission_Details', 'U') IS NOT NULL DROP TABLE Admission_Details",
         "IF OBJECT_ID('Doctor_Availability', 'U') IS NOT NULL DROP TABLE Doctor_Availability",
         "IF OBJECT_ID('Specialisation', 'U') IS NOT NULL DROP TABLE Specialisation",
+        "IF OBJECT_ID('PendingDoctor', 'U') IS NOT NULL DROP TABLE PendingDoctor",  # <--- FIXED: Added this
         "IF OBJECT_ID('Doctor', 'U') IS NOT NULL DROP TABLE Doctor",
         "IF OBJECT_ID('LabTest', 'U') IS NOT NULL DROP TABLE LabTest",
         "IF OBJECT_ID('Medical_History', 'U') IS NOT NULL DROP TABLE Medical_History",
@@ -61,11 +62,11 @@ def setup_database():
             
     connection.commit()
 
-    # SQL queries to create tables
+    # --- 2. CREATE TABLES ---
     create_statements = [
         """
         CREATE TABLE UserAccount (
-            UserID INTEGER IDENTITY(1,1) NOT NULL,  -- CHANGED THIS LINE
+            UserID INTEGER IDENTITY(1,1) NOT NULL,
             Name VARCHAR(100) NOT NULL,
             ContactNumber VARCHAR(15),
             Gender CHAR(1),
@@ -107,8 +108,8 @@ def setup_database():
             DoctorEmail VARCHAR(100) UNIQUE NOT NULL,
             DoctorPassword VARCHAR(100) NOT NULL,
             DoctorStatus VARCHAR(20),
-            Contact VARCHAR(20),   -- New Column
-            approved INTEGER       -- New Column (1 or 0)
+            Contact VARCHAR(20),
+            approved INTEGER
         )
         """,
         """
@@ -191,7 +192,8 @@ def setup_database():
             CONSTRAINT fk_bill_user FOREIGN KEY (PatientID) REFERENCES UserAccount(UserID),
             CONSTRAINT fk_bill_order FOREIGN KEY (OrderID) REFERENCES Pharmacy_Order(OrderID)
         )
-    """]
+        """
+    ]
 
     print("Creating new tables...")
     for statement in create_statements:
@@ -200,6 +202,9 @@ def setup_database():
             print("Table created successfully.")
         except Exception as e:
             print(f"Error creating table: {e}")
+            # If a table fails to create, we stop to avoid cascading errors
+            return 
+    
     print("All tables created.")
     connection.commit() # Commit after all tables are created
     print("Inserting data...")
