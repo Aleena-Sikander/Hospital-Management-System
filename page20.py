@@ -34,7 +34,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.appointments_details_button.clicked.connect(self.load_bills_from_appointments)
         self.login_patient_button.clicked.connect(self.go_to_login)
         self.login_patient_button.clicked.connect(self.prepare_login_as_patient)
-        self.login_register_button.clicked.connect(self.go_to_patient_registration)
+        self.login_register_button.clicked.connect(self.go_to_check_who_here)
         self.patient_registration_submit_button.clicked.connect(self.go_to_login) #condition
         self.patient_registration_submit_button.clicked.connect(self.patient_registration_submit)
         self.login_submit_button.clicked.connect(self.handle_login_submit) # route based on chosen role
@@ -64,10 +64,17 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.our_services_lab_test_button.clicked.connect(self.go_to_lab_test_page)
         self.lab_tests_book_button.clicked.connect(self.go_to_patient_lab_page)
         self.our_services_pharmacy_button.clicked.connect(self.go_to_pharmacy_page)
+        self.our_services_back_button.clicked.connect(self.go_to_patient_portal_profile_page)
         self.patient_labs_check_result_button.clicked.connect(self.go_to_check_result_page)
         self.lab_test_result_back_button.clicked.connect(self.go_to_patient_lab_page)
         self.patient_labs_generate_bill_button.clicked.connect(self.go_to_bill_gen_page)
         self.medical_history_back_button.clicked.connect(self.go_to_patient_portal_profile_page)
+        self.patient_profile_back_button.clicked.connect(self.go_to_patient_portal_page)
+        self.bills_back_button.clicked.connect(self.go_to_patient_portal_page)
+        self.appointments_back_button.clicked.connect(self.go_to_patient_portal_page)
+        self.admission_details_back_button.clicked.connect(self.go_to_patient_portal_page)
+        self.specialization_back_button.clicked.connect(self.go_to_service_page)
+        self.admin_doctor_back_button.clicked.connect(self.go_to_admin_portal_page)
         # Patient profile page (page index 4 - page_4) buttons
         self.patient_profile_medical_history.clicked.connect(self.go_to_medical_history)
         self.patient_profile_our_services.clicked.connect(self.go_to_service_page)
@@ -78,7 +85,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
         # Doctor Pages:
         self.login_doctor_button.clicked.connect(self.go_to_login)
         self.login_doctor_button.clicked.connect(self.prepare_login_as_doctor)
-        self.doctor_registration_submit_button.clicked.connect(self.go_to_login)
+        self.doctor_registration_submit_button.clicked.connect(self.go_to_submit_doctor_registration)
         # self.login_register_button.clicked.connect(self.go_to_doctor_registration_page)
         # self.login_submit_button.clicked.connect(self.go_to_doctor_profile_page) # conditions
         self.doctor_portal_profile_button.clicked.connect(self.go_to_doctor_profile_page)
@@ -93,11 +100,19 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.admin_portal_patient_button.clicked.connect(self.go_to_admin_patient_page)
         self.admin_patient_admission_edit_button.clicked.connect(self.go_to_admin_patient_admission_edit_page)
         self.admin_portal_doctor_button.clicked.connect(self.go_to_admin_doctor_approval_page)
-        self.admin_doctor_approval_approve_button.clicked.connect(self.go_to_admin_apecialization_edit_page)
+        self.admin_doctor_approval_approve_button.clicked.connect(self.approve_selected_doctor)
+        self.admin_doctor_approval_reject_button.clicked.connect(self.reject_selected_doctor)
         self.admin_portal_pharmacy_button.clicked.connect(self.go_to_admin_pharmacy_edit_page)
         self.Admin_pharmacy_entry_back_button.clicked.connect(self.go_to_admin_portal_page)
         self.order_generate_bill_button.clicked.connect(self.go_to_bill_gen_page)
     # --- Navigation Methods ---
+    
+    def go_to_check_who_here(self):
+        if self.current_login_type == "doctor":
+            self.go_to_doctor_registration_page()
+        elif self.current_login_type == "patient":
+            self.go_to_patient_registration()
+    
     def go_to_login_page(self):
         """Navigate to login selection page"""
         self.setCurrentIndex(1)  # page_2
@@ -113,7 +128,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
     def prepare_login_as_doctor(self):
         """Show login form and remember Doctor role"""
         self.current_login_type = "doctor"
-        self.login_register_button.setEnabled(False)
+        self.login_register_button.setEnabled(True)
         self.setCurrentIndex(4)
         print("Preparing login as doctor")
 
@@ -184,10 +199,10 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
             # --- 3. Insert patient data into UserAccount table ---
             insert_query = """
-            INSERT INTO UserAccount (UserID, Name, ContactNumber, Gender, Role, DateOfBirth, Email, Password)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO UserAccount (Name, ContactNumber, Gender, Role, DateOfBirth, Email, Password)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             """
-            cursor.execute(insert_query, (name_text, contact_text, email_text, gender, dob, password))
+            cursor.execute(insert_query, (name_text, contact_text, gender, 'Patient', dob, email_text, password))
             connection.commit()
 
             print(f"Patient registered successfully: {name_text}")
@@ -212,6 +227,227 @@ class HospitalApp(QtWidgets.QStackedWidget):
         finally:
             if connection:
                 connection.close()
+
+    def go_to_submit_doctor_registration(self):
+        """Validates input and sends data to PendingDoctor table"""
+        
+        # 1. Get data from UI
+        name = self.doctor_registration__name.text() # Check your UI variable name
+        email = self.doctor_registration_email.text()
+        password = self.doctor_registration_password.text()
+        confirm_pass = self.doctor_registration_confirm_passowrd.text()
+        contact = self.doctor_registration_contact_no.text()
+        specialization = self.doctor_registration_comboBox.currentText()
+
+        # 2. Validation
+        if not name or not email or not password or not contact:
+            QMessageBox.warning(self, "Error", "Please fill in all fields.")
+            return
+
+        if password != confirm_pass:
+            QMessageBox.warning(self, "Error", "Passwords do not match.")
+            return
+
+        if len(contact) != 10 or not contact.isdigit():
+            QMessageBox.warning(self, "Error", "Contact must be 10 digits.")
+            return
+
+        # 3. Insert into PendingDoctor Table
+        connection = None
+        try:
+            connection = get_db_connection()
+            if connection:
+                cursor = connection.cursor()
+                
+                query = """
+                INSERT INTO PendingDoctor (Name, Email, Password, Contact, Specialization)
+                VALUES (?, ?, ?, ?, ?)
+                """
+                cursor.execute(query, (name, email, password, contact, specialization))
+                connection.commit()
+
+                QMessageBox.information(self, "Request Sent", "Registration submitted! Please wait for Admin approval.")
+                
+                # Clear fields
+                self.doctor_registration__name.clear()
+                self.doctor_registration_email.clear()
+                self.doctor_registration_password.clear()
+                self.doctor_registration_contact_no.clear()
+                
+                # Go back to login
+                self.setCurrentIndex(0)
+
+        except pyodbc.Error as e:
+            QMessageBox.critical(self, "Database Error", f"Error submitting request: {e}")
+        finally:
+            if connection:
+                connection.close()
+    
+    def go_to_admin_doctor_approval_page(self):
+        self.setCurrentIndex(6) # Or whatever your index is
+        self.load_pending_doctor_requests() # <--- ADD THIS LINE
+        print("Navigated to doctor approval page and loaded data")
+
+    def load_pending_doctor_requests(self):
+        """Fetches pending doctors and displays them in the table"""
+        
+        table = self.admin_doctor_approval_approve_requests
+        
+        # --- FIX START: Setup the columns first! ---
+        table.setColumnCount(5)  # Tell the table we need 5 columns
+        table.setHorizontalHeaderLabels(["Request ID", "Name", "Email", "Contact", "Specialization"])
+        # --- FIX END ---
+
+        # Clear previous data rows (but keep the headers)
+        table.setRowCount(0)
+        
+        connection = None
+        try:
+            connection = get_db_connection()
+            if connection:
+                cursor = connection.cursor()
+                
+                query = "SELECT RequestID, Name, Email, Contact, Specialization FROM PendingDoctor"
+                cursor.execute(query)
+                rows = cursor.fetchall()
+
+                for row_number, row_data in enumerate(rows):
+                    table.insertRow(row_number)
+                    
+                    # Now that columns exist, these lines will work:
+                    table.setItem(row_number, 0, QtWidgets.QTableWidgetItem(str(row_data[0]))) 
+                    table.setItem(row_number, 1, QtWidgets.QTableWidgetItem(str(row_data[1])))
+                    table.setItem(row_number, 2, QtWidgets.QTableWidgetItem(str(row_data[2])))
+                    table.setItem(row_number, 3, QtWidgets.QTableWidgetItem(str(row_data[3])))
+                    table.setItem(row_number, 4, QtWidgets.QTableWidgetItem(str(row_data[4])))
+                
+                # Optional: Make columns stretch to fill the space
+                header = table.horizontalHeader()
+                header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeMode.Stretch)
+
+        except Exception as e:
+            print(f"Error loading pending requests: {e}")
+        finally:
+            if connection:
+                connection.close()
+
+
+    def get_next_id(self, cursor, table_name, column_name):
+        """Calculates the next available ID (MAX + 1)"""
+        try:
+            cursor.execute(f"SELECT MAX({column_name}) FROM {table_name}")
+            val = cursor.fetchone()[0]
+            if val is None:
+                return 1
+            return val + 1
+        except Exception:
+            return 1
+        
+    
+    def approve_selected_doctor(self):
+        """
+        Approves the selected doctor request.
+        Handles the logic to prevent duplicate doctor entries.
+        """
+        # 1. Get selected row
+        current_row = self.admin_doctor_approval_approve_requests.currentRow()
+        if current_row < 0:
+            QMessageBox.warning(self, "Selection Error", "Please select a request to approve.")
+            return
+
+        # 2. Extract data from the table row
+        # Column 0 is RequestID (Hidden or visible), Column 1 Name, 2 Email, 3 Contact, 4 Spec
+        request_id = self.admin_doctor_approval_approve_requests.item(current_row, 0).text()
+        
+        # We need to fetch the PASSWORD from the database because it's not in the table view
+        connection = get_db_connection()
+        if not connection: return
+        
+        cursor = connection.cursor()
+        
+        try:
+            # Fetch full details from PendingDoctor
+            cursor.execute("SELECT Name, Email, Password, Contact, Specialization FROM PendingDoctor WHERE RequestID = ?", (request_id,))
+            pending_data = cursor.fetchone()
+            
+            if not pending_data:
+                QMessageBox.warning(self, "Error", "Request not found in database.")
+                return
+
+            name, email, password, contact, specialization = pending_data
+
+            # --- LOGIC: CHECK IF DOCTOR EXISTS ---
+            cursor.execute("SELECT DoctorID FROM Doctor WHERE DoctorEmail = ?", (email,))
+            existing_doctor = cursor.fetchone()
+            
+            doctor_id = None
+
+            if existing_doctor:
+                # SCENARIO A: Doctor already exists (e.g., Thomas is adding a 2nd specialization)
+                doctor_id = existing_doctor[0]
+                print(f"Doctor exists (ID: {doctor_id}). Adding new specialization only.")
+            else:
+                # SCENARIO B: New Doctor
+                doctor_id = self.get_next_id(cursor, "Doctor", "DoctorID")
+                
+                # Insert into Doctor Table
+                insert_doc = """
+                INSERT INTO Doctor (DoctorID, DoctorName, DoctorEmail, DoctorPassword, DoctorStatus, Contact, approved)
+                VALUES (?, ?, ?, ?, 'Active', ?, 1)
+                """
+                cursor.execute(insert_doc, (doctor_id, name, email, password, contact))
+                print(f"Created new Doctor (ID: {doctor_id}).")
+
+            # --- ALWAYS: ADD SPECIALIZATION ---
+            spec_id = self.get_next_id(cursor, "Specialisation", "SpecialisationID")
+            insert_spec = "INSERT INTO Specialisation (SpecialisationID, FieldName, DoctorID) VALUES (?, ?, ?)"
+            cursor.execute(insert_spec, (spec_id, specialization, doctor_id))
+
+            # --- CLEANUP: REMOVE FROM PENDING ---
+            cursor.execute("DELETE FROM PendingDoctor WHERE RequestID = ?", (request_id,))
+            
+            connection.commit()
+            
+            QMessageBox.information(self, "Success", f"Doctor {name} approved for {specialization}.")
+            
+            # Refresh the table
+            self.load_pending_doctor_requests()
+
+        except pyodbc.Error as e:
+            connection.rollback()
+            QMessageBox.critical(self, "Database Error", f"Approval failed: {e}")
+        finally:
+            connection.close()
+
+
+
+    def reject_selected_doctor(self):
+        current_row = self.admin_doctor_approval_approve_requests.currentRow()
+        if current_row < 0:
+            QMessageBox.warning(self, "Selection Error", "Please select a request to reject.")
+            return
+
+        request_id = self.admin_doctor_approval_approve_requests.item(current_row, 0).text()
+        
+        confirm = QMessageBox.question(self, "Confirm", "Are you sure you want to reject this request?", 
+                                       QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        
+        if confirm == QMessageBox.StandardButton.No:
+            return
+
+        connection = get_db_connection()
+        if not connection: return
+        cursor = connection.cursor()
+        
+        try:
+            cursor.execute("DELETE FROM PendingDoctor WHERE RequestID = ?", (request_id,))
+            connection.commit()
+            QMessageBox.information(self, "Rejected", "Request has been removed.")
+            self.load_pending_doctor_requests()
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to reject: {e}")
+        finally:
+            connection.close()
 
     def go_to_patient_portal_page(self):
         """
@@ -828,9 +1064,6 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
     def go_to_admin_patient_admission_edit_page(self):
         self.setCurrentIndex(8)
-
-    def go_to_admin_doctor_approval_page(self):
-        self.setCurrentIndex(6)
     
     def go_to_admin_apecialization_edit_page(self):
         self.setCurrentIndex(11)
@@ -839,7 +1072,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.setCurrentIndex(15)
     
     def go_to_pharmacy_page(self):
-        self.setCurrentIndex(14)
+        self.setCurrentIndex(13)
     
     def go_to_patient_appointment_page(self):
         self.setCurrentIndex(25)

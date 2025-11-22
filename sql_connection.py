@@ -65,7 +65,7 @@ def setup_database():
     create_statements = [
         """
         CREATE TABLE UserAccount (
-            UserID INTEGER NOT NULL,
+            UserID INTEGER IDENTITY(1,1) NOT NULL,  -- CHANGED THIS LINE
             Name VARCHAR(100) NOT NULL,
             ContactNumber VARCHAR(15),
             Gender CHAR(1),
@@ -106,7 +106,9 @@ def setup_database():
             DoctorName VARCHAR(100) NOT NULL,
             DoctorEmail VARCHAR(100) UNIQUE NOT NULL,
             DoctorPassword VARCHAR(100) NOT NULL,
-            DoctorStatus VARCHAR(20)
+            DoctorStatus VARCHAR(20),
+            Contact VARCHAR(20),   -- New Column
+            approved INTEGER       -- New Column (1 or 0)
         )
         """,
         """
@@ -168,6 +170,17 @@ def setup_database():
         )
         """,
         """
+        CREATE TABLE PendingDoctor (
+            RequestID INTEGER IDENTITY(1,1) PRIMARY KEY,
+            Name VARCHAR(100) NOT NULL,
+            Email VARCHAR(100) NOT NULL,
+            Password VARCHAR(100) NOT NULL,
+            Contact VARCHAR(20) NOT NULL,
+            Specialization VARCHAR(50) NOT NULL,
+            RequestDate DATE DEFAULT GETDATE()
+        )
+        """,
+        """
         CREATE TABLE Bill (
             BillID INTEGER PRIMARY KEY,
             OrderID INTEGER NOT NULL,
@@ -215,12 +228,16 @@ def setup_database():
         (20, 'Mariam Zafar', '03191234567', 'F', 'Patient', '1997-03-15', 'mariam.zafar@gmail.com', 'mz123')
     ]
 
+    cursor.execute("SET IDENTITY_INSERT UserAccount ON")
+    
     user_insert_query = """
         INSERT INTO UserAccount (UserID, Name, ContactNumber, Gender, Role, DateOfBirth, Email, Password)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     """
-
     cursor.executemany(user_insert_query, user_data)
+    
+    # Turn it back OFF so the App can auto-generate IDs later
+    cursor.execute("SET IDENTITY_INSERT UserAccount OFF")
     connection.commit()
     print("Inserted UserAccount records.")
 
@@ -288,31 +305,32 @@ def setup_database():
     print("Inserted LabTest records.")
 
     doctor_data = [
-        (100, 'Dr. Bilal Amir', 'bilal.amir@hospital.com', 'ba123', 'Active'),
-        (200, 'Dr. Imran Malik', 'imran.malik@hospital.com', 'passImran2', 'Active'),
-        (300, 'Dr. Sara Ahmed', 'sara.ahmed@hospital.com', 'passSara3', 'Active'),
-        (400, 'Dr. Bilal Raza', 'bilal.raza@hospital.com', 'passBilal4', 'Active'),
-        (500, 'Dr. Nadia Farooq', 'nadia.farooq@hospital.com', 'passNadia5', 'Active'),
-        (600, 'Dr. Kamran Shah', 'kamran.shah@hospital.com', 'passKamran6', 'Active'),
-        (700, 'Dr. Hina Qureshi', 'hina.qureshi@hospital.com', 'passHina7', 'Active'),
-        (800, 'Dr. Faisal Mehmood', 'faisal.mehmood@hospital.com', 'passFaisal8', 'Active'),
-        (900, 'Dr. Rabia Aslam', 'rabia.aslam@hospital.com', 'passRabia9', 'Active'),
-        (110, 'Dr. Shazia Tariq', 'shazia.tariq@hospital.com', 'passShazia11', 'Active'),
-        (120, 'Dr. Adnan Javed', 'adnan.javed@hospital.com', 'passAdnan12', 'Active'),
-        (130, 'Dr. Mehmood Ali', 'mehmood.ali@hospital.com', 'passMehmood13', 'Active'),
-        (140, 'Dr. Farah Siddiqui', 'farah.siddiqui@hospital.com', 'passFarah14', 'Active'),
-        (150, 'Dr. Salman Rafiq', 'salman.rafiq@hospital.com', 'passSalman15', 'Active'),
-        (160, 'Dr. Naila Hussain', 'naila.hussain@hospital.com', 'passNaila16', 'Active'),
-        (170, 'Dr. Usman Tariq', 'usman.tariq@hospital.com', 'passUsman17', 'Active'),
-        (180, 'Dr. Mahnoor Zia', 'mahnoor.zia@hospital.com', 'passMahnoor18', 'Active'),
-        (190, 'Dr. Danish Khan', 'danish.khan@hospital.com', 'passDanish19', 'Active'),
-        (220, 'Dr. Saba Rehman', 'saba.rehman@hospital.com', 'passSaba20', 'Active'),
-        (210, 'Dr. Zafar Iqbal', 'zafar.iqbal@hospital.com', 'passZafar10', 'Active'),
+        (100, 'Dr. Bilal Amir', 'bilal.amir@hospital.com', 'ba123', 'Active', '03001234501', 1),
+        (200, 'Dr. Imran Malik', 'imran.malik@hospital.com', 'passImran2', 'Active', '03001234502', 1),
+        (300, 'Dr. Sara Ahmed', 'sara.ahmed@hospital.com', 'passSara3', 'Active', '03001234503', 1),
+        (400, 'Dr. Bilal Raza', 'bilal.raza@hospital.com', 'passBilal4', 'Active', '03001234504', 1),
+        (500, 'Dr. Nadia Farooq', 'nadia.farooq@hospital.com', 'passNadia5', 'Active', '03001234505', 1),
+        (600, 'Dr. Kamran Shah', 'kamran.shah@hospital.com', 'passKamran6', 'Active', '03001234506', 1),
+        (700, 'Dr. Hina Qureshi', 'hina.qureshi@hospital.com', 'passHina7', 'Active', '03001234507', 1),
+        (800, 'Dr. Faisal Mehmood', 'faisal.mehmood@hospital.com', 'passFaisal8', 'Active', '03001234508', 1),
+        (900, 'Dr. Rabia Aslam', 'rabia.aslam@hospital.com', 'passRabia9', 'Active', '03001234509', 1),
+        (110, 'Dr. Shazia Tariq', 'shazia.tariq@hospital.com', 'passShazia11', 'Active', '03001234510', 1),
+        (120, 'Dr. Adnan Javed', 'adnan.javed@hospital.com', 'passAdnan12', 'Active', '03001234511', 1),
+        (130, 'Dr. Mehmood Ali', 'mehmood.ali@hospital.com', 'passMehmood13', 'Active', '03001234512', 1),
+        (140, 'Dr. Farah Siddiqui', 'farah.siddiqui@hospital.com', 'passFarah14', 'Active', '03001234513', 1),
+        (150, 'Dr. Salman Rafiq', 'salman.rafiq@hospital.com', 'passSalman15', 'Active', '03001234514', 1),
+        (160, 'Dr. Naila Hussain', 'naila.hussain@hospital.com', 'passNaila16', 'Active', '03001234515', 1),
+        (170, 'Dr. Usman Tariq', 'usman.tariq@hospital.com', 'passUsman17', 'Active', '03001234516', 1),
+        (180, 'Dr. Mahnoor Zia', 'mahnoor.zia@hospital.com', 'passMahnoor18', 'Active', '03001234517', 1),
+        (190, 'Dr. Danish Khan', 'danish.khan@hospital.com', 'passDanish19', 'Active', '03001234518', 1),
+        (220, 'Dr. Saba Rehman', 'saba.rehman@hospital.com', 'passSaba20', 'Active', '03001234519', 1),
+        (210, 'Dr. Zafar Iqbal', 'zafar.iqbal@hospital.com', 'passZafar10', 'Active', '03001234520', 1),
     ]
 
+    # Updated INSERT query to include the 2 new columns
     doctor_insert_query = """
-        INSERT INTO Doctor (DoctorID, DoctorName, DoctorEmail, DoctorPassword, DoctorStatus)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO Doctor (DoctorID, DoctorName, DoctorEmail, DoctorPassword, DoctorStatus, Contact, approved)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
     """
 
     cursor.executemany(doctor_insert_query, doctor_data)
