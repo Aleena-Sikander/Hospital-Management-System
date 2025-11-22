@@ -20,7 +20,7 @@ def get_db_connection():
     try:
         connection = pyodbc.connect(connection_string)
         return connection
-    except Exception as e:
+    except Exception as e: #ok this should change it
         print(f"Error establishing database connection: {e}")
         return None
 
