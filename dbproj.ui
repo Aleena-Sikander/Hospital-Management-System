@@ -14,7 +14,7 @@
    <string>StackedWidget</string>
   </property>
   <property name="currentIndex">
-   <number>7</number>
+   <number>21</number>
   </property>
   <widget class="QWidget" name="first_page">
    <widget class="QLabel" name="label">
@@ -880,6 +880,37 @@ color: rgb(255, 255, 255);</string>
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QPushButton" name="admin_patient_admission_back_button">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>160</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(61, 70, 126);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>BACK BUTTON</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>110</width>
+      <height>110</height>
+     </size>
+    </property>
+   </widget>
   </widget>
   <widget class="QWidget" name="page_8">
    <widget class="QLabel" name="label_9">
@@ -918,6 +949,37 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="admin_admission_entry_back_button">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>700</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(61, 70, 126);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>BACK BUTTON</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>110</width>
+      <height>110</height>
+     </size>
     </property>
    </widget>
   </widget>
@@ -1706,33 +1768,33 @@ color: rgb(255, 255, 255);</string>
      <bool>true</bool>
     </property>
    </widget>
-    <widget class="QLabel" name="bill_generation_total_label">
-        <property name="geometry">
-        <rect>
-        <x>230</x>
-        <y>610</y>
-        <width>220</width>
-        <height>51</height>
-        </rect>
-        </property>
-        <property name="font">
-        <font>
-        <family>Arial</family>
-        <pointsize>24</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-        </font>
-        </property>
-        <property name="styleSheet">
-        <string>color: rgb(52, 73, 94); background-color: transparent;</string>
-        </property>
-        <property name="text">
-        <string>0.00</string>
-        </property>
-        <property name="alignment">
-        <set>Qt::AlignLeft|Qt::AlignVCenter</set>
-        </property>
-    </widget>
+   <widget class="QLabel" name="bill_generation_total_label">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>610</y>
+      <width>220</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>24</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string>color: rgb(52, 73, 94); background-color: transparent;</string>
+    </property>
+    <property name="text">
+     <string>0.00</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
    <widget class="QTableView" name="bill_generation_dataview">
     <property name="geometry">
      <rect>
@@ -1748,164 +1810,150 @@ color: rgb(255, 255, 255);</string>
    </widget>
   </widget>
   <widget class="QWidget" name="page_18">
-    <widget class="QLabel" name="label_19">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>1000</width>
-       <height>800</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap>19.png</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
-    </widget>
-    
-    <!-- Back button positioned correctly -->
-    <widget class="QPushButton" name="lab_test_result_back_button">
-     <property name="geometry">
-      <rect>
-       <x>28</x>
-       <y>530</y>
-       <width>81</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
- 
-    <!-- Patient ID - positioned to the right of "6" in the image -->
-    <widget class="QLabel" name="result_patient_id_value">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>308</y>
-       <width>260</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string>color: black; font-size: 16px;</string>
-     </property>
-     <property name="text">
-      <string></string>
-     </property>
-    </widget>
-    
-    <!-- Refering Doctor ID - positioned to the right of "2025-10-01" -->
-    <widget class="QLabel" name="result_doctor_id_value">
-     <property name="geometry">
-      <rect>
-       <x>250</x>
-       <y>360</y>
-       <width>260</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string>color: black; font-size: 16px;</string>
-     </property>
-     <property name="text">
-      <string></string>
-     </property>
-    </widget>
-       
-    <!-- Date taken - positioned to the right of "Pateint ID" (Note: typo in image "Pateint" should be "Patient") -->
-    <widget class="QLabel" name="result_date_taken_value">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>420</y>
-       <width>260</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string>color: black; font-size: 16px;</string>
-     </property>
-     <property name="text">
-      <string></string>
-     </property>
-    </widget>
-    
-    <!-- Lab Test ID - positioned to the right of "Refering Doctor ID" -->
-    <widget class="QLabel" name="result_test_id_value">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>470</y>
-       <width>260</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string>color: black; font-size: 16px;</string>
-     </property>
-     <property name="text">
-      <string></string>
-     </property>
-    </widget>
-    
-    <!-- Test description/results area - positioned in the main content area below the header info -->
-    <widget class="QLabel" name="result_desc_value">
-     <property name="geometry">
-      <rect>
-       <x>550</x>
-       <y>200</y>
-       <width>800</width>
-       <height>600</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string>color: black; font-size: 16px; background-color: transparent;</string>
-     </property>
-     <property name="text">
-      <string></string>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignTop|Qt::AlignLeft</set>
-     </property>
-    </widget>
-    
-    <!-- Download button positioned correctly -->
-    <widget class="QPushButton" name="lab_test_result_download_button">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>530</y>
-       <width>141</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
- </widget>
+   <widget class="QLabel" name="label_19">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1000</width>
+      <height>800</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>19.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="lab_test_result_back_button">
+    <property name="geometry">
+     <rect>
+      <x>28</x>
+      <y>530</y>
+      <width>81</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="result_patient_id_value">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>308</y>
+      <width>260</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>color: black; font-size: 16px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="result_doctor_id_value">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>360</y>
+      <width>260</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>color: black; font-size: 16px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="result_date_taken_value">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>420</y>
+      <width>260</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>color: black; font-size: 16px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="result_test_id_value">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>470</y>
+      <width>260</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>color: black; font-size: 16px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="result_desc_value">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>200</y>
+      <width>800</width>
+      <height>600</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>color: black; font-size: 16px; background-color: transparent;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="lab_test_result_download_button">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>530</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
   <widget class="QWidget" name="page_19">
    <widget class="QLabel" name="label_20">
     <property name="geometry">
@@ -1983,6 +2031,37 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="doctor_profile_back_button">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>720</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(61, 70, 126);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>BACK BUTTON</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>110</width>
+      <height>110</height>
+     </size>
     </property>
    </widget>
   </widget>
@@ -2080,6 +2159,68 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="appointments_back_button_2">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>680</y>
+      <width>141</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(61, 70, 126);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>BACK BUTTON</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>110</width>
+      <height>110</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="appointments_admit_button">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>390</y>
+      <width>181</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(61, 70, 126);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>ADMIT</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>110</width>
+      <height>110</height>
+     </size>
     </property>
    </widget>
   </widget>
@@ -2792,7 +2933,6 @@ color: rgb(255, 255, 255);</string>
      <bool>true</bool>
     </property>
    </widget>
-
    <widget class="QTableView" name="patient_labs_tableview">
     <property name="geometry">
      <rect>
@@ -2806,8 +2946,6 @@ color: rgb(255, 255, 255);</string>
      <string>background-color: transparent; border: none;</string>
     </property>
    </widget>
-
-
    <widget class="QPushButton" name="patient_labs_check_result_button">
     <property name="geometry">
      <rect>
@@ -2848,154 +2986,145 @@ color: rgb(255, 255, 255);</string>
    </widget>
   </widget>
   <widget class="QWidget" name="page_28">
-    <widget class="QLabel" name="label_29">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>1000</width>
-       <height>800</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap>29.png</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
-    </widget>
-    
-    <!-- LEFT BOX: List of diseases/allergies -->
-    <widget class="QListWidget" name="medical_history_list">
-     <property name="geometry">
-      <rect>
-       <x>240</x>
-       <y>180</y>
-       <width>340</width>
-       <height>520</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string>background-color: transparent; 
+   <widget class="QLabel" name="label_29">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1000</width>
+      <height>800</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>29.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="medical_history_list">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>180</y>
+      <width>340</width>
+      <height>520</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: transparent; 
              border: none; 
              color: rgba(0, 0, 0, 1);
              font-size: 14px;
              padding: 10px;</string>
-     </property>
-    </widget>
-    
-    <!-- RIGHT BOX: Details display -->
-    <widget class="QTextEdit" name="medical_history_details_text">
-     <property name="geometry">
-      <rect>
-       <x>620</x>
-       <y>270</y>
-       <width>340</width>
-       <height>430</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string>background-color: transparent; 
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="medical_history_details_text">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>270</y>
+      <width>340</width>
+      <height>430</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: transparent; 
              border: none; 
              color: rgba(0, 0, 0, 1);
              font-size: 13px;
              padding: 15px;</string>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-    
-    <!-- DETAILS BUTTON (top right) -->
-    <widget class="QPushButton" name="medical_history_details_button_top">
-     <property name="geometry">
-      <rect>
-       <x>650</x>
-       <y>180</y>
-       <width>170</width>
-       <height>70</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-    
-    <widget class="QPushButton" name="medical_history_details_button">
-     <property name="geometry">
-      <rect>
-       <x>430</x>
-       <y>710</y>
-       <width>141</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-    
-    <widget class="QLineEdit" name="medical_history_patient_id_lineedit">
-     <property name="geometry">
-      <rect>
-       <x>28</x>
-       <y>320</y>
-       <width>191</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string>background-color: rgba(207, 226, 243, 1); border: none; font-weight: bold; color: rgba(0, 0, 0, 1);</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-    
-    <widget class="QPushButton" name="medical_history_back_button">
-     <property name="geometry">
-      <rect>
-       <x>250</x>
-       <y>710</y>
-       <width>141</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
- </widget>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="medical_history_details_button_top">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>180</y>
+      <width>170</width>
+      <height>70</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="medical_history_details_button">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>710</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="medical_history_patient_id_lineedit">
+    <property name="geometry">
+     <rect>
+      <x>28</x>
+      <y>320</y>
+      <width>191</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(207, 226, 243, 1); border: none; font-weight: bold; color: rgba(0, 0, 0, 1);</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="medical_history_back_button">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>710</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
   <widget class="QWidget" name="page_29">
    <widget class="QLabel" name="label_30">
     <property name="geometry">
