@@ -48,6 +48,7 @@ def setup_database():
         "IF OBJECT_ID('Specialisation', 'U') IS NOT NULL DROP TABLE Specialisation",
         "IF OBJECT_ID('PendingDoctor', 'U') IS NOT NULL DROP TABLE PendingDoctor",  # <--- FIXED: Added this
         "IF OBJECT_ID('Doctor', 'U') IS NOT NULL DROP TABLE Doctor",
+        "IF OBJECT_ID('LabEntries', 'U') IS NOT NULL DROP TABLE LabEntries",
         "IF OBJECT_ID('LabTest', 'U') IS NOT NULL DROP TABLE LabTest",
         "IF OBJECT_ID('Medical_History', 'U') IS NOT NULL DROP TABLE Medical_History",
         "IF OBJECT_ID('UserAccount', 'U') IS NOT NULL DROP TABLE UserAccount",
@@ -193,6 +194,13 @@ def setup_database():
             BillStatus VARCHAR(20),
             CONSTRAINT fk_bill_user FOREIGN KEY (PatientID) REFERENCES UserAccount(UserID)
         )
+        """,
+        """
+        CREATE TABLE LabEntries (
+            LabID INTEGER IDENTITY(1,1) PRIMARY KEY,  -- Changed to IDENTITY
+            TestName VARCHAR(50) NOT NULL,
+            TestPrice FLOAT NOT NULL
+        )
         """
     ]
 
@@ -309,6 +317,42 @@ def setup_database():
     cursor.executemany(LabTest_insert_query, LabTest_data)
     connection.commit()
     print("Inserted LabTest records.")
+
+
+    LabEntries_data = [
+        (1, 'CBC', 500),
+        (2, 'Lipid Profile', 700),
+        (3, 'Blood Sugar', 400),
+        (4, 'Thyroid Panel', 600),
+        (5, 'Urine Test', 300),
+        (6, 'ECG', 900),
+        (7, 'MRI Brain', 5000),
+        (8, 'X-Ray Chest', 800),
+        (9, 'CT Abdomen', 4500),
+        (10, 'Vitamin D', 550),
+        (11, 'CBC', 500),
+        (12, 'Blood Sugar', 400),
+        (13, 'Thyroid Panel', 600),
+        (14, 'Liver Function', 750),
+        (15, 'Kidney Function', 800),
+        (16, 'ECG', 900),
+        (17, 'HbA1c', 650),
+        (18, 'Stool Test', 350),
+        (19, 'Allergy Panel', 1200),
+        (20, 'Pap Smear', 950)
+    ]
+    cursor.execute("SET IDENTITY_INSERT LabEntries ON")
+
+    LabEntries_insert_query = """
+        INSERT INTO LabEntries (LabID, TestName, TestPrice)
+        VALUES (?, ?, ?)
+    """
+    cursor.executemany(LabEntries_insert_query, LabEntries_data)
+    
+    cursor.execute("SET IDENTITY_INSERT LabEntries OFF")
+    
+    connection.commit()
+    print("Inserted LabEntries records.")    
 
     doctor_data = [
         (100, 'Dr. Bilal Amir', 'bilal.amir@hospital.com', 'ba123', 'Active', '03001234501', 1),
