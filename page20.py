@@ -32,7 +32,6 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.GCH_our_services_button.clicked.connect(self.go_to_service_page)
         self.specialization_tableview.clicked.connect(self.on_specialization_row_selected)
 
-
         # Login page (page index 1 - page_2) buttons
         # self.appointments_details_button.clicked.connect(self.load_bills_from_appointments)
         self.login_patient_button.clicked.connect(self.go_to_login)
@@ -357,7 +356,6 @@ class HospitalApp(QtWidgets.QStackedWidget):
             if connection:
                 connection.close()
 
-
     def get_next_id(self, cursor, table_name, column_name):
         """Calculates the next available ID (MAX + 1)"""
         try:
@@ -368,7 +366,6 @@ class HospitalApp(QtWidgets.QStackedWidget):
             return val + 1
         except Exception:
             return 1
-        
     
     def approve_selected_doctor(self):
         """
@@ -444,8 +441,6 @@ class HospitalApp(QtWidgets.QStackedWidget):
             QMessageBox.critical(self, "Database Error", f"Approval failed: {e}")
         finally:
             connection.close()
-
-
 
     def reject_selected_doctor(self):
         current_row = self.admin_doctor_approval_approve_requests.currentRow()
@@ -935,6 +930,48 @@ class HospitalApp(QtWidgets.QStackedWidget):
         """Navigate to admission details page"""
         self.setCurrentIndex(26)  # page_11
         print("Navigated to admission details (27)")
+        connection = None
+        try:
+            # --- 3. Connect to DB ---
+            connection = get_db_connection()
+            if connection is None:
+                QMessageBox.critical(self, "Connection Error", "Could not connect to the database.")
+                return
+            
+            cursor = connection.cursor()
+
+            doc_query = "select doctorName from doctor where DoctorID in (select top 1 doctorId from Doctor_Appointment where PatientID = ? and AppointmentStatus = 'Completed' order by AppointmentDateTime desc)"
+            cursor.execute(doc_query, (self.current_user_id,))
+            doc_result = cursor.fetchone()
+
+            if doc_result:
+                self.admission_details_doctor.setText(str(doc_result[0]))
+            else:
+                self.admission_details_doctor.setText("N/A")
+
+            # --- Patient / Admin Logic (Not 3 digits) ---
+            query = "SELECT top 1 * FROM Admission_Details WHERE PatientID = ? ORDER BY ADMISSIONDATE DESC"
+            cursor.execute(query, (self.current_user_id,))
+            result = cursor.fetchone()
+            if result:
+                self.admission_details_room_no.setText(result[2])
+                self.admission_details_date.setText(result[3].strftime("%Y-%m-%d"))
+                self.admission_details_discharge_date.setText(str(result[4]))
+                self.admission_details_total_chargers.setText(str(result[5]))
+                
+            else:
+                self.admission_details_room_no.setText("N/A")
+                self.admission_details_date.setText("N/A")
+                self.admission_details_discharge_date.setText("N/A")
+                self.admission_details_total_chargers.setText("N/A")
+
+        except pyodbc.Error as e:
+            QMessageBox.critical(self, "Database Error", f"An error occurred during login: {e}")
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"An unexpected error occurred: {e}")
+        finally:
+            if connection:
+                connection.close()
     
     def go_to_medical_history(self):
         """Navigate to medical history page"""
@@ -1057,6 +1094,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
             QMessageBox.critical(self, "Query Error", f"Failed to load specialization data: {e}")
         finally:
             connection.close()
+
     def on_specialization_row_selected(self, index):
         try:
             row = index.row()
@@ -2082,6 +2120,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
                     self.current_user_id = user_id # Save the doctor's ID
                     # self.go_to_doctor_portal_page()
                     self.setCurrentIndex(19)
+                    
                 else:
                     QMessageBox.warning(self, "Login Failed", "Invalid ID or password.")
             else:
