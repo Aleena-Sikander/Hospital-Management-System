@@ -14,7 +14,7 @@
    <string>StackedWidget</string>
   </property>
   <property name="currentIndex">
-   <number>21</number>
+   <number>7</number>
   </property>
   <widget class="QWidget" name="first_page">
    <widget class="QLabel" name="label">
@@ -909,6 +909,19 @@ color: rgb(255, 255, 255);</string>
       <width>110</width>
       <height>110</height>
      </size>
+    </property>
+   </widget>
+   <widget class="QTableView" name="admin_patient_admission_dataview">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>340</y>
+      <width>511</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -1806,8 +1819,8 @@ color: rgb(255, 255, 255);</string>
    <widget class="QTableView" name="bill_generation_dataview">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>200</y>
+      <x>60</x>
+      <y>220</y>
       <width>611</width>
       <height>380</height>
      </rect>
@@ -2229,6 +2242,19 @@ color: rgb(255, 255, 255);</string>
       <width>110</width>
       <height>110</height>
      </size>
+    </property>
+   </widget>
+   <widget class="QTableView" name="appointments_admit_dataview">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>230</y>
+      <width>601</width>
+      <height>421</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
     </property>
    </widget>
   </widget>
@@ -3250,8 +3276,6 @@ color: rgb(255, 255, 255);</string>
    </widget>
   </widget>
  </widget>
- <resources>
-  <include location="back.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
