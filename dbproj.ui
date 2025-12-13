@@ -14,7 +14,7 @@
    <string>StackedWidget</string>
   </property>
   <property name="currentIndex">
-   <number>7</number>
+   <number>21</number>
   </property>
   <widget class="QWidget" name="first_page">
    <widget class="QLabel" name="label">
@@ -2077,6 +2077,96 @@ color: rgb(255, 255, 255);</string>
      </size>
     </property>
    </widget>
+   <widget class="QTableView" name="doctor_profile_specialization">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>510</y>
+      <width>341</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+   </widget>
+   <widget class="QTableView" name="doctor_profile_availability">
+    <property name="geometry">
+     <rect>
+      <x>730</x>
+      <y>390</y>
+      <width>241</width>
+      <height>311</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="doctor_profile_name">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>300</y>
+      <width>341</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>color: black; font-size: 16px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="doctor_profile_email">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>370</y>
+      <width>341</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>color: black; font-size: 16px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="doctor_profile_contact">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>440</y>
+      <width>341</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>color: black; font-size: 16px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="doctor_profile_docid">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>180</y>
+      <width>171</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>color: black; font-size: 16px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QWidget" name="page_21">
    <widget class="QLabel" name="label_22">
@@ -2247,6 +2337,22 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="styleSheet">
      <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="appointments_medical_history_searchbutton">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>230</y>
+      <width>191</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>color: black; font-size: 16px;</string>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
