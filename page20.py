@@ -24,6 +24,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
         # Start at first page
         self.setCurrentIndex(0)
+        print("1")
 
         # --- Connect buttons to their pages ---
         # First page (page index 0 - first_page) buttons
@@ -136,28 +137,28 @@ class HospitalApp(QtWidgets.QStackedWidget):
     def go_to_login_page(self):
         """Navigate to login selection page"""
         self.setCurrentIndex(1)  # page_2
-        print("Navigated to login page")
+        print("Navigated to login page (2)")
 
     def prepare_login_as_patient(self):
         """Show login form and remember Patient role"""
         self.current_login_type = "patient"
         self.login_register_button.setEnabled(True)
         self.setCurrentIndex(4)  # login form page
-        print("Preparing login as patient")
+        print("Preparing login as patient (5)")
 
     def prepare_login_as_doctor(self):
         """Show login form and remember Doctor role"""
         self.current_login_type = "doctor"
         self.login_register_button.setEnabled(True)
         self.setCurrentIndex(4)
-        print("Preparing login as doctor")
+        print("Preparing login as doctor (5)")
 
     def prepare_login_as_admin(self):
         """Show login form and remember Admin role"""
         self.current_login_type = "admin"
         self.login_register_button.setEnabled(False)
         self.setCurrentIndex(4)
-        print("Preparing login as admin")
+        print("Preparing login as admin (5)")
 
     def handle_login_submit(self):
         """Dispatch login submit to the correct handler based on chosen role"""
@@ -170,16 +171,17 @@ class HospitalApp(QtWidgets.QStackedWidget):
         else:
             QMessageBox.warning(self, "Login Error", "Please choose Patient, Doctor or Admin before submitting login.")
             self.setCurrentIndex(1)  # back to role selection
+            print("2")
 
     def go_to_service_page(self):
         """Navigate to our services page"""
         self.setCurrentIndex(9)  # page_5 (Our Services page)
-        print("Navigated to services page")
+        print("Navigated to services page (10)")
 
     def go_to_patient_registration(self):
         """Navigate to patient registration form"""
         self.setCurrentIndex(2)  # page (Patient registration form)
-        print("Navigated to patient registration")
+        print("Navigated to patient registration (3)")
 
     def patient_registration_submit(self):
         """Validate and submit patient registration to database"""
@@ -237,6 +239,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
             self.patient_registration_confirm_password.clear()
             self.patient_registration_contact.clear()
             self.patient_registration_gender.setCurrentIndex(0)
+            print("1")
             self.patient_registration_dob.setDate(self.patient_registration_dob.date())
 
             # Navigate to login
@@ -298,6 +301,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
                 
                 # Go back to login
                 self.setCurrentIndex(0)
+                print("1")
 
         except pyodbc.Error as e:
             QMessageBox.critical(self, "Database Error", f"Error submitting request: {e}")
@@ -308,7 +312,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
     def go_to_admin_doctor_approval_page(self):
         self.setCurrentIndex(6) # Or whatever your index is
         self.load_pending_doctor_requests() # <--- ADD THIS LINE
-        print("Navigated to doctor approval page and loaded data")
+        print("Navigated to doctor approval page and loaded data (7)")
 
     def load_pending_doctor_requests(self):
         """Fetches pending doctors and displays them in the table"""
@@ -531,12 +535,12 @@ class HospitalApp(QtWidgets.QStackedWidget):
         finally:
             if connection:
                 connection.close()
-        print("Navigated to patient portal")
+        print("Navigated to patient portal (23)")
 
     def go_to_patient_portal_profile_page(self):
         """Navigate to patient profile page"""
         self.setCurrentIndex(23)  # page_4 (Patient profile page)
-        print("Navigated to patient profile page")
+        print("Navigated to patient profile page (24)")
     
     def go_to_appointment_booking(self):
         if not self.selected_specialisation_id:
@@ -545,7 +549,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
         # show appointment booking page
         self.setCurrentIndex(16)
-        print("Navigated to appointment booking")
+        print("Navigated to appointment booking (17)")
 
         # load doctors for selected specialization and load availability for the first doctor (if any)
         self.load_available_doctors_for_specialisation(self.selected_specialisation_id)
@@ -858,12 +862,12 @@ class HospitalApp(QtWidgets.QStackedWidget):
     def go_to_patient_portal_appointment_page(self):
         """Navigate to appointment booking page"""
         self.setCurrentIndex(26)  # page_6
-        print("Navigated to appointment booking")
+        print("Navigated to appointment booking (27)")
     
     def go_to_bills_page(self):
         """Navigate to bills page"""
         self.setCurrentIndex(24)  # page_10
-        print("Navigated to bills page")
+        print("Navigated to bills page (25)")
 
     def load_bills_page(self):
         if not self.current_user_id:
@@ -871,6 +875,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
             return
 
         self.setCurrentIndex(24)  # bills page
+        print("25")
         connection = get_db_connection()
         if connection is None:
             QMessageBox.critical(self, "Database Error", "Could not connect to the database.")
@@ -929,7 +934,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
     def go_to_admission_details(self):
         """Navigate to admission details page"""
         self.setCurrentIndex(26)  # page_11
-        print("Navigated to admission details")
+        print("Navigated to admission details (27)")
     
     def go_to_medical_history(self):
         """Navigate to medical history page"""
@@ -995,7 +1000,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
             if connection:
                 connection.close()
 
-        print("Navigated to medical history")
+        print("Navigated to medical history (29)")
 
 
     def show_selected_medical_history_details(self):
@@ -1026,7 +1031,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
     def go_to_specialization_page(self):
         """Load specialization table using PYODBC instead of QSqlDatabase."""
         self.setCurrentIndex(10)
-        print("Navigated to specialization page")
+        print("Navigated to specialization page 11)")
         connection = get_db_connection()
         if connection is None:
             QMessageBox.critical(self, "Database Error", "Could not connect to the database.")
@@ -1113,6 +1118,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
                 # set combo index to 0 to trigger times load (if signal connected)
                 try:
                     self.appointment_booking_available_doctors.setCurrentIndex(0)
+                    print("1")
                 except Exception:
                     pass
                 # load availability explicitly
@@ -1290,7 +1296,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
     def go_to_bill_gen_page(self, bill_id=None):
         self.setCurrentIndex(17)  # Bill generation page
-        print("Navigated to bill generation page")
+        print("Navigated to bill generation page (18)")
         
         if bill_id:
             self.load_bill_for_generation(bill_id)
@@ -1308,6 +1314,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
         # Navigate to bills page
         self.setCurrentIndex(24)
+        print("25")
 
         connection = get_db_connection()
         if connection is None:
@@ -1703,13 +1710,13 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
     def go_to_lab_test_page(self):
         self.setCurrentIndex(12)
-        print("Navigated to lab_test page")
+        print("Navigated to lab_test page (13)")
         self.load_available_lab_tests()
 
 
     def go_to_patient_lab_page(self):
         self.setCurrentIndex(27)
-        print("Navigated to patient_lab")
+        print("Navigated to patient_lab (28)")
         self.load_patient_lab_tests()
     
     def load_available_lab_tests(self):
@@ -1883,7 +1890,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
     def go_to_check_result_page(self):
         self.setCurrentIndex(18)
-        print("Navigated to lab result page")
+        print("Navigated to lab result page (19)")
 
     
     def on_check_result_clicked(self):
@@ -1944,6 +1951,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
             # self.result_desc_value.setText(str(test_desc) if test_desc else 
             # Navigate to Results page
             self.setCurrentIndex(18)
+            print("19")
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to load lab test result: {e}")
@@ -2025,10 +2033,11 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
     def go_to_doctor_registration_page(self):
         self.setCurrentIndex(3)
-        print("Navigated to doctor page")
+        print("Navigated to doctor page (4)")
 
     def go_to_login(self):
         self.setCurrentIndex(4)
+        print("5")
 
     def go_to_doctor_portal_page(self):
         # self.setCurrentIndex(19)
@@ -2088,16 +2097,19 @@ class HospitalApp(QtWidgets.QStackedWidget):
                 connection.close()
         
           # page_3 (Patient portal with 4 options)
-            print("Navigated to doc portal")
+            print("Navigated to doc portal (20)")
 
     def go_to_doctor_profile_page(self):
         self.setCurrentIndex(20)
+        print("21")
     
     def go_to_doctor_appointment_page(self):
         self.setCurrentIndex(21)
+        print("22")
     
     def go_to_editable_medical_history(self):
         self.setCurrentIndex(29)
+        print("30")
     
     def go_to_admin_portal_page(self):
         # self.setCurrentIndex(5)
@@ -2153,25 +2165,31 @@ class HospitalApp(QtWidgets.QStackedWidget):
                 connection.close()
         
           # page_3 (Patient portal with 4 options)
-            print("Navigated to admin portal")
+            print("Navigated to admin portal (6)")
 
     def go_to_admin_patient_page(self):
         self.setCurrentIndex(7)
+        print("8")
 
     def go_to_admin_patient_admission_edit_page(self):
         self.setCurrentIndex(8)
+        print("9")
     
     def go_to_admin_apecialization_edit_page(self):
         self.setCurrentIndex(11)
+        print("12")
     
     def go_to_admin_pharmacy_edit_page(self):
         self.setCurrentIndex(15)
+        print("16")
     
     def go_to_pharmacy_page(self):
         self.setCurrentIndex(13)
+        print("14")
     
     def go_to_patient_appointment_page(self):
         self.setCurrentIndex(25)
+        print("26")
 
 app = QtWidgets.QApplication(sys.argv)
 window = HospitalApp()

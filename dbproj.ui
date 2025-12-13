@@ -1098,7 +1098,7 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+     <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(170, 56, 56, 1);font-weight: bold;</string>
     </property>
    </widget>
   </widget>
@@ -1623,7 +1623,15 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+     <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(170, 56, 56, 1);font-weight: bold; qproperty-alignment: AlignCenter;</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
    </widget>
    <widget class="QComboBox" name="appointment_booking_available_times">
@@ -1644,7 +1652,7 @@ color: rgb(255, 255, 255);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+     <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(170, 56, 56, 1);font-weight: bold; qproperty-alignment: AlignCenter;</string>
     </property>
    </widget>
   </widget>
@@ -2668,8 +2676,7 @@ color: rgb(255, 255, 255);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(61, 70, 126);
-color: rgb(255, 255, 255);</string>
+     <string notr="true">background-color: rgb(61, 70, 126); color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>BACK BUTTON</string>
@@ -2698,6 +2705,10 @@ color: rgb(255, 255, 255);</string>
       <bold>true</bold>
      </font>
     </property>
+    <property name="readOnly"><bool>true</bool></property>
+    <property name="styleSheet">
+     <string>background-color: transparent; border: none;</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="admission_details_date">
     <property name="geometry">
@@ -2715,6 +2726,10 @@ color: rgb(255, 255, 255);</string>
       <weight>75</weight>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="readOnly"><bool>true</bool></property>
+    <property name="styleSheet">
+     <string>background-color: transparent; border: none;</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="admission_details_discharge_date">
@@ -2734,6 +2749,10 @@ color: rgb(255, 255, 255);</string>
       <bold>true</bold>
      </font>
     </property>
+    <property name="readOnly"><bool>true</bool></property>
+    <property name="styleSheet">
+     <string>background-color: transparent; border: none;</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="admission_details_doctor">
     <property name="geometry">
@@ -2752,6 +2771,10 @@ color: rgb(255, 255, 255);</string>
       <bold>true</bold>
      </font>
     </property>
+    <property name="readOnly"><bool>true</bool></property>
+    <property name="styleSheet">
+     <string>background-color: transparent; border: none;</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="admission_details_total_chargers">
     <property name="geometry">
@@ -2769,6 +2792,10 @@ color: rgb(255, 255, 255);</string>
       <weight>75</weight>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="readOnly"><bool>true</bool></property>
+    <property name="styleSheet">
+     <string>background-color: transparent; border: none;</string>
     </property>
    </widget>
   </widget>
@@ -2806,7 +2833,6 @@ color: rgb(255, 255, 255);</string>
      <string>background-color: transparent; border: none;</string>
     </property>
    </widget>
-
 
    <widget class="QPushButton" name="patient_labs_check_result_button">
     <property name="geometry">
