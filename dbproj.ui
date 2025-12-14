@@ -14,7 +14,7 @@
    <string>StackedWidget</string>
   </property>
   <property name="currentIndex">
-   <number>15</number>
+   <number>14</number>
   </property>
   <widget class="QWidget" name="first_page">
    <widget class="QLabel" name="label">
