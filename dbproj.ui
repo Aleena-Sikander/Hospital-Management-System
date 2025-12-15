@@ -14,7 +14,7 @@
    <string>StackedWidget</string>
   </property>
   <property name="currentIndex">
-   <number>21</number>
+   <number>14</number>
   </property>
   <widget class="QWidget" name="first_page">
    <widget class="QLabel" name="label">
@@ -1257,6 +1257,27 @@ color: rgb(255, 255, 255);</string>
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QTableView" name="Admin_specialization_entry_dataview">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>340</y>
+      <width>661</width>
+      <height>351</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QWidget" name="page_12">
    <widget class="QLabel" name="label_13">
@@ -1535,6 +1556,27 @@ color: rgb(255, 255, 255);</string>
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QTableView" name="Admin_lab_tests_entry_dataview">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>260</y>
+      <width>661</width>
+      <height>421</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QWidget" name="page_15">
    <widget class="QLabel" name="label_16">
@@ -1611,6 +1653,58 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QTableView" name="Admin_pharmacy_entry_dataview">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>270</y>
+      <width>591</width>
+      <height>421</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Admin_pharmacy_entry_labtest_entry">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>710</y>
+      <width>171</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(61, 70, 126);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>LAB TEST ENTRY</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>110</width>
+      <height>110</height>
+     </size>
     </property>
    </widget>
   </widget>

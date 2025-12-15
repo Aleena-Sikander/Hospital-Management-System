@@ -120,6 +120,12 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.admin_doctor_approval_reject_button.clicked.connect(self.reject_selected_doctor)
         self.admin_portal_pharmacy_button.clicked.connect(self.go_to_admin_pharmacy_edit_page)
         self.Admin_pharmacy_entry_back_button.clicked.connect(self.go_to_admin_portal_page)
+        self.Admin_pharmacy_entry_add_button.clicked.connect(self.add_pharmacy_item)
+        self.Admin_pharmacy_entry_remove_button.clicked.connect(self.remove_pharmacy_item)
+        self.Admin_pharmacy_entry_labtest_entry.clicked.connect(self.go_to_admin_lab_entry_page)
+        self.Admin_lab_tests_entry_back_button.clicked.connect(self.go_to_admin_pharmacy_edit_page)
+        self.Admin_lab_tests_entry_add_button.clicked.connect(self.add_lab_entry)
+        self.Admin_lab_tests_entry_remove_button.clicked.connect(self.remove_lab_entry)
 
         # #bills:
         self.patient_portal_bills_button.clicked.connect(self.load_bills_page)
@@ -135,7 +141,10 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.bills_generate_bill_button.setEnabled(False)  # disabled by default
         self.bills_detail_dataview.clicked.connect(self.on_bill_row_selected)
         self.bill_generation_proceed_to_payment.clicked.connect(self.show_payment_message)
-    
+
+
+
+        
     def go_to_check_who_here(self):
         if self.current_login_type == "doctor":
             self.go_to_doctor_registration_page()
@@ -2448,7 +2457,455 @@ class HospitalApp(QtWidgets.QStackedWidget):
     def go_to_admin_pharmacy_edit_page(self):
         self.setCurrentIndex(15)
         print("16")
+        self.load_pharmacy_items()
     
+    def load_pharmacy_items(self):
+        from PyQt6.QtCore import Qt  # Ensure this import exists
+        
+        connection = get_db_connection()
+        if connection is None:
+            return
+
+        cursor = connection.cursor()
+        try:
+            query = "SELECT ItemID, ItemName, Category, QuantityInStock, PricePerItem FROM Pharmacy_Item"
+            cursor.execute(query)
+            rows = cursor.fetchall()
+
+            model = QStandardItemModel()
+            model.setHorizontalHeaderLabels(["Name", "Category", "Stock", "Price"])
+
+            for row in rows:
+                # Create the Name item separately so we can attach the ID to it
+                name_item = QStandardItem(str(row[1]))
+                name_item.setData(row[0], Qt.ItemDataRole.UserRole)  # Store ID hidden inside the name item
+
+                items = [
+                    name_item,
+                    QStandardItem(str(row[2])),
+                    QStandardItem(str(row[3])),
+                    QStandardItem(str(row[4]))
+                ]
+                model.appendRow(items)
+            
+            self.Admin_pharmacy_entry_dataview.setModel(model)
+            self.Admin_pharmacy_entry_dataview.resizeColumnsToContents()
+
+        except Exception as e:
+            print(f"Error loading pharmacy items: {e}")
+        finally:
+            connection.close()
+    
+    def add_pharmacy_item(self):
+        from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox
+        from PyQt6.QtCore import Qt
+
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Add Pharmacy Item")
+        dialog.setFixedSize(500, 600)
+        dialog.setStyleSheet("QDialog { background-color: #f5f5f5; }")
+
+        layout = QVBoxLayout()
+        layout.setSpacing(15)
+        layout.setContentsMargins(30, 30, 30, 30)
+
+        title_label = QLabel("Add New Item")
+        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        title_label.setStyleSheet("""
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            padding: 15px;
+            background-color: #f46677;
+            border-radius: 8px;
+        """)
+        layout.addWidget(title_label)
+        layout.addSpacing(15)
+
+        name_label = QLabel("Item Name:")
+        name_label.setStyleSheet("font-size: 14px; font-weight: bold; color: #2c3e50;")
+        layout.addWidget(name_label)
+
+        name_input = QLineEdit()
+        name_input.setPlaceholderText("Enter item name")
+        name_input.setStyleSheet("""
+            QLineEdit {
+                font-size: 14px;
+                background-color: white;
+                color: #2c3e50;
+                padding: 12px;
+                border-radius: 6px;
+                border: 1px solid #bdc3c7;
+            }
+        """)
+        layout.addWidget(name_input)
+
+        category_label = QLabel("Category:")
+        category_label.setStyleSheet("font-size: 14px; font-weight: bold; color: #2c3e50;")
+        layout.addWidget(category_label)
+
+        category_input = QLineEdit()
+        category_input.setPlaceholderText("Enter category")
+        category_input.setStyleSheet("""
+            QLineEdit {
+                font-size: 14px;
+                background-color: white;
+                color: #2c3e50;
+                padding: 12px;
+                border-radius: 6px;
+                border: 1px solid #bdc3c7;
+            }
+        """)
+        layout.addWidget(category_input)
+
+        stock_label = QLabel("Quantity in Stock:")
+        stock_label.setStyleSheet("font-size: 14px; font-weight: bold; color: #2c3e50;")
+        layout.addWidget(stock_label)
+
+        stock_input = QLineEdit()
+        stock_input.setPlaceholderText("Enter numeric quantity")
+        stock_input.setStyleSheet("""
+            QLineEdit {
+                font-size: 14px;
+                background-color: white;
+                color: #2c3e50;
+                padding: 12px;
+                border-radius: 6px;
+                border: 1px solid #bdc3c7;
+            }
+        """)
+        layout.addWidget(stock_input)
+
+        price_label = QLabel("Price Per Item:")
+        price_label.setStyleSheet("font-size: 14px; font-weight: bold; color: #2c3e50;")
+        layout.addWidget(price_label)
+
+        price_input = QLineEdit()
+        price_input.setPlaceholderText("Enter price")
+        price_input.setStyleSheet("""
+            QLineEdit {
+                font-size: 14px;
+                background-color: white;
+                color: #2c3e50;
+                padding: 12px;
+                border-radius: 6px;
+                border: 1px solid #bdc3c7;
+            }
+        """)
+        layout.addWidget(price_input)
+
+        layout.addStretch()
+
+        submit_button = QPushButton("Add Item")
+        submit_button.setFixedHeight(45)
+        submit_button.setCursor(Qt.CursorShape.PointingHandCursor)
+        submit_button.setStyleSheet("""
+            QPushButton {
+                background-color: #3498db;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: bold;
+            }
+            QPushButton:hover {
+                background-color: #2980b9;
+            }
+            QPushButton:pressed {
+                background-color: #21618c;
+            }
+        """)
+
+        def submit_data():
+            name = name_input.text()
+            category = category_input.text()
+            stock = stock_input.text()
+            price = price_input.text()
+
+            if not name or not category or not stock or not price:
+                QMessageBox.warning(dialog, "Input Error", "Please fill in all fields.")
+                return
+
+            if not stock.isdigit():
+                QMessageBox.warning(dialog, "Input Error", "Stock must be a valid integer.")
+                return
+
+            try:
+                float(price)
+            except ValueError:
+                QMessageBox.warning(dialog, "Input Error", "Price must be a valid number.")
+                return
+
+            connection = get_db_connection()
+            if connection is None:
+                return
+            
+            cursor = connection.cursor()
+            try:
+                cursor.execute("SELECT MAX(ItemID) FROM Pharmacy_Item")
+                max_id = cursor.fetchone()[0]
+                next_id = 1 if max_id is None else max_id + 1
+
+                query = "INSERT INTO Pharmacy_Item (ItemID, ItemName, Category, QuantityInStock, PricePerItem) VALUES (?, ?, ?, ?, ?)"
+                cursor.execute(query, (next_id, name, category, stock, price))
+                connection.commit()
+                
+                QMessageBox.information(dialog, "Success", "Item added successfully.")
+                self.load_pharmacy_items() 
+                dialog.accept()
+
+            except Exception as e:
+                QMessageBox.critical(dialog, "Database Error", f"Failed to add item: {e}")
+            finally:
+                connection.close()
+
+        submit_button.clicked.connect(submit_data)
+        layout.addWidget(submit_button)
+
+        dialog.setLayout(layout)
+        
+        parent_geometry = self.geometry()
+        dialog_x = parent_geometry.x() + (parent_geometry.width() - dialog.width()) // 2
+        dialog_y = parent_geometry.y() + 100 
+        dialog.move(dialog_x, dialog_y)
+        
+        dialog.exec()
+
+    def remove_pharmacy_item(self):
+        from PyQt6.QtCore import Qt 
+
+        index = self.Admin_pharmacy_entry_dataview.currentIndex()
+        if not index.isValid():
+            QMessageBox.warning(self, "Selection Error", "Please select an item to remove.")
+            return
+
+        model = self.Admin_pharmacy_entry_dataview.model()
+        
+        # Get the item from the first column (Name column) which holds our hidden ID
+        name_item = model.item(index.row(), 0)
+        item_id = name_item.data(Qt.ItemDataRole.UserRole)
+
+        confirm = QMessageBox.question(self, "Confirm", "Are you sure you want to delete this item?", QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        if confirm == QMessageBox.StandardButton.No:
+            return
+
+        connection = get_db_connection()
+        if connection is None:
+            return
+        
+        cursor = connection.cursor()
+        try:
+            cursor.execute("DELETE FROM Pharmacy_Item WHERE ItemID = ?", (item_id,))
+            connection.commit()
+            QMessageBox.information(self, "Success", "Item removed successfully.")
+            self.load_pharmacy_items()
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to remove item: {e}")
+        finally:
+            connection.close()
+
+    def go_to_admin_lab_entry_page(self):
+        self.setCurrentIndex(14)
+        self.load_lab_entries()
+    
+    def load_lab_entries(self):
+        from PyQt6.QtCore import Qt
+        
+        connection = get_db_connection()
+        if connection is None:
+            return
+
+        cursor = connection.cursor()
+        try:
+            query = "SELECT LabID, TestName, TestPrice FROM LabEntries"
+            cursor.execute(query)
+            rows = cursor.fetchall()
+
+            model = QStandardItemModel()
+            model.setHorizontalHeaderLabels(["Test Name", "Price"])
+
+            for row in rows:
+                name_item = QStandardItem(str(row[1]))
+                name_item.setData(row[0], Qt.ItemDataRole.UserRole)
+
+                items = [
+                    name_item,
+                    QStandardItem(str(row[2]))
+                ]
+                model.appendRow(items)
+            
+            self.Admin_lab_tests_entry_dataview.setModel(model)
+            self.Admin_lab_tests_entry_dataview.resizeColumnsToContents()
+
+        except Exception as e:
+            print(f"Error loading lab entries: {e}")
+        finally:
+            connection.close()
+    
+    def add_lab_entry(self):
+        from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox
+        from PyQt6.QtCore import Qt
+
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Add Lab Test")
+        dialog.setFixedSize(500, 450)
+        dialog.setStyleSheet("QDialog { background-color: #f5f5f5; }")
+
+        layout = QVBoxLayout()
+        layout.setSpacing(15)
+        layout.setContentsMargins(30, 30, 30, 30)
+
+        title_label = QLabel("Add New Lab Test")
+        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        title_label.setStyleSheet("""
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            padding: 15px;
+            background-color: #3498db;
+            border-radius: 8px;
+        """)
+        layout.addWidget(title_label)
+        layout.addSpacing(15)
+
+        name_label = QLabel("Test Name:")
+        name_label.setStyleSheet("font-size: 14px; font-weight: bold; color: #2c3e50;")
+        layout.addWidget(name_label)
+
+        name_input = QLineEdit()
+        name_input.setPlaceholderText("Enter test name")
+        name_input.setStyleSheet("""
+            QLineEdit {
+                font-size: 14px;
+                background-color: white;
+                color: #2c3e50;
+                padding: 12px;
+                border-radius: 6px;
+                border: 1px solid #bdc3c7;
+            }
+        """)
+        layout.addWidget(name_input)
+
+        price_label = QLabel("Price:")
+        price_label.setStyleSheet("font-size: 14px; font-weight: bold; color: #2c3e50;")
+        layout.addWidget(price_label)
+
+        price_input = QLineEdit()
+        price_input.setPlaceholderText("Enter price")
+        price_input.setStyleSheet("""
+            QLineEdit {
+                font-size: 14px;
+                background-color: white;
+                color: #2c3e50;
+                padding: 12px;
+                border-radius: 6px;
+                border: 1px solid #bdc3c7;
+            }
+        """)
+        layout.addWidget(price_input)
+
+        layout.addStretch()
+
+        submit_button = QPushButton("Add Test")
+        submit_button.setFixedHeight(45)
+        submit_button.setCursor(Qt.CursorShape.PointingHandCursor)
+        submit_button.setStyleSheet("""
+            QPushButton {
+                background-color: #3498db;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: bold;
+            }
+            QPushButton:hover {
+                background-color: #2980b9;
+            }
+            QPushButton:pressed {
+                background-color: #21618c;
+            }
+        """)
+
+        def submit_data():
+            name = name_input.text()
+            price = price_input.text()
+
+            if not name or not price:
+                QMessageBox.warning(dialog, "Input Error", "Please fill in all fields.")
+                return
+
+            try:
+                float(price)
+            except ValueError:
+                QMessageBox.warning(dialog, "Input Error", "Price must be a valid number.")
+                return
+
+            connection = get_db_connection()
+            if connection is None:
+                return
+            
+            cursor = connection.cursor()
+            try:
+                # --- CHANGED: No manual ID calculation needed! ---
+                
+                # We simply insert Name and Price. The DB creates the ID automatically.
+                query = "INSERT INTO LabEntries (TestName, TestPrice) VALUES (?, ?)"
+                cursor.execute(query, (name, price))
+                connection.commit()
+                
+                QMessageBox.information(dialog, "Success", "Lab test added successfully.")
+                self.load_lab_entries()
+                dialog.accept()
+
+            except Exception as e:
+                QMessageBox.critical(dialog, "Database Error", f"Failed to add test: {e}")
+            finally:
+                connection.close()
+
+        submit_button.clicked.connect(submit_data)
+        layout.addWidget(submit_button)
+
+        dialog.setLayout(layout)
+        
+        parent_geometry = self.geometry()
+        dialog_x = parent_geometry.x() + (parent_geometry.width() - dialog.width()) // 2
+        dialog_y = parent_geometry.y() + 100
+        dialog.move(dialog_x, dialog_y)
+        
+        dialog.exec()
+
+    def remove_lab_entry(self):
+        from PyQt6.QtCore import Qt
+
+        index = self.Admin_lab_tests_entry_dataview.currentIndex()
+        if not index.isValid():
+            QMessageBox.warning(self, "Selection Error", "Please select a test to remove.")
+            return
+
+        model = self.Admin_lab_tests_entry_dataview.model()
+        name_item = model.item(index.row(), 0)
+        lab_id = name_item.data(Qt.ItemDataRole.UserRole)
+
+        confirm = QMessageBox.question(self, "Confirm", "Are you sure you want to delete this test?", QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        if confirm == QMessageBox.StandardButton.No:
+            return
+
+        connection = get_db_connection()
+        if connection is None:
+            return
+        
+        cursor = connection.cursor()
+        try:
+            cursor.execute("DELETE FROM LabEntries WHERE LabID = ?", (lab_id,))
+            connection.commit()
+            QMessageBox.information(self, "Success", "Lab test removed successfully.")
+            self.load_lab_entries()
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to remove test: {e}")
+        finally:
+            connection.close()
+
+
     def go_to_pharmacy_page(self):
         self.setCurrentIndex(13)
         print("14")
