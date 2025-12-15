@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import QMessageBox
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
 from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton
 from PyQt6.QtCore import Qt
+from PyQt6.QtCore import QDateTime
 import sys
 import pyodbc 
 from sql_connection import get_db_connection
@@ -108,6 +109,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.appointments_back_button_2.clicked.connect(self.go_to_doctor_portal_page)
         self.appointments_admit_button.clicked.connect(self.admit_patient_from_appointment)
         self.appointments_cancel_appointment_button_2.clicked.connect(self.cancel_selected_appointment)
+        self.appointments_edit_button.clicked.connect(self.edit_datetime_change)
 
 
         #admin pages:
@@ -977,10 +979,10 @@ class HospitalApp(QtWidgets.QStackedWidget):
             cursor.execute(query, (self.current_user_id,))
             result = cursor.fetchone()
             if result:
-                self.admission_details_room_no.setText(result[2])
-                self.admission_details_date.setText(result[3].strftime("%Y-%m-%d"))
-                self.admission_details_discharge_date.setText(str(result[4]))
-                self.admission_details_total_chargers.setText(str(result[5]))
+                self.admission_details_room_no.setText(result[3])
+                self.admission_details_date.setText(result[4].strftime("%Y-%m-%d"))
+                self.admission_details_discharge_date.setText(str(result[5]))
+                self.admission_details_total_chargers.setText(str(result[6]))
                 
             else:
                 self.admission_details_room_no.setText("N/A")
@@ -2207,6 +2209,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
                 price_item       = QStandardItem(str(row[3]))
                 status_item      = QStandardItem(str(row[4]))
 
+                datetime_item.setFlags(datetime_item.flags() | Qt.ItemFlag.ItemIsEditable)
                 patient_item.setData(row[1], Qt.ItemDataRole.UserRole)
 
                 items = [
@@ -2369,14 +2372,20 @@ class HospitalApp(QtWidgets.QStackedWidget):
             cursor.execute("""
                 UPDATE Doctor_Appointment
                 SET AppointmentStatus = ?
-                WHERE AppointmentID = ?
+                WHERE AppointmentID = ? and AppointmentStatus = 'Scheduled'
             """, ('Cancelled', appointment_id))
+
+            if cursor.rowcount == 0:
+                QMessageBox.information(
+                    self,
+                    "Not Allowed",
+                    "This appointment is already cancelled or completed."
+                )
+                return
 
             connection.commit()
 
-            status_item = model.item(index.row(), 4)  
-            status_item.setText("Cancelled")
-
+            model.item(index.row(), 4).setText("Cancelled")
             QMessageBox.information(self, "Success", "Appointment cancelled successfully.")
 
         except Exception as e:
@@ -2384,6 +2393,69 @@ class HospitalApp(QtWidgets.QStackedWidget):
             QMessageBox.critical(self, "Error", f"Failed to cancel appointment:\n{e}")
         finally:
             connection.close()
+
+    def edit_datetime_change(self):
+        view = self.appointments_admit_dataview
+        index = view.currentIndex()
+
+        if not index.isValid():
+            QMessageBox.warning(self, "No Selection", "Select an appointment first.")
+            return
+
+        row = index.row()
+        model = view.model()
+
+        appointment_id = model.item(row, 0).text()
+        new_datetime = model.item(row, 2).text().strip()
+
+        # format check
+        if len(new_datetime) < 16:
+            QMessageBox.warning(
+                self,
+                "Invalid Format",
+                "Use format: YYYY-MM-DD HH:MM:SS"
+            )
+            return
+
+        connection = get_db_connection()
+        if connection is None:
+            QMessageBox.critical(self, "Database Error", "Could not connect to database.")
+            return
+
+        cursor = connection.cursor()
+
+        try:
+            cursor.execute("""
+                UPDATE Doctor_Appointment
+                SET AppointmentDateTime = ?, AppointmentStatus = 'Delayed'
+                WHERE AppointmentID = ? AND AppointmentStatus = 'Scheduled'
+            """, (new_datetime, appointment_id))
+
+            if cursor.rowcount == 0:
+                QMessageBox.information(
+                    self,
+                    "Not Updated",
+                    "Only Scheduled appointments can be edited."
+                )
+                return
+
+            connection.commit()
+
+            # Update status in table
+            model.item(row, 4).setText("Delayed")
+
+            QMessageBox.information(
+                self,
+                "Success",
+                "Appointment updated successfully."
+            )
+
+        except Exception as e:
+            connection.rollback()
+            QMessageBox.critical(self, "Error", str(e))
+        finally:
+            connection.close()
+
 
 
     def go_to_admin_portal_page(self):
