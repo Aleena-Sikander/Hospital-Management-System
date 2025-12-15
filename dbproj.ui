@@ -805,6 +805,9 @@
       <height>391</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="admin_doctor_back_button">
     <property name="geometry">
@@ -921,7 +924,7 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+     <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(0, 0, 0, 1);font-weight: bold;</string>
     </property>
    </widget>
   </widget>
@@ -1173,7 +1176,7 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(170, 56, 56, 1);font-weight: bold;</string>
+     <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(0, 0, 0, 1);font-weight: bold;</string>
     </property>
    </widget>
   </widget>
@@ -1331,7 +1334,7 @@ color: rgb(255, 255, 255);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+     <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(0, 0, 0, 1);font-weight: bold;</string>
     </property>
    </widget>
   </widget>
@@ -1430,7 +1433,7 @@ color: rgb(255, 255, 255);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+     <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(0, 0, 0, 1);font-weight: bold;</string>
     </property>
    </widget>
    <widget class="QTableView" name="pharmacy_cart_view">
@@ -1451,7 +1454,7 @@ color: rgb(255, 255, 255);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+     <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(0, 0, 0, 1);font-weight: bold;</string>
     </property>
    </widget>
   </widget>
@@ -1698,7 +1701,7 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(170, 56, 56, 1);font-weight: bold; qproperty-alignment: AlignCenter;</string>
+     <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(170, 56, 56, 1);font-weight: bold;</string>
     </property>
     <property name="font">
      <font>
@@ -1826,7 +1829,7 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+     <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(0, 0, 0, 1);font-weight: bold;</string>
     </property>
    </widget>
   </widget>
@@ -2085,7 +2088,7 @@ color: rgb(255, 255, 255);</string>
      </size>
     </property>
    </widget>
-   <widget class="QTableView" name="doctor_profile_specialization">
+   <widget class="QLabel" name="doctor_profile_specialization">
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -2094,11 +2097,17 @@ color: rgb(255, 255, 255);</string>
       <height>191</height>
      </rect>
     </property>
-    <property name="styleSheet">
+    <!-- <property name="styleSheet">
      <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property> -->
+    <property name="styleSheet">
+     <string>color: black; font-size: 16px; font-weight: bold</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QTableView" name="doctor_profile_availability">
+   <widget class="QLabel" name="doctor_profile_availability">
     <property name="geometry">
      <rect>
       <x>730</x>
@@ -2107,8 +2116,14 @@ color: rgb(255, 255, 255);</string>
       <height>311</height>
      </rect>
     </property>
-    <property name="styleSheet">
+    <!-- <property name="styleSheet">
      <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+    </property> -->
+    <property name="styleSheet">
+     <string>color: black; font-size: 16px; font-weight: bold</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="doctor_profile_name">
@@ -2121,7 +2136,10 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string>color: black; font-size: 16px;</string>
+     <string>color: black; font-size: 16px; font-weight: bold</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
     <property name="text">
      <string/>
@@ -2137,7 +2155,10 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string>color: black; font-size: 16px;</string>
+     <string>color: black; font-size: 16px; font-weight: bold</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
     <property name="text">
      <string/>
@@ -2153,7 +2174,10 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string>color: black; font-size: 16px;</string>
+     <string>color: black; font-size: 16px; font-weight: bold</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
     <property name="text">
      <string/>
@@ -2169,7 +2193,10 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string>color: black; font-size: 16px;</string>
+     <string>color: black; font-size: 16px; font-weight: bold</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
     <property name="text">
      <string/>
@@ -2344,7 +2371,7 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+     <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(0, 0, 0, 1);font-weight: bold;</string>
     </property>
    </widget>
    <widget class="QLabel" name="appointments_medical_history_searchbutton">
@@ -2357,7 +2384,10 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string>color: black; font-size: 16px;</string>
+     <string>color: black; font-size: 16px; font-weight: bold; </string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
     <property name="text">
      <string/>
@@ -2766,7 +2796,7 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+     <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(0, 0, 0, 1);font-weight: bold;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="bills_back_button">
@@ -2876,7 +2906,7 @@ color: rgb(255, 255, 255);</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
+     <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(0, 0, 0, 1);font-weight: bold;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="appointments_back_button">
@@ -3132,7 +3162,7 @@ color: rgb(255, 255, 255);</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string>background-color: transparent; border: none;</string>
+     <string>background-color: transparent; border: none; color: rgba(0, 0, 0, 1);font-weight: bold;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="patient_labs_check_result_button">
@@ -3208,6 +3238,7 @@ color: rgb(255, 255, 255);</string>
              border: none; 
              color: rgba(0, 0, 0, 1);
              font-size: 14px;
+             font-weight: bold;
              padding: 10px;</string>
     </property>
    </widget>
@@ -3225,6 +3256,7 @@ color: rgb(255, 255, 255);</string>
              border: none; 
              color: rgba(0, 0, 0, 1);
              font-size: 13px;
+             font-weight: bold;
              padding: 15px;</string>
     </property>
     <property name="readOnly">
@@ -3388,6 +3420,70 @@ color: rgb(255, 255, 255);</string>
      <string/>
     </property>
     <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="doc_medical_history_patient_id_lineedit">
+    <property name="geometry">
+     <rect>
+      <x>28</x>
+      <y>320</y>
+      <width>191</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>100</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: rgba(207, 226, 243, 1); border: none; font-weight: bold; color: rgba(0, 0, 0, 1);</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="doc_medical_history_list">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>180</y>
+      <width>340</width>
+      <height>520</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: transparent; 
+             border: none; 
+             color: rgba(0, 0, 0, 1);
+             font-size: 14px;
+             font-weight: bold;
+             padding: 10px;</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="doc_medical_history_details_text">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>270</y>
+      <width>340</width>
+      <height>430</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string>background-color: transparent; 
+             border: none; 
+             color: rgba(0, 0, 0, 1);
+             font-size: 13px;
+             font-weight: bold;
+             padding: 15px;</string>
+    </property>
+    <property name="readOnly">
      <bool>true</bool>
     </property>
    </widget>

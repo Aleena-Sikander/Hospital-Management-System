@@ -132,11 +132,13 @@ def setup_database():
         CREATE TABLE Admission_Details (
             AdmissionID INTEGER PRIMARY KEY,
             PatientID INTEGER NOT NULL,
-            RoomNo VARCHAR(5) NOT NULL,
+            Ref_DoctorID INTEGER NOT NULL,
+            RoomNo VARCHAR(5),
             AdmissionDate DATE NOT NULL,
             DischargeDate DATE,
-            RoomPrice FLOAT NOT NULL,
-            CONSTRAINT fk_admission_user FOREIGN KEY (PatientID) REFERENCES UserAccount(UserID)
+            RoomPrice FLOAT,
+            CONSTRAINT fk_admission_user FOREIGN KEY (PatientID) REFERENCES UserAccount(UserID),
+            CONSTRAINT fk_admission_doctor FOREIGN KEY (Ref_DoctorID) REFERENCES Doctor(DoctorID)
         )
         """,
         """
@@ -449,31 +451,31 @@ def setup_database():
     print("Inserted Doctor_Availability records.")
 
     Admission_Details_data = [
-        (1, 6, '101A', '2025-10-01', '2025-10-05', 5000),
-        (2, 7, '102B', '2025-10-02', '2025-10-06', 5200),
-        (3, 8, '103C', '2025-10-03', '2025-10-07', 4800),
-        (4, 9, '104D', '2025-10-04', '2025-10-08', 5100),
-        (5, 10, '105E', '2025-10-05', '2025-10-09', 5300),
-        (6, 11, '106F', '2025-10-06', '2025-10-10', 4900),
-        (7, 12, '107G', '2025-10-07', '2025-10-11', 5000),
-        (8, 13, '108H', '2025-10-08', '2025-10-12', 5200),
-        (9, 14, '109I', '2025-10-09', '2025-10-13', 4800),
-        (10, 15, '110J', '2025-10-10', '2025-10-14', 5100),
-        (11, 16, '111K', '2025-10-11', '2025-10-15', 5300),
-        (12, 17, '112L', '2025-10-12', '2025-10-16', 4900),
-        (13, 18, '113M', '2025-10-13', '2025-10-17', 5000),
-        (14, 19, '114N', '2025-10-14', '2025-10-18', 5200),
-        (15, 20, '115O', '2025-10-15', '2025-10-19', 4800),
-        (16, 6, '116P', '2025-10-20', None, 5100),
-        (17, 7, '117Q', '2025-10-21', None, 5300),
-        (18, 8, '118R', '2025-10-22', None, 4900),
-        (19, 9, '119S', '2025-10-23', None, 5000),
-        (20, 10, '120T', '2025-10-24', None, 5200)
+        (1, 6, 100, '101A', '2025-10-01', '2025-10-05', 5000),
+        (2, 7, 100, '102B', '2025-10-02', '2025-10-06', 5200),
+        (3, 8, 200, '103C', '2025-10-03', '2025-10-07', 4800),
+        (4, 9, 200, '104D', '2025-10-04', '2025-10-08', 5100),
+        (5, 10, 300, '105E', '2025-10-05', '2025-10-09', 5300),
+        (6, 11, 300, '106F', '2025-10-06', '2025-10-10', 4900),
+        (7, 12, 400, '107G', '2025-10-07', '2025-10-11', 5000),
+        (8, 13, 400, '108H', '2025-10-08', '2025-10-12', 5200),
+        (9, 14, 500, '109I', '2025-10-09', '2025-10-13', 4800),
+        (10, 15, 500, '110J', '2025-10-10', '2025-10-14', 5100),
+        (11, 16, 600, '111K', '2025-10-11', '2025-10-15', 5300),
+        (12, 17, 600, '112L', '2025-10-12', '2025-10-16', 4900),
+        (13, 18, 700, '113M', '2025-10-13', '2025-10-17', 5000),
+        (14, 19, 700, '114N', '2025-10-14', '2025-10-18', 5200),
+        (15, 20, 800, '115O', '2025-10-15', '2025-10-19', 4800),
+        (16, 6, 800, '116P', '2025-10-20', None, 5100),
+        (17, 7, 900, '117Q', '2025-10-21', None, 5300),
+        (18, 8, 900, '118R', '2025-10-22', None, 4900),
+        (19, 9, 110,'119S', '2025-10-23', None, 5000),
+        (20, 10, 110, '120T', '2025-10-24', None, 5200)
     ]
 
     Admission_Details_insert_query = """
-        INSERT INTO Admission_Details (AdmissionID, PatientID, RoomNo, AdmissionDate, DischargeDate, RoomPrice)
-        VALUES (?, ?, ?, ?, ?, ?)
+        INSERT INTO Admission_Details (AdmissionID, PatientID, Ref_DoctorID, RoomNo, AdmissionDate, DischargeDate, RoomPrice)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
     """
 
     cursor.executemany(Admission_Details_insert_query, Admission_Details_data)

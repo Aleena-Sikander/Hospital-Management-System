@@ -31,6 +31,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.GCH_login_button.clicked.connect(self.go_to_login_page)
         self.GCH_our_services_button.clicked.connect(self.go_to_service_page)
         self.specialization_tableview.clicked.connect(self.on_specialization_row_selected)
+        self.appointments_admit_dataview.clicked.connect(self.on_doc_app_row_selected)
 
         # Login page (page index 1 - page_2) buttons
         # self.appointments_details_button.clicked.connect(self.load_bills_from_appointments)
@@ -64,7 +65,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.our_services_lab_test_button.clicked.connect(self.go_to_lab_test_page)
         self.lab_tests_book_button.clicked.connect(self.book_lab_test)
         self.our_services_pharmacy_button.clicked.connect(self.go_to_pharmacy_page)
-        self.our_services_back_button.clicked.connect(self.go_to_patient_portal_profile_page)
+        self.our_services_back_button.clicked.connect(self.main_page)
         self.patient_labs_check_result_button.clicked.connect(self.on_check_result_clicked)
         self.lab_test_result_back_button.clicked.connect(self.go_to_patient_lab_page)
         self.lab_test_result_download_button.clicked.connect(self.show_lab_test_details)
@@ -92,14 +93,22 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.medical_history_details_button_top.clicked.connect(self.show_selected_medical_history_details)
 
         self.medical_history_list.itemDoubleClicked.connect(self.show_selected_medical_history_details)
+
         # Doctor Pages:
         self.login_doctor_button.clicked.connect(self.go_to_login)
         self.login_doctor_button.clicked.connect(self.prepare_login_as_doctor)
         self.doctor_registration_submit_button.clicked.connect(self.go_to_submit_doctor_registration)
         self.doctor_portal_profile_button.clicked.connect(self.go_to_doctor_profile_page)
         self.doctor_portal_appointment_button.clicked.connect(self.go_to_doctor_appointment_page)
+        self.doctor_profile_back_button.clicked.connect(self.go_to_doctor_portal_page)
         self.appointments_medical_history_button.clicked.connect(self.go_to_editable_medical_history)
         self.doctor_medical_history_back_button.clicked.connect(self.go_to_doctor_appointment_page)
+        self.doc_medical_history_list.itemDoubleClicked.connect(self.show_selected_doc_medical_history_details)
+        self.doctor_medical_history_details_button.clicked.connect(self.show_selected_doc_medical_history_details)
+        self.appointments_back_button_2.clicked.connect(self.go_to_doctor_portal_page)
+        self.appointments_admit_button.clicked.connect(self.admit_patient_from_appointment)
+        self.appointments_cancel_appointment_button_2.clicked.connect(self.cancel_selected_appointment)
+
 
         #admin pages:
         self.login_admin_button.clicked.connect(self.go_to_login)
@@ -171,6 +180,11 @@ class HospitalApp(QtWidgets.QStackedWidget):
             QMessageBox.warning(self, "Login Error", "Please choose Patient, Doctor or Admin before submitting login.")
             self.setCurrentIndex(1)  # back to role selection
             print("2")
+
+    def main_page(self):
+        """Navigate to main first page"""
+        self.setCurrentIndex(0)  # first_page
+        print("Navigated to main page (1)")
 
     def go_to_service_page(self):
         """Navigate to our services page"""
@@ -1039,7 +1053,6 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
         print("Navigated to medical history (29)")
 
-
     def show_selected_medical_history_details(self):
         """Display details of selected medical history in the right box"""
         selected_index = self.medical_history_list.currentRow()
@@ -1076,15 +1089,15 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
         cursor = connection.cursor()
         try:
-            cursor.execute("SELECT * FROM Specialisation")
+            cursor.execute("SELECT SpecialisationID, FieldName, DoctorID FROM Specialisation")
             rows = cursor.fetchall()
             model = QStandardItemModel()
-            model.setHorizontalHeaderLabels(["ID", "Field Name", "Doctor ID"])
+            model.setHorizontalHeaderLabels(["Field Name"])
             for row in rows:
+                name_item = QStandardItem(str(row[1]))
+                name_item.setData(row[0], role=Qt.ItemDataRole.UserRole)  # Store SpecialisationID
                 items = [
-                    QStandardItem(str(row[0])),
-                    QStandardItem(str(row[1])),
-                    QStandardItem(str(row[2])),
+                    name_item
                 ]
                 model.appendRow(items)
             self.specialization_tableview.setModel(model)
@@ -1097,15 +1110,14 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
     def on_specialization_row_selected(self, index):
         try:
-            row = index.row()
             model = self.specialization_tableview.model()
+            item = model.itemFromIndex(index)
 
-            # Try to access using QStandardItemModel indexing; adjust if your model differs
-            spec_id_item = model.item(row, 0)
-            if spec_id_item is None:
-                self.selected_specialisation_id = None
+            if item:
+                self.selected_specialisation_id = item.data(Qt.ItemDataRole.UserRole)
+                print("Selected SpecialisationID:", self.selected_specialisation_id)
             else:
-                self.selected_specialisation_id = spec_id_item.text()
+                self.selected_specialisation_id = None
 
             print("Selected SpecialisationID:", self.selected_specialisation_id)
         except Exception as e:
@@ -2106,6 +2118,25 @@ class HospitalApp(QtWidgets.QStackedWidget):
                 return
             
             cursor = connection.cursor()
+
+            special_query = "select FieldName from Specialisation where DoctorID=?"
+            cursor.execute(special_query, (user_id,))
+            spec_result = cursor.fetchall()
+
+            if spec_result:
+                specialization_list = [row[0] for row in spec_result]
+                display_text = "\n".join(specialization_list)
+                self.doctor_profile_specialization.setText(display_text)
+
+            avail_query = "select Available from Doctor_Availability where DoctorID=?"
+            cursor.execute(avail_query, (user_id,))
+            avail_result = cursor.fetchall()
+
+            if avail_result:
+                availability_list = [row[0].strftime("%Y-%m-%d %H:%M") for row in avail_result]
+                display_text = "\n".join(availability_list)
+                self.doctor_profile_availability.setText(display_text)
+
             # --- Doctor Logic (3 digits) ---
             query = "SELECT * FROM Doctor WHERE DoctorID = ?"
             cursor.execute(query, (user_id,))
@@ -2118,8 +2149,11 @@ class HospitalApp(QtWidgets.QStackedWidget):
                 if db_password == password:
                     print(f"Login successful for Doctor: {user_id}")
                     self.current_user_id = user_id # Save the doctor's ID
-                    # self.go_to_doctor_portal_page()
                     self.setCurrentIndex(19)
+                    self.doctor_profile_name.setText(result[1])
+                    self.doctor_profile_email.setText(result[2])
+                    self.doctor_profile_contact.setText(result[5])
+                    self.doctor_profile_docid.setText(str(result[0]))
                     
                 else:
                     QMessageBox.warning(self, "Login Failed", "Invalid ID or password.")
@@ -2143,13 +2177,206 @@ class HospitalApp(QtWidgets.QStackedWidget):
         print("21")
     
     def go_to_doctor_appointment_page(self):
+        """Load specialization table using PYODBC instead of QSqlDatabase."""
         self.setCurrentIndex(21)
         print("22")
+        connection = get_db_connection()
+        if connection is None:
+            QMessageBox.critical(self, "Database Error", "Could not connect to the database.")
+            return
+
+        cursor = connection.cursor()
+        try:
+            cursor.execute("select AppointmentID, PatientID, AppointmentDateTime, AppointmentPrice, AppointmentStatus from Doctor_Appointment where DoctorID=?", (self.current_user_id,))
+            rows = cursor.fetchall()
+            model = QStandardItemModel()
+            model.setHorizontalHeaderLabels(["AppointmentID", "PatientID", "DateTime", "Price", "Status"])
+            for row in rows:
+                appointment_item = QStandardItem(str(row[0]))
+                patient_item     = QStandardItem(str(row[1]))
+                datetime_item    = QStandardItem(str(row[2]))
+                price_item       = QStandardItem(str(row[3]))
+                status_item      = QStandardItem(str(row[4]))
+
+                patient_item.setData(row[1], Qt.ItemDataRole.UserRole)
+
+                items = [
+                    appointment_item,
+                    patient_item,
+                    datetime_item,
+                    price_item,
+                    status_item     
+                ]
+                model.appendRow(items)
+
+            self.appointments_admit_dataview.setModel(model)
+            self.appointments_admit_dataview.resizeColumnsToContents()
+            print("Appointment table loaded successfully.")
+        except Exception as e:
+            QMessageBox.critical(self, "Query Error", f"Failed to load appointment data: {e}")
+        finally:
+            connection.close()
+    
+    def on_doc_app_row_selected(self, index):
+        model = self.appointments_admit_dataview.model()
+        patient_item = model.item(index.row(), 1)
+
+        if patient_item:
+            self.selected_patient_id = patient_item.data(Qt.ItemDataRole.UserRole)
+            self.appointments_medical_history_searchbutton.setText(str(self.selected_patient_id))
+            print("Selected PatientID:", self.selected_patient_id)
     
     def go_to_editable_medical_history(self):
+        if not hasattr(self, 'selected_patient_id') or self.selected_patient_id is None:
+            QMessageBox.warning(self, "No Patient Selected", "Please select a patient first.")
+            return
+        
         self.setCurrentIndex(29)
+        self.doc_medical_history_patient_id_lineedit.setText(str(self.selected_patient_id))
         print("30")
+
+        connection = get_db_connection()
+        if connection is None:
+            QMessageBox.critical(self, "Database Error", "Could not connect to the database.")
+            return
+        cursor = connection.cursor()
+
+        query = """SELECT *
+            FROM Medical_History
+            WHERE PatientID = ?
+            ORDER BY DiagnosisDate DESC"""
+        
+        cursor.execute(query, (self.selected_patient_id,))
+        results = cursor.fetchall()
+
+        if not results:
+            QMessageBox.information(self, "No Records", "No medical history records found for this patient.")
+            return
+        
+        self.medical_history = results
+        self.doc_medical_history_list.clear()
+
+        for row in results:
+            disease_name = row[3]
+            allergy = row[2] if row[2] and row[2] != 'None' else ""
+                
+            if allergy:
+                display_text = f"{disease_name} (Allergy: {allergy})"
+            else:
+                display_text = disease_name
+                
+            self.doc_medical_history_list.addItem(display_text)
+
+        self.medical_history_details_text.clear()
+        print(f"Fetched {len(results)} medical history records")
+        connection.close()
+
+    def show_selected_doc_medical_history_details(self):
+        """Display details of selected medical history in the right box"""
+        selected_index = self.doc_medical_history_list.currentRow()
+        
+        if selected_index < 0:
+            QMessageBox.warning(self, "Selection Error", "Please select a medical record first.")
+            return
+        
+        # Get the corresponding data
+        if hasattr(self, 'medical_history') and selected_index < len(self.medical_history):
+            row = self.medical_history[selected_index]
+            
+            # Format the details text
+            details_text = f"Medical History Details:\n\n"
+            details_text += f"Record ID: {row[0]}\n\n"
+            details_text += f"Allergies: {row[2] or 'None'}\n\n"
+            details_text += f"Disease: {row[3]}\n\n"
+            details_text += f"Diagnosis Date: {row[4]}\n\n"
+            details_text += f"Additional Details: {row[5]}\n"
+            
+            # Display in the right text box
+            self.doc_medical_history_details_text.setText(details_text)
+        else:
+            QMessageBox.warning(self, "Error", "Could not retrieve medical history details.")
+
+    def admit_patient_from_appointment(self):
+        if not hasattr(self, 'selected_patient_id') or self.selected_patient_id is None:
+            QMessageBox.warning(self, "No Patient Selected", "Please select a patient first.")
+            return
+
+        connection = get_db_connection()
+        if connection is None:
+            QMessageBox.critical(self, "Database Error", "Could not connect to the database.")
+            return
+
+        cursor = connection.cursor()
+        try:
+            # Manually generate AdmissionID
+            cursor.execute("SELECT COALESCE(MAX(AdmissionID), 0) + 1 FROM Admission_Details")
+            new_admission_id = cursor.fetchone()[0]
+
+            cursor.execute("""
+                INSERT INTO Admission_Details (AdmissionID, PatientID, Ref_DoctorID, AdmissionDate)
+                VALUES (?, ?, ?, GETDATE())
+            """, (new_admission_id, self.selected_patient_id, self.current_user_id))
+
+            connection.commit()
+
+            QMessageBox.information(self, "Success", f"Patient {self.selected_patient_id} admitted with Admission ID {new_admission_id}.")
+
+        except Exception as e:
+            connection.rollback()
+            QMessageBox.critical(self, "Admission Error", f"Failed to admit patient: {e}")
+        finally:
+            connection.close()
     
+    def cancel_selected_appointment(self):
+        view = self.appointments_admit_dataview
+        index = view.currentIndex()
+
+        if not index.isValid():
+            QMessageBox.warning(self, "No Selection", "Please select an appointment first.")
+            return
+
+        model = view.model()
+
+        # AppointmentID is in column 0
+        appointment_id = model.item(index.row(), 0).text()
+
+        confirm = QMessageBox.question(
+            self,
+            "Confirm Cancellation",
+            f"Cancel appointment ID {appointment_id}?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+        )
+
+        if confirm != QMessageBox.StandardButton.Yes:
+            return
+
+        connection = get_db_connection()
+        if connection is None:
+            QMessageBox.critical(self, "Database Error", "Could not connect to database.")
+            return
+
+        cursor = connection.cursor()
+        try:
+            cursor.execute("""
+                UPDATE Doctor_Appointment
+                SET AppointmentStatus = ?
+                WHERE AppointmentID = ?
+            """, ('Cancelled', appointment_id))
+
+            connection.commit()
+
+            status_item = model.item(index.row(), 4)  
+            status_item.setText("Cancelled")
+
+            QMessageBox.information(self, "Success", "Appointment cancelled successfully.")
+
+        except Exception as e:
+            connection.rollback()
+            QMessageBox.critical(self, "Error", f"Failed to cancel appointment:\n{e}")
+        finally:
+            connection.close()
+
+
     def go_to_admin_portal_page(self):
         # self.setCurrentIndex(5)
         # --- 1. Get text from UI ---
