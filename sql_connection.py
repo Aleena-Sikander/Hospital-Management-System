@@ -1,7 +1,7 @@
 import pyodbc
 
 # --- Connection Details ---
-SERVER = r'DESKTOP-GDT94QR\ALEENASQLSERVER'
+SERVER = r'DESKTOP-U5TP2TI\tomSQL'
 DATABASE = 'Hospital_Managment_System'
 USE_WINDOWS_AUTH = True
 

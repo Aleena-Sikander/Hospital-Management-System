@@ -115,6 +115,8 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.login_admin_button.clicked.connect(self.prepare_login_as_admin)
         self.admin_portal_patient_button.clicked.connect(self.go_to_admin_patient_page)
         self.admin_patient_admission_edit_button.clicked.connect(self.go_to_admin_patient_admission_edit_page)
+        self.admin_admission_entry_save_button.clicked.connect(self.save_admission_changes)
+        self.admin_admission_entry_back_button.clicked.connect(self.go_to_admin_patient_page)
         self.admin_portal_doctor_button.clicked.connect(self.go_to_admin_doctor_approval_page)
         self.admin_doctor_approval_approve_button.clicked.connect(self.approve_selected_doctor)
         self.admin_doctor_approval_reject_button.clicked.connect(self.reject_selected_doctor)
@@ -2445,11 +2447,154 @@ class HospitalApp(QtWidgets.QStackedWidget):
     def go_to_admin_patient_page(self):
         self.setCurrentIndex(7)
         print("8")
+        self.load_admission_details()
+
+    def load_admission_details(self):
+        from PyQt6.QtCore import Qt  
+        
+        connection = get_db_connection()
+        if connection is None:
+            return
+
+        cursor = connection.cursor()
+        try:
+            # UPDATED QUERY: Added ORDER BY to show 'Admitted' (NULL DischargeDate) first
+            query = """
+                SELECT 
+                    AD.AdmissionID, 
+                    UA.Name AS PatientName, 
+                    D.DoctorName, 
+                    AD.RoomNo, 
+                    AD.AdmissionDate,
+                    AD.DischargeDate
+                FROM Admission_Details AD
+                INNER JOIN UserAccount UA ON AD.PatientID = UA.UserID
+                INNER JOIN Doctor D ON AD.Ref_DoctorID = D.DoctorID
+                ORDER BY 
+                    CASE WHEN AD.DischargeDate IS NULL THEN 0 ELSE 1 END ASC, 
+                    AD.AdmissionDate DESC
+            """
+            cursor.execute(query)
+            rows = cursor.fetchall()
+
+            model = QStandardItemModel()
+            model.setHorizontalHeaderLabels(["Patient Name", "Doctor Name", "Room No", "Admission Date", "Status"])
+
+            for row in rows:
+                patient_item = QStandardItem(str(row[1]))
+                patient_item.setData(row[0], Qt.ItemDataRole.UserRole)
+
+                discharge_date = row[5]
+                if discharge_date is None:
+                    status_text = "Admitted"
+                else:
+                    status_text = "Discharged"
+
+                items = [
+                    patient_item,                 
+                    QStandardItem(str(row[2])),   
+                    QStandardItem(str(row[3])),   
+                    QStandardItem(str(row[4])),   
+                    QStandardItem(status_text)    
+                ]
+                model.appendRow(items)
+            
+            self.admin_patient_admission_dataview.setModel(model)
+            self.admin_patient_admission_dataview.resizeColumnsToContents()
+
+        except Exception as e:
+            print(f"Error loading admission details: {e}")
+        finally:
+            connection.close()
+        
 
     def go_to_admin_patient_admission_edit_page(self):
-        self.setCurrentIndex(8)
-        print("9")
+        from PyQt6.QtCore import Qt
+        
+        index = self.admin_patient_admission_dataview.currentIndex()
+        if not index.isValid():
+            QMessageBox.warning(self, "Selection Error", "Please select an admission record to edit.")
+            return
+
+        model = self.admin_patient_admission_dataview.model()
+        patient_item = model.item(index.row(), 0)
+        admission_id = patient_item.data(Qt.ItemDataRole.UserRole)
+        
+        if not admission_id:
+            QMessageBox.warning(self, "Error", "Could not retrieve Admission ID.")
+            return
+
+        self.current_editing_admission_id = admission_id
+
+        connection = get_db_connection()
+        if not connection: return
+        
+        cursor = connection.cursor()
+        try:
+            query = """
+                SELECT RoomNo, AdmissionDate, DischargeDate, Ref_DoctorID 
+                FROM Admission_Details 
+                WHERE AdmissionID = ?
+            """
+            cursor.execute(query, (admission_id,))
+            result = cursor.fetchone()
+
+            if result:
+                self.setCurrentIndex(8)
+                print(f"Editing Admission ID: {admission_id}")
+
+                self.admin_admission_entry_room.setText(str(result[0]))
+                
+                self.admin_admission_entry_AdDate.setText(str(result[1]))
+                self.admin_admission_entry_AdDate.setReadOnly(True)  # <-- Added this line
+                
+                if result[2]:
+                    self.admin_admission_entry_DisDate.setText(str(result[2]))
+                else:
+                    self.admin_admission_entry_DisDate.clear()
+                
+                self.admin_admission_entry_AsDoc.setText(str(result[3]))
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to load data: {e}")
+        finally:
+            connection.close()
     
+    def save_admission_changes(self):
+        room_no = self.admin_admission_entry_room.text()
+        ad_date = self.admin_admission_entry_AdDate.text()
+        dis_date = self.admin_admission_entry_DisDate.text()
+        doc_id = self.admin_admission_entry_AsDoc.text()
+
+        if not room_no or not ad_date or not doc_id:
+            QMessageBox.warning(self, "Input Error", "Room, Admission Date, and Doctor ID are required.")
+            return
+        
+        if dis_date.strip() == "":
+            dis_date = None
+
+        connection = get_db_connection()
+        if not connection: return
+        
+        cursor = connection.cursor()
+        try:
+            query = """
+                UPDATE Admission_Details 
+                SET RoomNo = ?, AdmissionDate = ?, DischargeDate = ?, Ref_DoctorID = ?
+                WHERE AdmissionID = ?
+            """
+            cursor.execute(query, (room_no, ad_date, dis_date, doc_id, self.current_editing_admission_id))
+            connection.commit()
+
+            QMessageBox.information(self, "Success", "Admission details updated successfully!")
+
+            self.go_to_admin_patient_page()
+
+        except Exception as e:
+            QMessageBox.critical(self, "Database Error", f"Update failed: {e}")
+        finally:
+            connection.close()
+
     def go_to_admin_apecialization_edit_page(self):
         self.setCurrentIndex(11)
         print("12")
