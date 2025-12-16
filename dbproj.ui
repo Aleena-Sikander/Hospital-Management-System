@@ -14,7 +14,7 @@
    <string>StackedWidget</string>
   </property>
   <property name="currentIndex">
-   <number>8</number>
+   <number>7</number>
   </property>
   <widget class="QWidget" name="first_page">
    <widget class="QLabel" name="label">
@@ -734,6 +734,37 @@
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QPushButton" name="admin_portal_logout">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>130</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(61, 70, 126);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>LOG OUT</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>110</width>
+      <height>110</height>
+     </size>
+    </property>
+   </widget>
   </widget>
   <widget class="QWidget" name="page_6">
    <widget class="QLabel" name="label_7">
@@ -1434,6 +1465,37 @@ color: rgb(255, 255, 255);</string>
      <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(0, 0, 0, 1);font-weight: bold;</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="lab_tests_mylabs">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>700</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(61, 70, 126);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>MY LABS</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>110</width>
+      <height>110</height>
+     </size>
+    </property>
+   </widget>
   </widget>
   <widget class="QWidget" name="page_13">
    <widget class="QLabel" name="label_14">
@@ -2002,6 +2064,37 @@ color: rgb(255, 255, 255);</string>
      <string>background-color: rgba(0, 0, 0, 0); border: none; color: rgba(0, 0, 0, 1);font-weight: bold;</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="bill_generation_back_button">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>650</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(61, 70, 126);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>BACK BUTTON</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>110</width>
+      <height>110</height>
+     </size>
+    </property>
+   </widget>
   </widget>
   <widget class="QWidget" name="page_18">
    <widget class="QLabel" name="label_19">
@@ -2366,6 +2459,37 @@ color: rgb(255, 255, 255);</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QPushButton" name="doctor_profile_logout">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>630</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(61, 70, 126);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>LOG OUT</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>110</width>
+      <height>110</height>
+     </size>
+    </property>
+   </widget>
   </widget>
   <widget class="QWidget" name="page_21">
    <widget class="QLabel" name="label_22">
@@ -2393,25 +2517,6 @@ color: rgb(255, 255, 255);</string>
       <x>270</x>
       <y>680</y>
       <width>231</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string>background-color: rgba(0, 0, 0, 0); border: none;</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="appointments_details_button_2">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>680</y>
-      <width>111</width>
       <height>51</height>
      </rect>
     </property>
@@ -2497,9 +2602,9 @@ color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="appointments_admit_button">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>390</y>
-      <width>181</width>
+      <x>540</x>
+      <y>680</y>
+      <width>101</width>
       <height>61</height>
      </rect>
     </property>
@@ -2883,6 +2988,37 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>BACK BUTTON</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>110</width>
+      <height>110</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="patient_profile_logout">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>530</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(61, 70, 126);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>LOG OUT</string>
     </property>
     <property name="iconSize">
      <size>
@@ -3314,10 +3450,10 @@ color: rgb(255, 255, 255);</string>
    <widget class="QTableView" name="patient_labs_tableview">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>275</y>
-      <width>700</width>
-      <height>430</height>
+      <x>40</x>
+      <y>240</y>
+      <width>611</width>
+      <height>411</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -3360,6 +3496,36 @@ color: rgb(255, 255, 255);</string>
     </property>
     <property name="flat">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="patient_labs_generate_back_button">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>660</y>
+      <width>141</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS PGothic</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(61, 70, 126); color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>BACK BUTTON</string>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>110</width>
+      <height>110</height>
+     </size>
     </property>
    </widget>
   </widget>
