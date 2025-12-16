@@ -1,9 +1,7 @@
 from PyQt6 import QtWidgets, uic
-from PyQt6.QtWidgets import QMessageBox 
+from PyQt6.QtWidgets import QMessageBox, QDialog, QVBoxLayout, QLabel, QPushButton, QLineEdit, QDateTimeEdit, QDialogButtonBox 
 from PyQt6.QtGui import QStandardItemModel, QStandardItem
-from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton
-from PyQt6.QtCore import Qt
-from PyQt6.QtCore import QDateTime
+from PyQt6.QtCore import Qt, QDateTime
 import sys
 import pyodbc 
 from sql_connection import get_db_connection
@@ -109,6 +107,8 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.appointments_back_button_2.clicked.connect(self.go_to_doctor_portal_page)
         self.appointments_admit_button.clicked.connect(self.admit_patient_from_appointment)
         self.appointments_cancel_appointment_button_2.clicked.connect(self.cancel_selected_appointment)
+        self.doctor_medical_history_delete_button.clicked.connect(self.delete_selected_medical_history)
+        self.doctor_medical_history_add_button.clicked.connect(self.add_selected_medical_record)
         self.appointments_edit_button.clicked.connect(self.edit_datetime_change)
 
 
@@ -143,7 +143,6 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.bills_generate_bill_button.setEnabled(False)  # disabled by default
         self.bills_detail_dataview.clicked.connect(self.on_bill_row_selected)
         self.bill_generation_proceed_to_payment.clicked.connect(self.show_payment_message)
-
 
 
         
@@ -280,15 +279,15 @@ class HospitalApp(QtWidgets.QStackedWidget):
     def go_to_submit_doctor_registration(self):
         """Validates input and sends data to PendingDoctor table"""
         
-        # 1. Get data from UI
-        name = self.doctor_registration__name.text() # Check your UI variable name
+        # 1. Geting data from UI
+        name = self.doctor_registration__name.text() 
         email = self.doctor_registration_email.text()
         password = self.doctor_registration_password.text()
         confirm_pass = self.doctor_registration_confirm_passowrd.text()
         contact = self.doctor_registration_contact_no.text()
         specialization = self.doctor_registration_comboBox.currentText()
 
-        # 2. Validation
+        # 2. Validation check
         if not name or not email or not password or not contact:
             QMessageBox.warning(self, "Error", "Please fill in all fields.")
             return
@@ -335,7 +334,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
     
     def go_to_admin_doctor_approval_page(self):
         self.setCurrentIndex(6) # Or whatever your index is
-        self.load_pending_doctor_requests() # <--- ADD THIS LINE
+        self.load_pending_doctor_requests()
         print("Navigated to doctor approval page and loaded data (7)")
 
     def load_pending_doctor_requests(self):
@@ -343,10 +342,8 @@ class HospitalApp(QtWidgets.QStackedWidget):
         
         table = self.admin_doctor_approval_approve_requests
         
-        # --- FIX START: Setup the columns first! ---
         table.setColumnCount(5)  # Tell the table we need 5 columns
         table.setHorizontalHeaderLabels(["Request ID", "Name", "Email", "Contact", "Specialization"])
-        # --- FIX END ---
 
         # Clear previous data rows (but keep the headers)
         table.setRowCount(0)
@@ -371,7 +368,6 @@ class HospitalApp(QtWidgets.QStackedWidget):
                     table.setItem(row_number, 3, QtWidgets.QTableWidgetItem(str(row_data[3])))
                     table.setItem(row_number, 4, QtWidgets.QTableWidgetItem(str(row_data[4])))
                 
-                # Optional: Make columns stretch to fill the space
                 header = table.horizontalHeader()
                 header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeMode.Stretch)
 
@@ -404,7 +400,6 @@ class HospitalApp(QtWidgets.QStackedWidget):
             return
 
         # 2. Extract data from the table row
-        # Column 0 is RequestID (Hidden or visible), Column 1 Name, 2 Email, 3 Contact, 4 Spec
         request_id = self.admin_doctor_approval_approve_requests.item(current_row, 0).text()
         
         # We need to fetch the PASSWORD from the database because it's not in the table view
@@ -525,7 +520,6 @@ class HospitalApp(QtWidgets.QStackedWidget):
                 return
             
             cursor = connection.cursor()
-            # --- Patient / Admin Logic (Not 3 digits) ---
             query = "SELECT * FROM UserAccount WHERE UserID = ? and UserAccount.Role='Patient' "
             cursor.execute(query, (user_id,))
             result = cursor.fetchone()
@@ -534,7 +528,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
                 print(db_password)
                 if db_password == password:
                     print(f"Login successful for Patient: {user_id}")
-                    self.current_user_id = user_id # Save the patient's ID
+                    self.current_user_id = user_id # Save the patient's ID 
                     self.setCurrentIndex(22)
                     self.patient_profile_patient_id.setText(str(user_id))
                     self.patient_profile_name.setText(result[1])
@@ -2303,10 +2297,171 @@ class HospitalApp(QtWidgets.QStackedWidget):
             details_text += f"Diagnosis Date: {row[4]}\n\n"
             details_text += f"Additional Details: {row[5]}\n"
             
-            # Display in the right text box
+            # Display
             self.doc_medical_history_details_text.setText(details_text)
         else:
             QMessageBox.warning(self, "Error", "Could not retrieve medical history details.")
+    
+    def delete_selected_medical_history(self):
+        selected_index = self.doc_medical_history_list.currentRow()
+
+        if selected_index < 0:
+            QMessageBox.warning(self, "No Selection", "Please select a medical history record to delete.")
+            return
+
+        # Get the record ID from self.medical_history
+        if hasattr(self, 'medical_history') and selected_index < len(self.medical_history):
+            record_id = self.medical_history[selected_index][0]  
+
+            # Confirm deletion with the user
+            reply = QMessageBox.question(
+                self,
+                "Confirm Delete",
+                f"Are you sure you want to delete the record '{self.doc_medical_history_list.currentItem().text()}'?",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+            )
+
+            if reply == QMessageBox.StandardButton.Yes:
+                connection = get_db_connection()
+                if connection is None:
+                    QMessageBox.critical(self, "Database Error", "Could not connect to the database.")
+                    return
+
+                try:
+                    cursor = connection.cursor()
+                    cursor.execute("DELETE FROM Medical_History WHERE MedicalHistoryID = ?", (record_id,))
+                    connection.commit()
+                    QMessageBox.information(self, "Deleted", "Medical history record deleted successfully.")
+
+                    # Remove from list 
+                    self.doc_medical_history_list.takeItem(selected_index)
+                    self.medical_history.pop(selected_index)
+                    self.medical_history_details_text.clear()
+                except Exception as e:
+                    QMessageBox.critical(self, "Error", f"Failed to delete record: {e}")
+                finally:
+                    connection.close()
+        else:
+            QMessageBox.warning(self, "Error", "Could not retrieve the selected record.")
+    
+
+    def add_selected_medical_record(self):
+        if not hasattr(self, 'selected_patient_id') or self.selected_patient_id is None:
+            QMessageBox.warning(self, "No Patient Selected", "Please select a patient first.")
+            return
+
+        # --- Create popup dialog ---
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Add Medical History")
+        dialog.setFixedSize(450, 350)
+        dialog.setStyleSheet("QDialog { background-color: #f5f5f5; }")
+
+        layout = QVBoxLayout()
+        layout.setSpacing(15)
+        layout.setContentsMargins(30, 30, 30, 30)
+
+        title_label = QLabel("Add Medical History Record")
+        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        title_label.setStyleSheet("""
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            padding: 10px;
+            background-color: #3498db;
+            border-radius: 8px;
+        """)
+        layout.addWidget(title_label)
+
+        disease_label = QLabel("Disease:")
+        disease_label.setStyleSheet("font-size: 14px; font-weight: bold; color: #2c3e50;")
+        layout.addWidget(disease_label)
+        disease_input = QLineEdit()
+        disease_input.setFixedHeight(35)
+        disease_input.setStyleSheet("font-size: 14px; padding: 5px;")
+        layout.addWidget(disease_input)
+
+        allergy_label = QLabel("Allergies:")
+        allergy_label.setStyleSheet("font-size: 14px; font-weight: bold; color: #2c3e50;")
+        layout.addWidget(allergy_label)
+        allergy_input = QLineEdit()
+        allergy_input.setFixedHeight(35)
+        allergy_input.setStyleSheet("font-size: 14px; padding: 5px;")
+        layout.addWidget(allergy_input)
+
+        details_label = QLabel("Additional Details:")
+        details_label.setStyleSheet("font-size: 14px; font-weight: bold; color: #2c3e50;")
+        layout.addWidget(details_label)
+        details_input = QLineEdit()
+        details_input.setFixedHeight(35)
+        details_input.setStyleSheet("font-size: 14px; padding: 5px;")
+        layout.addWidget(details_input)
+
+        ok_button = QPushButton("Add Record")
+        ok_button.setFixedHeight(45)
+        ok_button.setStyleSheet("""
+            QPushButton {
+                background-color: #3498db;
+                color: white;
+                border-radius: 6px;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            QPushButton:hover { background-color: #2980b9; }
+            QPushButton:pressed { background-color: #21618c; }
+        """)
+        ok_button.setEnabled(False)  # initially disabled
+        layout.addWidget(ok_button)
+
+        # --- Enable OK button only if Disease field is not empty ---
+        def toggle_ok_button(text):
+            ok_button.setEnabled(bool(text.strip()))
+
+        disease_input.textChanged.connect(toggle_ok_button)
+
+        ok_button.clicked.connect(dialog.accept)
+
+        dialog.setLayout(layout)
+
+        if dialog.exec():  # Wait for user input
+            disease = disease_input.text().strip()
+            allergy = allergy_input.text().strip()
+            details = details_input.text().strip()
+            diagnosis_date = QDateTime.currentDateTime().toString("yyyy-MM-dd")  # Current date
+
+            connection = get_db_connection()
+            if connection is None:
+                QMessageBox.critical(self, "Database Error", "Could not connect to the database.")
+                return
+
+            try:
+                cursor = connection.cursor()
+
+                # incrementing MedicalHistoryID
+                cursor.execute("SELECT MAX(MedicalHistoryID) FROM Medical_History")
+                max_id = cursor.fetchone()[0] or 0
+                new_id = max_id + 1
+
+                # Insert record
+                cursor.execute("""
+                    INSERT INTO Medical_History (MedicalHistoryID, PatientID, Allergies, Disease, DiagnosisDate, Details)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                """, (new_id, self.selected_patient_id, allergy, disease, diagnosis_date, details))
+                connection.commit()
+
+                # Update local list and GUI
+                display_text = f"{disease} (Allergy: {allergy})" if allergy else disease
+                self.doc_medical_history_list.addItem(display_text)
+                if not hasattr(self, 'medical_history'):
+                    self.medical_history = []
+                self.medical_history.append((new_id, self.selected_patient_id, allergy, disease, diagnosis_date, details))
+
+                QMessageBox.information(self, "Success", "Medical history record added successfully.")
+
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Failed to add record: {e}")
+            finally:
+                connection.close()
+
 
     def admit_patient_from_appointment(self):
         if not hasattr(self, 'selected_patient_id') or self.selected_patient_id is None:
@@ -2320,7 +2475,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
         cursor = connection.cursor()
         try:
-            # Manually generate AdmissionID
+            # incrementing AdmissionID
             cursor.execute("SELECT COALESCE(MAX(AdmissionID), 0) + 1 FROM Admission_Details")
             new_admission_id = cursor.fetchone()[0]
 
@@ -2372,7 +2527,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
             cursor.execute("""
                 UPDATE Doctor_Appointment
                 SET AppointmentStatus = ?
-                WHERE AppointmentID = ? and AppointmentStatus = 'Scheduled'
+                WHERE AppointmentID = ? and AppointmentStatus = 'Scheduled' OR AppointmentStatus = 'Delayed'
             """, ('Cancelled', appointment_id))
 
             if cursor.rowcount == 0:
@@ -2394,6 +2549,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
         finally:
             connection.close()
 
+
     def edit_datetime_change(self):
         view = self.appointments_admit_dataview
         index = view.currentIndex()
@@ -2406,55 +2562,81 @@ class HospitalApp(QtWidgets.QStackedWidget):
         model = view.model()
 
         appointment_id = model.item(row, 0).text()
-        new_datetime = model.item(row, 2).text().strip()
+        current_date_text = model.item(row, 2).text()
+        current_status = model.item(row, 4).text()
 
-        # format check
-        if len(new_datetime) < 16:
-            QMessageBox.warning(
-                self,
-                "Invalid Format",
-                "Use format: YYYY-MM-DD HH:MM:SS"
-            )
+        if current_status != "Scheduled" and current_status != "Delayed":
+            QMessageBox.warning(self, "Action Denied", "Only 'Scheduled' appointments can be rescheduled.")
             return
 
-        connection = get_db_connection()
-        if connection is None:
-            QMessageBox.critical(self, "Database Error", "Could not connect to database.")
-            return
+        # --- Create Popup Dialog ---
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Reschedule Appointment")
+        dialog.setFixedSize(300, 150)
+        dialog.setStyleSheet("QDialog { background-color: rgba(195, 89, 89, 1);}")
 
-        cursor = connection.cursor()
+        layout = QVBoxLayout(dialog)
+        layout.setSpacing(10)
+        layout.setContentsMargins(20, 20, 20, 20)
 
-        try:
-            cursor.execute("""
-                UPDATE Doctor_Appointment
-                SET AppointmentDateTime = ?, AppointmentStatus = 'Delayed'
-                WHERE AppointmentID = ? AND AppointmentStatus = 'Scheduled'
-            """, (new_datetime, appointment_id))
+        lbl = QLabel("Select New Date & Time:", dialog)
+        lbl.setStyleSheet("font-weight: bold; font-size: 14px; color: black;")
+        layout.addWidget(lbl)
 
-            if cursor.rowcount == 0:
-                QMessageBox.information(
-                    self,
-                    "Not Updated",
-                    "Only Scheduled appointments can be edited."
-                )
+        dt_edit = QDateTimeEdit(dialog)
+        dt_edit.setCalendarPopup(True) 
+        dt_edit.setDisplayFormat("yyyy-MM-dd HH:mm:ss")
+        dt_edit.setStyleSheet("padding: 5px; font-size: 12px; background-color: rgba(37, 97, 143, 1);")
+
+        # Set initial time
+        current_dt = QDateTime.fromString(current_date_text, "yyyy-MM-dd HH:mm:ss")
+        if current_dt.isValid():
+            dt_edit.setDateTime(current_dt)
+        else:
+            dt_edit.setDateTime(QDateTime.currentDateTime())
+        
+        layout.addWidget(dt_edit)
+
+        # Buttons
+        buttons = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel, dialog)
+        buttons.accepted.connect(dialog.accept)
+        buttons.rejected.connect(dialog.reject)
+        layout.addWidget(buttons)
+
+        if dialog.exec() == 1: 
+            new_datetime_str = dt_edit.dateTime().toString("yyyy-MM-dd HH:mm:ss")
+            
+            # --- Database Update ---
+            connection = get_db_connection()
+            if connection is None:
                 return
 
-            connection.commit()
+            try:
+                cursor = connection.cursor()
+                cursor.execute("""
+                    UPDATE Doctor_Appointment
+                    SET AppointmentDateTime = ?, AppointmentStatus = 'Delayed'
+                    WHERE AppointmentID = ?
+                """, (new_datetime_str, appointment_id))
 
-            # Update status in table
-            model.item(row, 4).setText("Delayed")
+                if cursor.rowcount == 0:
+                    QMessageBox.information(self, "No Change", "Record not updated. ID may be invalid.")
+                    connection.rollback()
+                    return 
 
-            QMessageBox.information(
-                self,
-                "Success",
-                "Appointment updated successfully."
-            )
+                connection.commit()
 
-        except Exception as e:
-            connection.rollback()
-            QMessageBox.critical(self, "Error", str(e))
-        finally:
-            connection.close()
+                # --- Update UI Table ---
+                model.item(row, 2).setText(new_datetime_str)
+                model.item(row, 4).setText("Delayed")
+                
+                QMessageBox.information(self, "Success", "Appointment rescheduled successfully.")
+
+            except Exception as e:
+                connection.rollback()
+                QMessageBox.critical(self, "Error", f"Update failed: {e}")
+            finally:
+                connection.close()
 
 
 
