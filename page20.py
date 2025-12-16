@@ -43,6 +43,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
         # Patient portal page (page index 3 - page_3) buttons
         self.patient_portal_profile_button.clicked.connect(self.go_to_patient_portal_profile_page)
+        self.patient_labs_generate_back_button.clicked.connect(self.go_to_patient_portal_profile_page)
         self.patient_portal_appointment_button.clicked.connect(self.load_patient_appointments)
         self.patient_portal_admission_details_button.clicked.connect(self.go_to_admission_details)
         self.our_services_specializations_button.clicked.connect(self.go_to_specialization_page)
@@ -67,6 +68,7 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.our_services_back_button.clicked.connect(self.main_page)
         self.patient_labs_check_result_button.clicked.connect(self.on_check_result_clicked)
         self.lab_test_result_back_button.clicked.connect(self.go_to_patient_lab_page)
+        self.lab_tests_mylabs.clicked.connect(self.go_to_patient_lab_page)
         self.lab_test_result_download_button.clicked.connect(self.show_lab_test_details)
 
         # self.patient_labs_generate_bill_button.clicked.connect(self.go_to_bill_gen_page)
@@ -116,7 +118,10 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.login_admin_button.clicked.connect(self.go_to_login)
         self.login_admin_button.clicked.connect(self.prepare_login_as_admin)
         self.admin_portal_patient_button.clicked.connect(self.go_to_admin_patient_page)
+        self.admin_patient_admission_back_button.clicked.connect(self.go_to_admin_portal_page)
         self.admin_patient_admission_edit_button.clicked.connect(self.go_to_admin_patient_admission_edit_page)
+        self.admin_admission_entry_save_button.clicked.connect(self.save_admission_changes)
+        self.admin_admission_entry_back_button.clicked.connect(self.go_to_admin_patient_page)
         self.admin_portal_doctor_button.clicked.connect(self.go_to_admin_doctor_approval_page)
         self.admin_doctor_approval_approve_button.clicked.connect(self.approve_selected_doctor)
         self.admin_doctor_approval_reject_button.clicked.connect(self.reject_selected_doctor)
@@ -132,7 +137,9 @@ class HospitalApp(QtWidgets.QStackedWidget):
         # #bills:
         self.patient_portal_bills_button.clicked.connect(self.load_bills_page)
         self.bills_back_button.clicked.connect(self.go_to_patient_portal_page)
+        self.bill_generation_back_button.clicked.connect(self.go_to_patient_portal_page)
         self.order_generate_bill_button.clicked.connect(self.go_to_bill_gen_page)
+        
 
         self.bills_generate_bill_button.clicked.connect(
             lambda: self.go_to_bill_gen_page(self.get_selected_bill_id_from_bills()))        
@@ -144,7 +151,20 @@ class HospitalApp(QtWidgets.QStackedWidget):
         self.bills_detail_dataview.clicked.connect(self.on_bill_row_selected)
         self.bill_generation_proceed_to_payment.clicked.connect(self.show_payment_message)
 
+        # logout 
+        self.patient_profile_logout.clicked.connect(self.logout)
+        self.doctor_profile_logout.clicked.connect(self.logout)
+        self.admin_portal_logout.clicked.connect(self.logout)
 
+
+    def logout(self):
+        
+        self.current_user_id = None
+        self.current_login_type = None
+        self.selected_specialisation_id = None
+        
+        self.setCurrentIndex(0) 
+        print("Logged out successfully. Session cleared.")
         
     def go_to_check_who_here(self):
         if self.current_login_type == "doctor":
@@ -884,63 +904,115 @@ class HospitalApp(QtWidgets.QStackedWidget):
         print("Navigated to bills page (25)")
 
     def load_bills_page(self):
+        """Load bills using the mechanism from load_bills_from_appointments"""
         if not self.current_user_id:
             QMessageBox.warning(self, "Error", "No patient logged in.")
             return
 
         self.setCurrentIndex(24)  # bills page
         print("25")
+
         connection = get_db_connection()
         if connection is None:
             QMessageBox.critical(self, "Database Error", "Could not connect to the database.")
             return
 
         cursor = connection.cursor()
+
         try:
-            query = """
-                SELECT 
-                    COALESCE(DA.AppointmentID, LT.TestID) AS RefID,
-                    B.TotalPrice,
-                    COALESCE(DA.AppointmentDateTime, LT.TestDate) AS RefDate,
-                    B.BillStatus
-                FROM Bill B
-                LEFT JOIN Doctor_Appointment DA 
-                    ON B.OrderID = DA.AppointmentID
-                LEFT JOIN LabTest LT
-                    ON B.OrderID = LT.TestID
-                WHERE B.PatientID = ?
-                ORDER BY RefDate DESC;
-            """
-
-            cursor.execute(query, (self.current_user_id,))
-            rows = cursor.fetchall()
-
+            # Create table model with the specific columns you asked for
             model = QStandardItemModel()
-            model.setHorizontalHeaderLabels(["Appointment / Test ID", "Total Price", "Date"])
+            model.setHorizontalHeaderLabels(["ID", "Type", "Total Price", "Date"])
 
-            for row in rows:
-                ref_id = row[0] if row[0] else "N/A"
-                total_price = row[1] if row[1] else "0"
-                ref_date = row[2] if row[2] else "N/A"
-                bill_status = row[3] if row[3] else "Unpaid"
+            # 1. Fetch ALL bills for this patient
+            cursor.execute("""
+                SELECT B.BillID, B.OrderID, B.TotalPrice, B.BillStatus, B.BillDate
+                FROM Bill B
+                WHERE B.PatientID = ?
+                ORDER BY B.BillDate DESC
+            """, (self.current_user_id,))
+            bills = cursor.fetchall()
 
-                items = [
-                    QStandardItem(str(ref_id)),
-                    QStandardItem(str(total_price)),
-                    QStandardItem(str(ref_date))
+            for bill in bills:
+                bill_id, order_id, total_price, bill_status, bill_date = bill
+                
+                # Default values
+                type_str = "Unknown"
+                date_time_str = str(bill_date) if bill_date else ""
+                
+                # We use the price as a 'tie-breaker' to distinguish Appointment 22 from Lab 22
+                safe_price = float(total_price) if total_price else 0.0
+
+                # ========== 1. CHECK IF IT'S A DOCTOR APPOINTMENT ==========
+                # We check ID matches AND Price matches AND it's not Cancelled
+                cursor.execute("""
+                    SELECT DA.AppointmentDateTime
+                    FROM Doctor_Appointment DA
+                    WHERE DA.AppointmentID = ? 
+                    AND ABS(DA.AppointmentPrice - ?) < 0.1
+                    AND DA.AppointmentStatus != 'Cancelled'
+                """, (order_id, safe_price))
+                appointment = cursor.fetchone()
+                
+                if appointment:
+                    type_str = "Appointment"
+                    date_time_str = str(appointment[0])
+                
+                else:
+                    # ========== 2. CHECK IF IT'S A LAB TEST ==========
+                    cursor.execute("""
+                        SELECT LT.TestDate
+                        FROM LabTest LT
+                        WHERE LT.TestID = ?
+                        AND ABS(LT.TestPrice - ?) < 0.1
+                    """, (order_id, safe_price))
+                    lab_test = cursor.fetchone()
+                    
+                    if lab_test:
+                        type_str = "Lab Test"
+                        date_time_str = str(lab_test[0]) if lab_test[0] else ""
+                    else:
+                        # ========== 3. CHECK IF IT'S A PHARMACY ORDER ==========
+                        # Pharmacy usually sums up multiple items, so price matching is harder, 
+                        # but usually Pharmacy IDs don't conflict as much if generated sequentially.
+                        cursor.execute("""
+                            SELECT PO.OrderID
+                            FROM Pharmacy_Order PO
+                            WHERE PO.OrderID = ?
+                        """, (order_id,))
+                        pharmacy = cursor.fetchone()
+                        
+                        if pharmacy:
+                            type_str = "Pharmacy"
+                
+                # Skip if we found nothing (likely a Cancelled appointment)
+                if type_str == "Unknown":
+                    continue
+
+                # Add row to table
+                id_item = QStandardItem(str(order_id))
+                # Store Hidden Data for logic (Bill Status and Bill ID)
+                id_item.setData(bill_status, role=Qt.ItemDataRole.UserRole)
+                id_item.setData(bill_id, role=Qt.ItemDataRole.UserRole + 1) # Optional: Store BillID if needed
+
+                row_items = [
+                    id_item,
+                    QStandardItem(type_str),                 # The new "Type" column
+                    QStandardItem(f"{safe_price:.2f}"),      # Price
+                    QStandardItem(date_time_str)             # Date
                 ]
+                model.appendRow(row_items)
 
-                # Store bill status inside the first column
-                items[0].setData(bill_status, role=Qt.ItemDataRole.UserRole)
-
-                model.appendRow(items)
-
+            # Set model to dataview
             self.bills_detail_dataview.setModel(model)
             self.bills_detail_dataview.resizeColumnsToContents()
+            
+            # Button logic
             self.bills_generate_bill_button.setEnabled(False)
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to load bills: {e}")
+            print(f"Error details: {e}")
         finally:
             connection.close()
 
@@ -1600,23 +1672,25 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
             bill_id_val, order_id, total_price, bill_status, patient_id = bill
             self.current_bill_id_for_payment = bill_id_val
-
+            
+            # Use price for tie-breaking
+            safe_price = float(total_price) if total_price else 0.0
 
             # Prepare table model
             model = QStandardItemModel()
             model.setHorizontalHeaderLabels(["Service Type", "Name", "Quantity/Price", "Total"])
 
-            # Determine what type of bill this is based on OrderID
-            
             # --- 1. Check if it's a Doctor Appointment ---
+            # Added Price check to avoid confusing Appointment #22 with Lab #22
             cursor.execute("""
                 SELECT DA.AppointmentID, DA.AppointmentDateTime, DA.AppointmentPrice,
                     D.DoctorName, S.FieldName AS Specialisation
                 FROM Doctor_Appointment DA
                 LEFT JOIN Doctor D ON DA.DoctorID = D.DoctorID
                 LEFT JOIN Specialisation S ON D.DoctorID = S.DoctorID
-                WHERE DA.AppointmentID = ?
-            """, (order_id,))
+                WHERE DA.AppointmentID = ? 
+                AND ABS(DA.AppointmentPrice - ?) < 0.1
+            """, (order_id, safe_price))
             appointment = cursor.fetchone()
             
             if appointment:
@@ -1634,7 +1708,8 @@ class HospitalApp(QtWidgets.QStackedWidget):
                     SELECT LT.TestName, LT.TestPrice
                     FROM LabTest LT
                     WHERE LT.TestID = ?
-                """, (order_id,))
+                    AND ABS(LT.TestPrice - ?) < 0.1
+                """, (order_id, safe_price))
                 lab = cursor.fetchone()
                 
                 if lab:
@@ -1700,11 +1775,16 @@ class HospitalApp(QtWidgets.QStackedWidget):
 
     # --- Helper Functions to Get Selected Bill IDs ---
     def get_selected_bill_id_from_bills(self):
+        from PyQt6.QtCore import Qt
+
         index = self.bills_detail_dataview.currentIndex()
         if not index.isValid():
             QMessageBox.warning(self, "Error", "Please select a bill first.")
             return None
-        return index.sibling(index.row(), 0).data()  # BillID column
+            
+        # CHANGED: Retrieve the hidden BillID from UserRole + 1 
+        # (We stored it there in the load_bills_page function)
+        return index.sibling(index.row(), 0).data(Qt.ItemDataRole.UserRole + 1)
 
     def get_selected_lab_bill_id(self):
         index = self.patient_labs_tableview.currentIndex()
@@ -2699,11 +2779,154 @@ class HospitalApp(QtWidgets.QStackedWidget):
     def go_to_admin_patient_page(self):
         self.setCurrentIndex(7)
         print("8")
+        self.load_admission_details()
+
+    def load_admission_details(self):
+        from PyQt6.QtCore import Qt  
+        
+        connection = get_db_connection()
+        if connection is None:
+            return
+
+        cursor = connection.cursor()
+        try:
+            # UPDATED QUERY: Added ORDER BY to show 'Admitted' (NULL DischargeDate) first
+            query = """
+                SELECT 
+                    AD.AdmissionID, 
+                    UA.Name AS PatientName, 
+                    D.DoctorName, 
+                    AD.RoomNo, 
+                    AD.AdmissionDate,
+                    AD.DischargeDate
+                FROM Admission_Details AD
+                INNER JOIN UserAccount UA ON AD.PatientID = UA.UserID
+                INNER JOIN Doctor D ON AD.Ref_DoctorID = D.DoctorID
+                ORDER BY 
+                    CASE WHEN AD.DischargeDate IS NULL THEN 0 ELSE 1 END ASC, 
+                    AD.AdmissionDate DESC
+            """
+            cursor.execute(query)
+            rows = cursor.fetchall()
+
+            model = QStandardItemModel()
+            model.setHorizontalHeaderLabels(["Patient Name", "Doctor Name", "Room No", "Admission Date", "Status"])
+
+            for row in rows:
+                patient_item = QStandardItem(str(row[1]))
+                patient_item.setData(row[0], Qt.ItemDataRole.UserRole)
+
+                discharge_date = row[5]
+                if discharge_date is None:
+                    status_text = "Admitted"
+                else:
+                    status_text = "Discharged"
+
+                items = [
+                    patient_item,                 
+                    QStandardItem(str(row[2])),   
+                    QStandardItem(str(row[3])),   
+                    QStandardItem(str(row[4])),   
+                    QStandardItem(status_text)    
+                ]
+                model.appendRow(items)
+            
+            self.admin_patient_admission_dataview.setModel(model)
+            self.admin_patient_admission_dataview.resizeColumnsToContents()
+
+        except Exception as e:
+            print(f"Error loading admission details: {e}")
+        finally:
+            connection.close()
+        
 
     def go_to_admin_patient_admission_edit_page(self):
-        self.setCurrentIndex(8)
-        print("9")
+        from PyQt6.QtCore import Qt
+        
+        index = self.admin_patient_admission_dataview.currentIndex()
+        if not index.isValid():
+            QMessageBox.warning(self, "Selection Error", "Please select an admission record to edit.")
+            return
+
+        model = self.admin_patient_admission_dataview.model()
+        patient_item = model.item(index.row(), 0)
+        admission_id = patient_item.data(Qt.ItemDataRole.UserRole)
+        
+        if not admission_id:
+            QMessageBox.warning(self, "Error", "Could not retrieve Admission ID.")
+            return
+
+        self.current_editing_admission_id = admission_id
+
+        connection = get_db_connection()
+        if not connection: return
+        
+        cursor = connection.cursor()
+        try:
+            query = """
+                SELECT RoomNo, AdmissionDate, DischargeDate, Ref_DoctorID 
+                FROM Admission_Details 
+                WHERE AdmissionID = ?
+            """
+            cursor.execute(query, (admission_id,))
+            result = cursor.fetchone()
+
+            if result:
+                self.setCurrentIndex(8)
+                print(f"Editing Admission ID: {admission_id}")
+
+                self.admin_admission_entry_room.setText(str(result[0]))
+                
+                self.admin_admission_entry_AdDate.setText(str(result[1]))
+                self.admin_admission_entry_AdDate.setReadOnly(True)  # <-- Added this line
+                
+                if result[2]:
+                    self.admin_admission_entry_DisDate.setText(str(result[2]))
+                else:
+                    self.admin_admission_entry_DisDate.clear()
+                
+                self.admin_admission_entry_AsDoc.setText(str(result[3]))
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to load data: {e}")
+        finally:
+            connection.close()
     
+    def save_admission_changes(self):
+        room_no = self.admin_admission_entry_room.text()
+        ad_date = self.admin_admission_entry_AdDate.text()
+        dis_date = self.admin_admission_entry_DisDate.text()
+        doc_id = self.admin_admission_entry_AsDoc.text()
+
+        if not room_no or not ad_date or not doc_id:
+            QMessageBox.warning(self, "Input Error", "Room, Admission Date, and Doctor ID are required.")
+            return
+        
+        if dis_date.strip() == "":
+            dis_date = None
+
+        connection = get_db_connection()
+        if not connection: return
+        
+        cursor = connection.cursor()
+        try:
+            query = """
+                UPDATE Admission_Details 
+                SET RoomNo = ?, AdmissionDate = ?, DischargeDate = ?, Ref_DoctorID = ?
+                WHERE AdmissionID = ?
+            """
+            cursor.execute(query, (room_no, ad_date, dis_date, doc_id, self.current_editing_admission_id))
+            connection.commit()
+
+            QMessageBox.information(self, "Success", "Admission details updated successfully!")
+
+            self.go_to_admin_patient_page()
+
+        except Exception as e:
+            QMessageBox.critical(self, "Database Error", f"Update failed: {e}")
+        finally:
+            connection.close()
+
     def go_to_admin_apecialization_edit_page(self):
         self.setCurrentIndex(11)
         print("12")
